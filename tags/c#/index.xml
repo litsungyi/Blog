@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>C# on Null Refference</title><link>http://tsungyi.li/Blog/tags/c#/</link><description>Recent content in C# on Null Refference</description><generator>Hugo -- gohugo.io</generator><language>en-us</language><lastBuildDate>Thu, 12 Aug 2021 01:08:01 +0800</lastBuildDate><atom:link href="http://tsungyi.li/Blog/tags/c#/index.xml" rel="self" type="application/rss+xml"/><item><title>C# Notes - 001</title><link>http://tsungyi.li/Blog/posts/csharp-notes-001/</link><pubDate>Thu, 12 Aug 2021 01:08:01 +0800</pubDate><guid>http://tsungyi.li/Blog/posts/csharp-notes-001/</guid><description>型別宣告 在 C# 中宣告變數的語法如下：
+type name [= initial_value]; type 是變數的型別（例如： int, bool, string）。 name 是變數的名稱。 initial_value 是變數的初始值，沒有指定時初始值為其預設值。 Value Type 的預設值是 0 or false。 Reference Type 的預設值是 null Value Type v.s. Reference Type C# 的變數可以分類成兩種類型：Value Type（值類型） 以及 Reference Type （參考類型）。
+Value Type 包含以下型別： bool，整數型別，浮點數型別以及使用 struct 關鍵字宣告的自訂型別。
+Reference Type 包含以下型別： string以及使用 class 關鍵字宣告的自訂型別。
+兩種類型最大的差異在於記憶體的管理方式不同。
+Value Type Reference Type</description></item></channel></rss>
