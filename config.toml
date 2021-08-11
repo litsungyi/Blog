@@ -1,0 +1,43 @@
+baseURL = "http://tsungyi.li/Blog"
+languageCode = "en-us"
+title = "Null Refference"
+theme = "m10c"
+googleAnalytics = 'UA-1062546-8'
+disqusShortname = 'litsungyi'
+
+[Params]
+author = "Li TsungYi"
+description = "Hi, I am Li Tsung-Yi (李宗沂). I am a game developer from 🇹🇼 Taiwan."
+avatar = "/images/Profile.jpg"
+menu_item_separator = " | "
+favicon = "/favicon.ico"
+
+[[menu.main]]
+  identifier = "home"
+  name = "Home"
+  url = "/"
+
+[[menu.main]]
+  identifier = "tags"
+  name = "Tags"
+  url = "/tags/"
+
+[[menu.main]]
+  identifier = "about"
+  name = "About"
+  url = "/about.html"
+
+[[params.social]]
+  icon = "github"
+  name = "Github"
+  url = "https://github.com/litsungyi"
+
+[[params.social]]
+  icon = "facebook"
+  name = "Facebook"
+  url = "https://www.facebook.com/litsungyi"
+
+[[params.social]]
+  icon = "linkedin"
+  name = "LinkedIn"
+  url = "https://www.linkedin.com/in/litsungyi"
