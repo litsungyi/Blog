@@ -1,6 +1,43 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Posts on Null Refference</title><link>http://tsungyi.li/Blog/posts/</link><description>Recent content in Posts on Null Refference</description><generator>Hugo -- gohugo.io</generator><language>en-us</language><lastBuildDate>Thu, 12 Aug 2021 01:08:01 +0800</lastBuildDate><atom:link href="http://tsungyi.li/Blog/posts/index.xml" rel="self" type="application/rss+xml"/><item><title>C# Notes - 001</title><link>http://tsungyi.li/Blog/posts/csharp-notes-001/</link><pubDate>Thu, 12 Aug 2021 01:08:01 +0800</pubDate><guid>http://tsungyi.li/Blog/posts/csharp-notes-001/</guid><description>型別宣告 在 C# 中宣告變數的語法如下：
-type name [= initial_value]; type 是變數的型別（例如： int, bool, string）。 name 是變數的名稱。 initial_value 是變數的初始值，沒有指定時初始值為其預設值。 Value Type 的預設值是 0 or false。 Reference Type 的預設值是 null Value Type v.s. Reference Type C# 的變數可以分類成兩種類型：Value Type（值類型） 以及 Reference Type （參考類型）。
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Posts on Null Refference</title>
+    <link>https://tsungyi.li/Blog/posts/</link>
+    <description>Recent content in Posts on Null Refference</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Thu, 12 Aug 2021 01:08:01 +0800</lastBuildDate><atom:link href="https://tsungyi.li/Blog/posts/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>C# Notes - 001</title>
+      <link>https://tsungyi.li/Blog/posts/csharp-notes-001/</link>
+      <pubDate>Thu, 12 Aug 2021 01:08:01 +0800</pubDate>
+      
+      <guid>https://tsungyi.li/Blog/posts/csharp-notes-001/</guid>
+      <description>型別宣告 在 C# 中宣告變數的語法如下：
+type name [= initial_value];  type 是變數的型別（例如： int, bool, string）。 name 是變數的名稱。 initial_value 是變數的初始值，沒有指定時初始值為其預設值。  Value Type 的預設值是 0 or false。 Reference Type 的預設值是 null    Value Type v.s. Reference Type C# 的變數可以分類成兩種類型：Value Type（值類型） 以及 Reference Type （參考類型）。
 Value Type 包含以下型別： bool，整數型別，浮點數型別以及使用 struct 關鍵字宣告的自訂型別。
 Reference Type 包含以下型別： string以及使用 class 關鍵字宣告的自訂型別。
 兩種類型最大的差異在於記憶體的管理方式不同。
-Value Type Reference Type</description></item></channel></rss>
+Value Type Reference Type </description>
+    </item>
+    
+    <item>
+      <title>C&#43;&#43; - 宣告 vs. 定義</title>
+      <link>https://tsungyi.li/Blog/posts/cpp-declare-define/</link>
+      <pubDate>Mon, 29 Jun 2020 17:23:06 +0800</pubDate>
+      
+      <guid>https://tsungyi.li/Blog/posts/cpp-declare-define/</guid>
+      <description>Declare 宣告  宣告是指程式中使用到某個類別或是變數之前，先讓編譯器知道該類別的名稱或是變數的類別與名稱。 必須要在實際使用之前宣告。因此在標頭檔以及原始檔之中需要使用 #include 這個預處理器命令將用到的類別介紹給編譯器。  #include 這個預處理器命令實際上是將引入的檔案內容取代掉 #include 所在的位置，因此大量的 #include 會大幅增加編譯的時間。 如果只用到指標或是參考時，在標頭檔可以使用前置宣告 (Forward Declare) 的技巧來優化。（細節在 前置宣告 小節中說明）  不呼叫該指標的方法或是使用它的成員時，編譯器不需要知道該類別的形狀，只需要當成該類型的指標變數來處理。因為指標的大小是固定的，所以不需要引入該類別也可以通過編譯。     相同的宣告可以在專案中重複出現。  Define 定義  定義是編譯器提供類型實作細節的地方，以及配置變數記憶體的語句。  因為定義變數時需要配置記憶體在 stack 上，因此編譯器在此時必須要知道此類別的記憶體佈局（成員的順序與類型、記憶體對齊方式等&amp;hellip;）。   與宣告不同的是，定義在程式中只能出現一次。重複定義會造成錯誤。  同一個轉換單元（Translation Unit）之中只能定義一次，否則會有編譯錯誤。 同專案中不同轉換單元之中也只能定義一次，否則會有連結錯誤。   所有程式中有用到的實體（變數、函式&amp;hellip;）都必須也只能在其中一個轉換單元中定義，否則會有連結錯誤。  extern 關鍵字  在多個轉換單元之間，如果要使用同一個變數的實例可以將變數宣告為外部引用（extern），讓編譯器在連結期再把實際的變數實例連結到使用的程式碼。  Forward Declare 前置宣告  需要使用前置宣告通常有兩種原因  因為編譯器必須先看到類別、函式的宣告才能在接下來的程式中使用，一但出現互相引用的狀況編譯器就無法處理。例如底下兩個程式碼就無法編譯：    void TestFunction() { TestClass test; // error: unknown type name &amp;#39;TestClass&amp;#39; } class TestClass { public: void Test() { TestFunction(); } }; class TestClass { public: void Test() { TestFunction(); // error: use of undeclared identifier &amp;#39;TestFunction&amp;#39;  } }; void TestFunction() { TestClass test; }  不論是先定義 TestFunction 還是先定義 TestClass，都會在使用到對方的程式碼的時候發生編譯錯誤。 前置宣告的作法就是把其中一個的定義語法改成宣告語法，先讓編譯器知道名稱、型別資訊來避免編譯錯誤。  void TestFunction(); // NOTE: Forward declare  class TestClass { public: void Test() { TestFunction(); } }; void TestFunction() { TestClass test; } 更常見的原因是為了提升編譯速度。當某個類別的方法參數、成員變數需要其他型別時，我們就需要在標頭檔之中引用其他標頭檔。因為 #include 是將引用的檔案展開到 #include 的位置，當引入的數量很多的時候會有大量的 IO 發生。通常標頭檔還會被其他檔案引用，造成倍數的成長。  如果是方法的參數或是成員變數用到指標或是參考時，編譯器要知道保留多少空間來儲存這個參數。幸運的是指標或是參考的大小都是固定的，因此編譯器並不需要知道整個類別的記憶體佈局。所以使用前置宣告可以減少需要引入的標頭檔數量。 減少需要引入的標頭檔數量還可以減少因為修改檔案時需要重新編譯的檔案數量。    前置宣告的缺點  根據 Google C++ Style Guide 並不建議使用前置宣告。 使用前置宣告可能造成對 incomplete type 的操作，這在 C++ 標準是未定義行為(Undefine Behaviour)，因此無法保證程式是否能更正確運行。  在 #include 該型別的定義之前絕對不要對該型別做操作。  大部分的情況部會有問題，而且誤用時也會有編譯錯誤。但是像是 delete 指標、將指標當成參數是可以通過編譯的（會有警告）。      Ref: https://docs.</description>
+    </item>
+    
+    <item>
+      <title>C&#43;&#43; - 命名規則</title>
+      <link>https://tsungyi.li/Blog/posts/cpp-naming/</link>
+      <pubDate>Mon, 29 Jun 2020 14:13:50 +0800</pubDate>
+      
+      <guid>https://tsungyi.li/Blog/posts/cpp-naming/</guid>
+      <description>General Rule  程式中的所有類別、變數、函式&amp;hellip;的命名請務必使用讓人看到名稱就可以了解他的用途。  使用註解來解釋是不得已的作法，請盡量避免。   名稱的長度沒有限制，但是請以人類容易閱讀、記憶的原則命名，過長或過短的名稱都不適當。  避免無法發音的名稱或是外語的羅馬拼音，除非這是所有成員都理解的專有名稱或是 領域用語。 不要使用自創的縮寫。 使用縮寫請確保團隊成員都清楚縮寫的意義。   命名時請考慮使用共同的 領域用語，降低與其他成員溝通的成本。  團隊應該建立自己的 字彙表 提供團隊成員查詢專案使用的 領域用語。    引用防護（include guard）命名  使用 ALL_CAPS （全大寫命名法）命名。命名規則使用檔案完整路徑並且加上 __ 前綴。（Ex. __BATTLE_FLElD_H）  建議改用 #pragma once 取代引用防護，編譯器能對 #pragma once 做較好的最佳化。    全域變數命名  使用 lower camel case （小駝峰式命名法）命名，並且加上 g_ 前綴。（Ex. bool g_battleField）  請避免使用全域變數。    區域變數命名  使用 lower camel case （小駝峰式命名法）命名。（Ex. bool battleField）  常數命名  使用 ALL_CAPS （全大寫命名法）命名。（Ex.</description>
+    </item>
+    
+  </channel>
+</rss>

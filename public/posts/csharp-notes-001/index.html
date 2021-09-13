@@ -1,66 +1,99 @@
-<!doctype html><html lang=en-us>
-<head>
-<title>C# Notes - 001 // Null Refference</title>
-<link rel="shortcut icon" href=/favicon.ico>
-<link href=http://tsungyi.li/Blog/fontawesome-free-5.15.4-web/css/all.css rel=stylesheet>
-<meta charset=utf-8>
-<meta name=generator content="Hugo 0.87.0">
-<meta name=viewport content="width=device-width,initial-scale=1">
-<meta name=author content="Li TsungYi">
-<meta name=description content>
-<link rel=stylesheet href=http://tsungyi.li/Blog/css/main.min.4a7ec8660f9a44b08c4da97c5f2e31b1192df1d4d0322e65c0dbbc6ecb1b863f.css>
-<script type=application/javascript>var doNotTrack=!1;doNotTrack||(function(a,e,f,g,b,c,d){a.GoogleAnalyticsObject=b,a[b]=a[b]||function(){(a[b].q=a[b].q||[]).push(arguments)},a[b].l=1*new Date,c=e.createElement(f),d=e.getElementsByTagName(f)[0],c.async=1,c.src=g,d.parentNode.insertBefore(c,d)}(window,document,'script','https://www.google-analytics.com/analytics.js','ga'),ga('create','UA-1062546-8','auto'),ga('send','pageview'))</script>
-<meta name=twitter:card content="summary">
-<meta name=twitter:title content="C# Notes - 001">
-<meta name=twitter:description content="型別宣告 在 C# 中宣告變數的語法如下：
+<!doctype html>
+<html lang="en-us">
+  <head>
+    <title>C# Notes - 001 // Null Refference</title>
+    <link rel="shortcut icon" href="/favicon.ico" />
+    <link href="https://tsungyi.li/Blog/fontawesome-free-5.15.4-web/css/all.css" rel="stylesheet"> 
+    <meta charset="utf-8" />
+    <meta name="generator" content="Hugo 0.85.0" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="author" content="Li TsungYi" />
+    <meta name="description" content="" />
+    <link rel="stylesheet" href="https://tsungyi.li/Blog/css/main.min.4a7ec8660f9a44b08c4da97c5f2e31b1192df1d4d0322e65c0dbbc6ecb1b863f.css" />
+
+    
+<script type="application/javascript">
+var doNotTrack = false;
+if (!doNotTrack) {
+	(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+	(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+	m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+	})(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+	ga('create', 'UA-1062546-8', 'auto');
+	
+	ga('send', 'pageview');
+}
+</script>
+    <meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="C# Notes - 001"/>
+<meta name="twitter:description" content="型別宣告 在 C# 中宣告變數的語法如下：
 type name [= initial_value];  type 是變數的型別（例如： int, bool, string）。 name 是變數的名稱。 initial_value 是變數的初始值，沒有指定時初始值為其預設值。  Value Type 的預設值是 0 or false。 Reference Type 的預設值是 null    Value Type v.s. Reference Type C# 的變數可以分類成兩種類型：Value Type（值類型） 以及 Reference Type （參考類型）。
 Value Type 包含以下型別： bool，整數型別，浮點數型別以及使用 struct 關鍵字宣告的自訂型別。
 Reference Type 包含以下型別： string以及使用 class 關鍵字宣告的自訂型別。
 兩種類型最大的差異在於記憶體的管理方式不同。
-Value Type Reference Type ">
-<meta property="og:title" content="C# Notes - 001">
+Value Type Reference Type "/>
+
+    <meta property="og:title" content="C# Notes - 001" />
 <meta property="og:description" content="型別宣告 在 C# 中宣告變數的語法如下：
 type name [= initial_value];  type 是變數的型別（例如： int, bool, string）。 name 是變數的名稱。 initial_value 是變數的初始值，沒有指定時初始值為其預設值。  Value Type 的預設值是 0 or false。 Reference Type 的預設值是 null    Value Type v.s. Reference Type C# 的變數可以分類成兩種類型：Value Type（值類型） 以及 Reference Type （參考類型）。
 Value Type 包含以下型別： bool，整數型別，浮點數型別以及使用 struct 關鍵字宣告的自訂型別。
 Reference Type 包含以下型別： string以及使用 class 關鍵字宣告的自訂型別。
 兩種類型最大的差異在於記憶體的管理方式不同。
-Value Type Reference Type ">
-<meta property="og:type" content="article">
-<meta property="og:url" content="http://tsungyi.li/Blog/posts/csharp-notes-001/"><meta property="article:section" content="posts">
-<meta property="article:published_time" content="2021-08-12T01:08:01+08:00">
-<meta property="article:modified_time" content="2021-08-12T01:08:01+08:00">
-</head>
-<body>
-<header class=app-header>
-<a href=http://tsungyi.li/Blog><img class=app-header-avatar src=/Blog/images/Profile.jpg alt="Li TsungYi"></a>
-<h1>Null Refference</h1>
-<nav class=app-header-menu>
-<a class=app-header-menu-item href=/Blog/about.html>About</a>
-|
-<a class=app-header-menu-item href=/Blog/>Home</a>
-|
-<a class=app-header-menu-item href=/Blog/tags/>Tags</a>
-</nav>
-<p>Hi, I am Li Tsung-Yi (李宗沂). I am a game developer from 🇹🇼 Taiwan.</p>
-</header>
-<main class=app-container>
-<article class=post>
-<header class=post-header>
-<h1 class=post-title>C# Notes - 001</h1>
-<div class=post-meta>
-<div><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentcolor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon icon-calendar"><title>calendar</title><rect x="3" y="4" width="18" height="18" rx="2" ry="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
-Aug 12, 2021
-</div>
-<div><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentcolor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon icon-clock"><title>clock</title><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
-1 min read
-</div>
-<div><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentcolor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon icon-tag"><title>tag</title><path d="M20.59 13.41l-7.17 7.17a2 2 0 01-2.83.0L2 12V2h10l8.59 8.59a2 2 0 010 2.82z"/><line x1="7" y1="7" x2="7.01" y2="7"/></svg>
-<a class=tag href=http://tsungyi.li/Blog/tags/c#/>C#</a>
-</div>
-</div>
-</header>
-<div class=post-content>
-<h1 id=型別宣告>型別宣告</h1>
+Value Type Reference Type " />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://tsungyi.li/Blog/posts/csharp-notes-001/" /><meta property="article:section" content="posts" />
+<meta property="article:published_time" content="2021-08-12T01:08:01+08:00" />
+<meta property="article:modified_time" content="2021-08-12T01:08:01+08:00" />
+
+
+
+  </head>
+  <body>
+    <header class="app-header">
+      <a href="https://tsungyi.li/Blog"><img class="app-header-avatar" src="/Blog/images/Profile.jpg" alt="Li TsungYi" /></a>
+      <h1>Null Refference</h1>
+      <nav class="app-header-menu">
+          <a class="app-header-menu-item" href="/Blog/about.html">About</a>
+             | 
+          
+          <a class="app-header-menu-item" href="/Blog/">Home</a>
+             | 
+          
+          <a class="app-header-menu-item" href="/Blog/tags/">Tags</a>
+      </nav>
+      <p>Hi, I am Li Tsung-Yi (李宗沂). I am a game developer from 🇹🇼 Taiwan.</p>
+    </header>
+    <main class="app-container">
+      
+  <article class="post">
+    <header class="post-header">
+      <h1 class ="post-title">C# Notes - 001</h1>
+      <div class="post-meta">
+        <div>
+          <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon icon-calendar">
+  <title>calendar</title>
+  <rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect><line x1="16" y1="2" x2="16" y2="6"></line><line x1="8" y1="2" x2="8" y2="6"></line><line x1="3" y1="10" x2="21" y2="10"></line>
+</svg>
+          Aug 12, 2021
+        </div>
+        <div>
+          <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon icon-clock">
+  <title>clock</title>
+  <circle cx="12" cy="12" r="10"></circle><polyline points="12 6 12 12 16 14"></polyline>
+</svg>
+          1 min read
+        </div>
+        <div>
+          <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon icon-tag">
+  <title>tag</title>
+  <path d="M20.59 13.41l-7.17 7.17a2 2 0 0 1-2.83 0L2 12V2h10l8.59 8.59a2 2 0 0 1 0 2.82z"></path><line x1="7" y1="7" x2="7.01" y2="7"></line>
+</svg>
+              <a class="tag" href="https://tsungyi.li/Blog/tags/c#/">C#</a>
+        </div>
+      </div>
+    </header>
+    <div class="post-content">
+      <h1 id="型別宣告">型別宣告</h1>
 <p>在 C# 中宣告變數的語法如下：</p>
 <pre><code>type name [= initial_value];
 </code></pre><ul>
@@ -73,21 +106,39 @@ Aug 12, 2021
 </ul>
 </li>
 </ul>
-<h1 id=value-type-vs-reference-type><code>Value Type</code> v.s. <code>Reference Type</code></h1>
+<h1 id="value-type-vs-reference-type"><code>Value Type</code> v.s. <code>Reference Type</code></h1>
 <p>C# 的變數可以分類成兩種類型：<code>Value Type（值類型）</code> 以及 <code>Reference Type （參考類型）</code>。</p>
 <p><code>Value Type</code> 包含以下型別： <code>bool</code>，整數型別，浮點數型別以及使用 <code>struct</code> 關鍵字宣告的自訂型別。</p>
 <p><code>Reference Type</code> 包含以下型別： <code>string</code>以及使用 <code>class</code> 關鍵字宣告的自訂型別。</p>
 <p>兩種類型最大的差異在於記憶體的管理方式不同。</p>
-<h2 id=value-type>Value Type</h2>
-<h2 id=reference-type>Reference Type</h2>
-</div>
-<div class=post-footer>
-<div id=disqus_thread></div>
-<script type=application/javascript>var disqus_config=function(){};(function(){if(["localhost","127.0.0.1"].indexOf(window.location.hostname)!=-1){document.getElementById('disqus_thread').innerHTML='Disqus comments not available by default when the website is previewed locally.';return}var b=document,a=b.createElement('script');a.async=!0,a.src='//litsungyi.disqus.com/embed.js',a.setAttribute('data-timestamp',+new Date),(b.head||b.body).appendChild(a)})()</script>
-<noscript>Please enable JavaScript to view the <a href=https://disqus.com/?ref_noscript>comments powered by Disqus.</a></noscript>
-<a href=https://disqus.com class=dsq-brlink>comments powered by <span class=logo-disqus>Disqus</span></a>
-</div>
-</article>
-</main>
-</body>
+<h2 id="value-type">Value Type</h2>
+<h2 id="reference-type">Reference Type</h2>
+
+    </div>
+    <div class="post-footer">
+      <div id="disqus_thread"></div>
+<script type="application/javascript">
+    var disqus_config = function () {
+    
+    
+    
+    };
+    (function() {
+        if (["localhost", "127.0.0.1"].indexOf(window.location.hostname) != -1) {
+            document.getElementById('disqus_thread').innerHTML = 'Disqus comments not available by default when the website is previewed locally.';
+            return;
+        }
+        var d = document, s = d.createElement('script'); s.async = true;
+        s.src = '//' + "tsungyi-li" + '.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', +new Date());
+        (d.head || d.body).appendChild(s);
+    })();
+</script>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+<a href="https://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
+    </div>
+  </article>
+
+    </main>
+  </body>
 </html>
