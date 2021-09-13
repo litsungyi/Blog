@@ -1,8 +1,7 @@
 ---
 title: "C++ - 命名規則"
 date: 2020-06-29T14:13:50+08:00
-draft: false
-tags: ["c++"]
+tags: ["C++"]
 ---
 
 

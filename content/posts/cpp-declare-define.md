@@ -1,8 +1,7 @@
 ---
 title: "C++ - 宣告 vs. 定義"
 date: 2020-06-29T17:23:06+08:00
-draft: false
-tags: ["c++"]
+tags: ["C++"]
 ---
 
 

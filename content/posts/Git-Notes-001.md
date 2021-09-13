@@ -1,7 +1,7 @@
 ---
 title: "Git Notes - 001"
 date: 2021-08-12T01:08:01+08:00
-tags: ["git"]
+tags: ["Git"]
 draft: true
 ---
 
