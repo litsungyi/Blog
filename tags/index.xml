@@ -1,1 +1,29 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Tags on Null Refference</title><link>http://tsungyi.li/Blog/tags/</link><description>Recent content in Tags on Null Refference</description><generator>Hugo -- gohugo.io</generator><language>en-us</language><lastBuildDate>Thu, 12 Aug 2021 01:08:01 +0800</lastBuildDate><atom:link href="http://tsungyi.li/Blog/tags/index.xml" rel="self" type="application/rss+xml"/><item><title>C#</title><link>http://tsungyi.li/Blog/tags/c#/</link><pubDate>Thu, 12 Aug 2021 01:08:01 +0800</pubDate><guid>http://tsungyi.li/Blog/tags/c#/</guid><description/></item></channel></rss>
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Tags on Null Refference</title>
+    <link>https://tsungyi.li/Blog/tags/</link>
+    <description>Recent content in Tags on Null Refference</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Thu, 12 Aug 2021 01:08:01 +0800</lastBuildDate><atom:link href="https://tsungyi.li/Blog/tags/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>C#</title>
+      <link>https://tsungyi.li/Blog/tags/c#/</link>
+      <pubDate>Thu, 12 Aug 2021 01:08:01 +0800</pubDate>
+      
+      <guid>https://tsungyi.li/Blog/tags/c#/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>C&#43;&#43;</title>
+      <link>https://tsungyi.li/Blog/tags/c&#43;&#43;/</link>
+      <pubDate>Mon, 29 Jun 2020 17:23:06 +0800</pubDate>
+      
+      <guid>https://tsungyi.li/Blog/tags/c&#43;&#43;/</guid>
+      <description></description>
+    </item>
+    
+  </channel>
+</rss>
