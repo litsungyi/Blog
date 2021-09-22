@@ -13,18 +13,22 @@
 <meta name=twitter:card content="summary">
 <meta name=twitter:title content="C# Notes - 001">
 <meta name=twitter:description content="型別宣告 在 C# 中宣告變數的語法如下：
-type name [= initial_value];  type 是變數的型別（例如： int, bool, string）。 name 是變數的名稱。 initial_value 是變數的初始值，沒有指定時初始值為其預設值。  Value Type 的預設值是 0 or false。 Reference Type 的預設值是 null    Value Type v.s. Reference Type C# 的變數可以分類成兩種類型：Value Type（值類型） 以及 Reference Type （參考類型）。
-Value Type 包含以下型別： bool，整數型別，浮點數型別以及使用 struct 關鍵字宣告的自訂型別。
-Reference Type 包含以下型別： string以及使用 class 關鍵字宣告的自訂型別。
-兩種類型最大的差異在於記憶體的管理方式不同。
-Value Type Reference Type ">
+type name [= initial_value];   type 是變數的型別（例如： int, bool, string）。
+  name 是變數的名稱。
+  initial_value 是變數的初始值，沒有指定時初始值為其預設值。
+ Value Type 的預設值是 0 or false。 Reference Type 的預設值是 null    NOTE 1: type 可以使用 var 關鍵字，用來省略明確的型別宣告。此時的初始值不可以省略。編譯器需要從初始值來推導正確的型別。
+  Value Type v.s. Reference Type C# 的變數可以分類成兩種類型：Value Type（值類型） 以及 Reference Type （參考類型）。
+Value Type 包含以下型別： bool，整數型別，浮點數型別以及使用 struct 關鍵字宣告的自訂型別。 未指定成員變數的初始值時，整數預設為 0，浮點數為 0.0，布林值為 false。
+Reference Type 包含以下型別： string 以及使用 class 關鍵字宣告的自訂型別。 未指定成員變數的初始值時，預設為 null。">
 <meta property="og:title" content="C# Notes - 001">
 <meta property="og:description" content="型別宣告 在 C# 中宣告變數的語法如下：
-type name [= initial_value];  type 是變數的型別（例如： int, bool, string）。 name 是變數的名稱。 initial_value 是變數的初始值，沒有指定時初始值為其預設值。  Value Type 的預設值是 0 or false。 Reference Type 的預設值是 null    Value Type v.s. Reference Type C# 的變數可以分類成兩種類型：Value Type（值類型） 以及 Reference Type （參考類型）。
-Value Type 包含以下型別： bool，整數型別，浮點數型別以及使用 struct 關鍵字宣告的自訂型別。
-Reference Type 包含以下型別： string以及使用 class 關鍵字宣告的自訂型別。
-兩種類型最大的差異在於記憶體的管理方式不同。
-Value Type Reference Type ">
+type name [= initial_value];   type 是變數的型別（例如： int, bool, string）。
+  name 是變數的名稱。
+  initial_value 是變數的初始值，沒有指定時初始值為其預設值。
+ Value Type 的預設值是 0 or false。 Reference Type 的預設值是 null    NOTE 1: type 可以使用 var 關鍵字，用來省略明確的型別宣告。此時的初始值不可以省略。編譯器需要從初始值來推導正確的型別。
+  Value Type v.s. Reference Type C# 的變數可以分類成兩種類型：Value Type（值類型） 以及 Reference Type （參考類型）。
+Value Type 包含以下型別： bool，整數型別，浮點數型別以及使用 struct 關鍵字宣告的自訂型別。 未指定成員變數的初始值時，整數預設為 0，浮點數為 0.0，布林值為 false。
+Reference Type 包含以下型別： string 以及使用 class 關鍵字宣告的自訂型別。 未指定成員變數的初始值時，預設為 null。">
 <meta property="og:type" content="article">
 <meta property="og:url" content="https://tsungyi.li/Blog/posts/csharp-notes-001/"><meta property="article:section" content="posts">
 <meta property="article:published_time" content="2021-08-12T01:08:01+08:00">
@@ -64,19 +68,29 @@ Aug 12, 2021
 <p>在 C# 中宣告變數的語法如下：</p>
 <pre tabindex=0><code>type name [= initial_value];
 </code></pre><ul>
-<li><em>type</em> 是變數的型別（例如： <code>int</code>, <code>bool</code>, <code>string</code>）。</li>
-<li><em>name</em> 是變數的名稱。</li>
-<li><em>initial_value</em> 是變數的初始值，沒有指定時初始值為其預設值。
+<li>
+<p><em>type</em> 是變數的型別（例如： <code>int</code>, <code>bool</code>, <code>string</code>）。</p>
+</li>
+<li>
+<p><em>name</em> 是變數的名稱。</p>
+</li>
+<li>
+<p><em>initial_value</em> 是變數的初始值，沒有指定時初始值為其預設值。</p>
 <ul>
 <li><strong>Value Type</strong> 的預設值是 <code>0</code> or <code>false</code>。</li>
 <li><strong>Reference Type</strong> 的預設值是 <code>null</code></li>
 </ul>
 </li>
+<li>
+<p>NOTE 1: type 可以使用 var 關鍵字，用來省略明確的型別宣告。此時的初始值不可以省略。編譯器需要從初始值來推導正確的型別。</p>
+</li>
 </ul>
 <h1 id=value-type-vs-reference-type><code>Value Type</code> v.s. <code>Reference Type</code></h1>
 <p>C# 的變數可以分類成兩種類型：<code>Value Type（值類型）</code> 以及 <code>Reference Type （參考類型）</code>。</p>
-<p><code>Value Type</code> 包含以下型別： <code>bool</code>，整數型別，浮點數型別以及使用 <code>struct</code> 關鍵字宣告的自訂型別。</p>
-<p><code>Reference Type</code> 包含以下型別： <code>string</code>以及使用 <code>class</code> 關鍵字宣告的自訂型別。</p>
+<p><code>Value Type</code> 包含以下型別： <code>bool</code>，整數型別，浮點數型別以及使用 <code>struct</code> 關鍵字宣告的自訂型別。
+未指定成員變數的初始值時，整數預設為 0，浮點數為 0.0，布林值為 false。</p>
+<p><code>Reference Type</code> 包含以下型別： <code>string</code> 以及使用 <code>class</code> 關鍵字宣告的自訂型別。
+未指定成員變數的初始值時，預設為 <code>null</code>。</p>
 <p>兩種類型最大的差異在於記憶體的管理方式不同。</p>
 <h2 id=value-type>Value Type</h2>
 <h2 id=reference-type>Reference Type</h2>
