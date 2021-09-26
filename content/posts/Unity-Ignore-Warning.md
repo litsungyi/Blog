@@ -1,5 +1,5 @@
 ---
-title: "[Unity] 忽略警告訊息"
+title: "Unity - 忽略警告訊息"
 date: 2018-11-07T15:49:00+08:00
 tags: ["Unity", "C#"]
 ---
