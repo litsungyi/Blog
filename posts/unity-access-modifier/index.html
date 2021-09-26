@@ -1,6 +1,6 @@
 <!doctype html><html lang=en-us>
 <head>
-<title>[Unity] 存取修飾詞 (Access Modifier) 與 Special folders & Assembly definition files // Null Refference</title>
+<title>Unity - 存取修飾詞 (Access Modifier) 與 Special folders & Assembly definition files // Null Refference</title>
 <link rel="shortcut icon" href=/favicon.ico>
 <link href=https://tsungyi.li/Blog/fontawesome-free-5.15.4-web/css/all.css rel=stylesheet>
 <meta charset=utf-8>
@@ -11,16 +11,16 @@
 <link rel=stylesheet href=https://tsungyi.li/Blog/css/main.min.4a7ec8660f9a44b08c4da97c5f2e31b1192df1d4d0322e65c0dbbc6ecb1b863f.css>
 <script type=application/javascript>var doNotTrack=!1;doNotTrack||(function(a,e,f,g,b,c,d){a.GoogleAnalyticsObject=b,a[b]=a[b]||function(){(a[b].q=a[b].q||[]).push(arguments)},a[b].l=1*new Date,c=e.createElement(f),d=e.getElementsByTagName(f)[0],c.async=1,c.src=g,d.parentNode.insertBefore(c,d)}(window,document,'script','https://www.google-analytics.com/analytics.js','ga'),ga('create','UA-1062546-8','auto'),ga('send','pageview'))</script>
 <meta name=twitter:card content="summary">
-<meta name=twitter:title content="[Unity] 存取修飾詞 (Access Modifier) 與 Special folders & Assembly definition files">
+<meta name=twitter:title content="Unity - 存取修飾詞 (Access Modifier) 與 Special folders & Assembly definition files">
 <meta name=twitter:description content="存取修飾詞 Access Modifier C# 的存取修飾詞有以下六種
- public - 所有人都可以存取 protected - 只有所在類別以及他的的衍生類別可以存取 private - 只有所在類別可以存取 internal - 只有在相同 assembly 的類別可以存取 protected internal - 只有在相同 assembly 的類別或是所在類別以及他的的衍生類別可以存取 (也就是 protected OR internal) private protected (C# 7.2) - 只有在相同 assembly 的類別以及所在類別以及他的的衍生類別可以存取 (也就是 protected AND internal)  從這張簡圖就很容易了解不同修飾詞的範圍 另外 Type 只能宣告為 public 或 internal，Type Member 可以用所有的存取修飾詞宣告。
+ public 所有人都可以存取 protected 只有所在類別以及他的的衍生類別可以存取 private 只有所在類別可以存取 internal 只有在相同 assembly 的類別可以存取 protected internal 只有在相同 assembly 的類別或是所在類別以及他的的衍生類別可以存取 (也就是 protected OR internal) private protected (C# 7.2 新增) 只有在相同 assembly 的類別以及所在類別以及他的的衍生類別可以存取 (也就是 protected AND internal)  從這張簡圖就很容易了解不同修飾詞的範圍 另外 Type 只能宣告為 public 或 internal，Type Member 可以用所有的存取修飾詞宣告。
 Default Access Modifier 預設值總是可見度最低的存取修飾詞。Type 為 internal，Type Member 為 private。
-    預設的存取修飾詞 可用的存取修飾詞     namespace level     enum internal public, internal   interface internal public, internal   class internal public, internal   struct internal public, internal   delegate internal public, internal   type level     enum private public, protected, internal, private, protected internal, private protected   interface private public, protected, internal, private, protected internal, private protected   class private public, protected, internal, private, protected internal, private protected   struct private public, protected, internal, private, protected internal, private protected   delegate private public, protected, internal, private, protected internal, private protected   enum value public public   interface member public public   class member private public, protected, internal, private, protected internal, private protected   struct member private public, internal, private    以軟體設計的原則，應該讓類別、變數的可見性最小化。也就是說不需要公開的類別就不應該設為 public。">
-<meta property="og:title" content="[Unity] 存取修飾詞 (Access Modifier) 與 Special folders & Assembly definition files">
+    預設的存取修飾詞 可用的存取修飾詞       namespace level   enum internal public, internal   interface internal public, internal   class internal public, internal   struct internal public, internal   delegate internal public, internal   type level     enum private public, protected, internal, private, protected internal, private protected   interface private public, protected, internal, private, protected internal, private protected   class private public, protected, internal, private, protected internal, private protected   struct private public, protected, internal, private, protected internal, private protected   delegate private public, protected, internal, private, protected internal, private protected   enum value public public   interface member public public   class member private public, protected, internal, private, protected internal, private protected   struct member private public, internal, private    以軟體設計的原則，應該讓類別、變數的可見性最小化。也就是說不需要公開的類別就不應該設為 public。">
+<meta property="og:title" content="Unity - 存取修飾詞 (Access Modifier) 與 Special folders & Assembly definition files">
 <meta property="og:description" content="存取修飾詞 Access Modifier C# 的存取修飾詞有以下六種
- public - 所有人都可以存取 protected - 只有所在類別以及他的的衍生類別可以存取 private - 只有所在類別可以存取 internal - 只有在相同 assembly 的類別可以存取 protected internal - 只有在相同 assembly 的類別或是所在類別以及他的的衍生類別可以存取 (也就是 protected OR internal) private protected (C# 7.2) - 只有在相同 assembly 的類別以及所在類別以及他的的衍生類別可以存取 (也就是 protected AND internal)  從這張簡圖就很容易了解不同修飾詞的範圍 另外 Type 只能宣告為 public 或 internal，Type Member 可以用所有的存取修飾詞宣告。
+ public 所有人都可以存取 protected 只有所在類別以及他的的衍生類別可以存取 private 只有所在類別可以存取 internal 只有在相同 assembly 的類別可以存取 protected internal 只有在相同 assembly 的類別或是所在類別以及他的的衍生類別可以存取 (也就是 protected OR internal) private protected (C# 7.2 新增) 只有在相同 assembly 的類別以及所在類別以及他的的衍生類別可以存取 (也就是 protected AND internal)  從這張簡圖就很容易了解不同修飾詞的範圍 另外 Type 只能宣告為 public 或 internal，Type Member 可以用所有的存取修飾詞宣告。
 Default Access Modifier 預設值總是可見度最低的存取修飾詞。Type 為 internal，Type Member 為 private。
-    預設的存取修飾詞 可用的存取修飾詞     namespace level     enum internal public, internal   interface internal public, internal   class internal public, internal   struct internal public, internal   delegate internal public, internal   type level     enum private public, protected, internal, private, protected internal, private protected   interface private public, protected, internal, private, protected internal, private protected   class private public, protected, internal, private, protected internal, private protected   struct private public, protected, internal, private, protected internal, private protected   delegate private public, protected, internal, private, protected internal, private protected   enum value public public   interface member public public   class member private public, protected, internal, private, protected internal, private protected   struct member private public, internal, private    以軟體設計的原則，應該讓類別、變數的可見性最小化。也就是說不需要公開的類別就不應該設為 public。">
+    預設的存取修飾詞 可用的存取修飾詞       namespace level   enum internal public, internal   interface internal public, internal   class internal public, internal   struct internal public, internal   delegate internal public, internal   type level     enum private public, protected, internal, private, protected internal, private protected   interface private public, protected, internal, private, protected internal, private protected   class private public, protected, internal, private, protected internal, private protected   struct private public, protected, internal, private, protected internal, private protected   delegate private public, protected, internal, private, protected internal, private protected   enum value public public   interface member public public   class member private public, protected, internal, private, protected internal, private protected   struct member private public, internal, private    以軟體設計的原則，應該讓類別、變數的可見性最小化。也就是說不需要公開的類別就不應該設為 public。">
 <meta property="og:type" content="article">
 <meta property="og:url" content="https://tsungyi.li/Blog/posts/unity-access-modifier/"><meta property="article:section" content="posts">
 <meta property="article:published_time" content="2018-11-12T01:50:00+08:00">
@@ -42,7 +42,7 @@ Default Access Modifier 預設值總是可見度最低的存取修飾詞。Type 
 <main class=app-container>
 <article class=post>
 <header class=post-header>
-<h1 class=post-title>[Unity] 存取修飾詞 (Access Modifier) 與 Special folders & Assembly definition files</h1>
+<h1 class=post-title>Unity - 存取修飾詞 (Access Modifier) 與 Special folders & Assembly definition files</h1>
 <div class=post-meta>
 <div><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentcolor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon icon-calendar"><title>calendar</title><rect x="3" y="4" width="18" height="18" rx="2" ry="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
 Nov 12, 2018
@@ -59,14 +59,22 @@ Nov 12, 2018
 <div class=post-content>
 <h2 id=存取修飾詞-access-modifier>存取修飾詞 Access Modifier</h2>
 <p>C# 的存取修飾詞有以下六種</p>
-<ul>
-<li><code>public</code> - 所有人都可以存取</li>
-<li><code>protected</code> - 只有所在類別以及他的的衍生類別可以存取</li>
-<li><code>private</code> - 只有所在類別可以存取</li>
-<li><code>internal</code> - 只有在相同 assembly 的類別可以存取</li>
-<li><code>protected internal</code> - 只有在相同 assembly 的類別或是所在類別以及他的的衍生類別可以存取 (也就是 protected OR internal)</li>
-<li><code>private protected</code> (C# 7.2) - 只有在相同 assembly 的類別以及所在類別以及他的的衍生類別可以存取 (也就是 protected AND internal)</li>
-</ul>
+<dl>
+<dt><code>public</code></dt>
+<dd>所有人都可以存取</dd>
+<dt><code>protected</code></dt>
+<dd>只有所在類別以及他的的衍生類別可以存取</dd>
+<dt><code>private</code></dt>
+<dd>只有所在類別可以存取</dd>
+<dt><code>internal</code></dt>
+<dd>只有在相同 assembly 的類別可以存取</dd>
+<dt><code>protected internal</code></dt>
+<dd>只有在相同 assembly 的類別或是所在類別以及他的的衍生類別可以存取
+(也就是 protected OR internal)</dd>
+<dt><code>private protected</code> (C# 7.2 新增)</dt>
+<dd>只有在相同 assembly 的類別以及所在類別以及他的的衍生類別可以存取
+(也就是 protected AND internal)</dd>
+</dl>
 <p>從這張簡圖就很容易了解不同修飾詞的範圍
 <img src=/Blog/images/Unity-Access-Modifier/access-modifier.png alt=修飾詞的範圍></p>
 <p>另外 Type 只能宣告為 <code>public</code> 或 <code>internal</code>，Type Member 可以用所有的存取修飾詞宣告。</p>
@@ -82,9 +90,9 @@ Nov 12, 2018
 </thead>
 <tbody>
 <tr>
+<td></td>
+<td></td>
 <td><strong>namespace level</strong></td>
-<td></td>
-<td></td>
 </tr>
 <tr>
 <td>enum</td>
@@ -165,9 +173,9 @@ Nov 12, 2018
 </table>
 <p>以軟體設計的原則，應該讓類別、變數的可見性最小化。也就是說不需要公開的類別就不應該設為 <code>public</code>。</p>
 <p>如果是開發共用的函式庫，我們希望讓程式碼被其他專案重複使用時，我們通常會把共用的函式庫放在獨立的資料夾與命名空間內。</p>
-<p>另外也可以用獨立的儲存庫來存放，並且用 submodule 的方式加入到我們的專案中。</p>
+<p>另外也可以用獨立的儲存庫來存放，並且用 submodule 的方式加入到我們的專案中。使得我們可以更好地跨專案共用資料。</p>
+<h2 id=unity-special-folders>Unity Special folders</h2>
 <p>在 Unity 中，除了位於特殊資料夾以外的所有檔案會被放在遊戲專案中，為了降低程式間的耦合，以及避免在開發階段中意外將遊戲的功能寫到共用的函式庫的問題，我們可以利用一些 Unity 的機制來達成。</p>
-<h2 id=special-folders>Special folders</h2>
 <p>根據 Unity 的說明，依據檔案所在的資料夾不同，script 會被分配到不同的專案中。也會有不同的編譯順序。根據官方說明，通常可以分成四個專案編譯：</p>
 <ul>
 <li>Phase 1: 在 Standard Assets、Pro Standard Assets 以及 Plugins 中非 Editor 資料夾的程式碼</li>
@@ -176,24 +184,24 @@ Nov 12, 2018
 <li>Phase 4: 在 Standard Assets、Pro Standard Assets 以及 Plugins 以外的 Editor 資料夾的程式碼</li>
 </ul>
 <p>Ref. <a href=https://docs.unity3d.com/Manual/ScriptCompileOrderFolders.html>Special folders and script compilation order</a></p>
-<p>如果你使用 Visual Studio for Mac 開啟 Solution 只會看到一個專案。你可以在 Solution 上按右鍵 -> 顯示選項 -> 顯示 Unity 專案總管，取消勾選後就會看到實際的專案分佈。</p>
+<p>如果你使用 <strong>Visual Studio for Mac</strong> 開啟 Solution 只會看到一個專案。你可以在 Solution 上按右鍵 -> 顯示選項 -> 顯示 Unity 專案總管，取消勾選後就會看到實際的專案分佈。</p>
 <p>實際上檢查各專案的參考設定可以得到底下的相依圖。</p>
 <p><img src=/Blog/images/Unity-Access-Modifier/project-dependency.png alt=專案相依圖></p>
 <p>了解了這些細節，我們可以這樣規劃我們的專案：</p>
-<h3 id=遊戲專案相依於第三方專案ex-asset-store-買來的插件>遊戲專案相依於第三方專案（Ex. Asset Store 買來的插件）</h3>
-<p>當 Plugin 放在 Assets 內，而不是 Plugins 內，就會讓遊戲專案可以存取到 Plugin 的 internal 成員，這通常會破壞了 Plugin 想要對外隱藏的資訊。
+<h3 id=遊戲專案用到的第三方專案ex-asset-store-買來的插件>遊戲專案用到的第三方專案（Ex. Asset Store 買來的插件）</h3>
+<p>當第三方 Plugin 放在 Assets 資料夾內，而不是 Plugins 資料夾內，就會讓遊戲專案可以存取到 Plugin 的 internal 成員，這通常會破壞了 Plugin 想要對外隱藏的資訊。
 我們可以將 Plugin 移動到 Plugins 資料夾內來維持 Plugin 的封裝性。</p>
-<p>部分 Plugin 可能沒有考慮到會被移動到 Plugins 內，所需要實際測試看看。</p>
-<p>移動資料夾可能會造成之後更新 Plugin 時候的維護成本增加，也需要在搬移時考慮是否有必要。通常不會有問題，畢竟我們比較少會修改 Plugin 的內容。</p>
+<p><em>部分 Plugin 可能沒有考慮到會被移動到 Plugins 內，所需要實際測試看看。</em></p>
+<p>需要注意的是：移動資料夾可能會造成之後更新 Plugin 時候的維護成本增加，也需要在搬移時考慮是否有必要。通常不會有問題，畢竟我們比較少會修改 Plugin 的內容。</p>
 <ul>
 <li>在 Unity 2017.3 之後可以用 Assembly definition files 來解決 （稍後提到）。</li>
 <li>在 Unity 2017.2 以前可以先保留在 Plugin 原始的位置，使用上注意不要誤用到 internal 的成員。</li>
 </ul>
-<h4 id=對於跨專案共用的函式庫>對於跨專案共用的函式庫</h4>
+<h3 id=對於跨專案共用的函式庫>對於跨專案共用的函式庫</h3>
 <ul>
 <li>在 Unity 2017.2 以前可以將共用的函式庫放在 Plugins 之中，並且用 submodule 放到獨立的儲存庫。</li>
 <li>如果將共用的函式庫放在 Plugins 以外，如此一來共用函式庫的內容就會跟遊戲專案在同一個 Assembly 之中。如果在新增或修改程式時沒有注意到，很容易在共用函式庫中呼叫遊戲專案的程式，造成其他用到此共用函式庫的專案編譯失敗。放在 Plugins 可以讓這個情形在編譯時就發生錯誤，避免在其他專案更新時才發現錯誤。</li>
-<li>在 Unity 2017.3 之後可以用 Assembly definition files 來放到 Plugins 以外的資料夾，並且用 submodule 放到獨立的儲存庫。</li>
+<li>在 Unity 2017.3 之後可以用 Assembly definition files 來指定 Plugins 以外的資料夾被產生成獨立的 Assembly 來避免不必要的耦合，我們可以用 submodule 將資料夾放到獨立的儲存庫。</li>
 </ul>
 <h2 id=assembly-definition-files>Assembly definition files</h2>
 <p>從 Unity 2017.3 開始，我們可以針對不同的資料夾指定要編譯到獨立的專案中，並且設定彼此之間的相依關係。如此一來，就可以把 Plugin 放在各自的 Assembly 之中，避免彼此影響，也不需要改變現有資料夾架構，只需要加入一個定義檔即可。</p>
