@@ -12,7 +12,7 @@ Default Access Modifier 預設值總是可見度最低的存取修飾詞。Type 
 底下是來自我們目前專案的警告訊息：
 Unity 看到的警告訊息大約 300個 從 Visual Studio for Mac 看到的警告訊息超過 2000個 NOTE: Unity 跟 Visual Studio for Mac 的警告訊息數量不同，最好兩個都檢查
 雖然理論上警告訊息都必須要修正，但是專案進行中總是有很多無法掌握的情形， 以下介紹我在目前處理的專案中，遇到難以修改的警告訊息的解決方式：
-Plugins' warning 對於第三方的 Plugins 我們可以先用 #pragma warning 命令來暫時關閉警告訊息。
+Plugins&amp;rsquo; warning 對於第三方的 Plugins 我們可以先用 #pragma warning 命令來暫時關閉警告訊息。
 關閉的方式使用 #pragma warning disable 暫時關閉，並在使用後用 #pragma warning restore 開啟警告。
 通常會在發生警告前一行加上 #pragma warning disable *warning-list*，並且在發生警告後一行加上 #pragma warning restore *warning-list* 重新開啟警告。
 一般來說，建議將關閉警告與開啟警告的範圍越小越好，避免意外隱藏其他有意義的警告訊息。
