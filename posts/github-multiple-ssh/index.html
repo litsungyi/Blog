@@ -1,0 +1,39 @@
+<!doctype html><html lang=en-us><head><title>GitHub Multiple SSH // Null Refference</title><link rel="shortcut icon" href=/favicon.ico><link href=https://tsungyi.li/Blog/fontawesome-free-5.15.4-web/css/all.css rel=stylesheet><meta charset=utf-8><meta name=generator content="Hugo 0.101.0"><meta name=viewport content="width=device-width,initial-scale=1"><meta name=author content="Li TsungYi"><meta name=description content><link rel=stylesheet href=https://tsungyi.li/Blog/css/main.min.4a7ec8660f9a44b08c4da97c5f2e31b1192df1d4d0322e65c0dbbc6ecb1b863f.css><script type=application/javascript>var doNotTrack=!1;doNotTrack||(function(e,t,n,s,o,i,a){e.GoogleAnalyticsObject=o,e[o]=e[o]||function(){(e[o].q=e[o].q||[]).push(arguments)},e[o].l=1*new Date,i=t.createElement(n),a=t.getElementsByTagName(n)[0],i.async=1,i.src=s,a.parentNode.insertBefore(i,a)}(window,document,"script","https://www.google-analytics.com/analytics.js","ga"),ga("create","UA-1062546-8","auto"),ga("send","pageview"))</script><meta name=twitter:card content="summary"><meta name=twitter:title content="GitHub Multiple SSH"><meta name=twitter:description content="Introduction 如果有多個 GitHub 帳號 (個人帳號與工作用的帳號) 都要使用 SSH 連線，因為在同一台電腦上無法使用同一個 SSH Key 綁定到不同的帳號，所以會需要做一些設定才可以使用。
+Setting 首先要先幫兩個帳號都產生一組 SSH Key 可以參考 GitHub 的說明 Generating a new SSH key and adding it to the ssh-agent
+ssh-keygen -t ed25519 -C &#34;personal_mail@personal.com&#34; ssh-keygen -t ed25519 -C &#34;work_mail@company.com&#34;
+並且將兩個帳號都分別註冊到 GitHub 設定頁面 Adding a new SSH key to your GitHub account
+記得兩個帳號都要設定，需要分別登入兩個帳號並且將 public key 註冊。
+接下來需要修改你的 ssh 設定檔： 開啟並編輯 ~/.ssh/config 加上以下設定到檔案中，請依照你前面創造的 ssh 來設定你的設定檔。
+# Personal account Host github.com HostName github.com IdentityFile ~/."><meta property="og:title" content="GitHub Multiple SSH"><meta property="og:description" content="Introduction 如果有多個 GitHub 帳號 (個人帳號與工作用的帳號) 都要使用 SSH 連線，因為在同一台電腦上無法使用同一個 SSH Key 綁定到不同的帳號，所以會需要做一些設定才可以使用。
+Setting 首先要先幫兩個帳號都產生一組 SSH Key 可以參考 GitHub 的說明 Generating a new SSH key and adding it to the ssh-agent
+ssh-keygen -t ed25519 -C &#34;personal_mail@personal.com&#34; ssh-keygen -t ed25519 -C &#34;work_mail@company.com&#34;
+並且將兩個帳號都分別註冊到 GitHub 設定頁面 Adding a new SSH key to your GitHub account
+記得兩個帳號都要設定，需要分別登入兩個帳號並且將 public key 註冊。
+接下來需要修改你的 ssh 設定檔： 開啟並編輯 ~/.ssh/config 加上以下設定到檔案中，請依照你前面創造的 ssh 來設定你的設定檔。
+# Personal account Host github.com HostName github.com IdentityFile ~/."><meta property="og:type" content="article"><meta property="og:url" content="https://tsungyi.li/Blog/posts/github-multiple-ssh/"><meta property="article:section" content="posts"><meta property="article:published_time" content="2022-07-19T15:16:33+08:00"><meta property="article:modified_time" content="2022-07-19T15:16:33+08:00"></head><body><header class=app-header><a href=https://tsungyi.li/Blog><img class=app-header-avatar src=/images/Profile.jpg alt="Li TsungYi"></a><h1>Null Refference</h1><nav class=app-header-menu><a class=app-header-menu-item href=/Blog/about.html>About</a>
+|
+<a class=app-header-menu-item href=/Blog/>Home</a>
+|
+<a class=app-header-menu-item href=/Blog/tags/>Tags</a></nav><p>Hi, I am Li Tsung-Yi (李宗沂). I am a game developer from 🇹🇼 Taiwan.</p></header><main class=app-container><article class=post><header class=post-header><h1 class=post-title>GitHub Multiple SSH</h1><div class=post-meta><div><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentcolor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon icon-calendar"><title>calendar</title><rect x="3" y="4" width="18" height="18" rx="2" ry="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>Jul 19, 2022</div><div><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentcolor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon icon-clock"><title>clock</title><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>1 min read</div></div></header><div class=post-content><h1 id=introduction>Introduction</h1><p>如果有多個 GitHub 帳號 (個人帳號與工作用的帳號) 都要使用 SSH 連線，因為在同一台電腦上無法使用同一個 SSH Key 綁定到不同的帳號，所以會需要做一些設定才可以使用。</p><h1 id=setting>Setting</h1><ol><li><p>首先要先幫兩個帳號都產生一組 SSH Key
+可以參考 GitHub 的說明 <a href=https://docs.github.com/en/authentication/connecting-to-github-with-ssh/generating-a-new-ssh-key-and-adding-it-to-the-ssh-agent>Generating a new SSH key and adding it to the ssh-agent</a></p><p><code>ssh-keygen -t ed25519 -C "personal_mail@personal.com"</code>
+<code>ssh-keygen -t ed25519 -C "work_mail@company.com"</code></p></li><li><p>並且將兩個帳號都分別註冊到 GitHub 設定頁面
+<a href=https://docs.github.com/en/authentication/connecting-to-github-with-ssh/adding-a-new-ssh-key-to-your-github-account>Adding a new SSH key to your GitHub account</a></p><p>記得兩個帳號都要設定，需要分別登入兩個帳號並且將 public key 註冊。</p></li><li><p>接下來需要修改你的 ssh 設定檔： 開啟並編輯 <code>~/.ssh/config</code>
+加上以下設定到檔案中，請依照你前面創造的 ssh 來設定你的設定檔。</p></li></ol><pre tabindex=0><code># Personal account
+Host github.com
+   HostName github.com
+   IdentityFile ~/.ssh/personal_private_key
+   IdentitiesOnly yes
+   
+# Work account
+Host github-company
+   HostName github.com
+   IdentityFile ~/.ssh/work_private_key
+   IdentitiesOnly yes
+</code></pre><p><strong>NOTE</strong>: 注意第二個 github 需要幫它取別名。 checkout 的時候要改用這個別名。
+如果原本的路徑是 <code>git@github.com:your-company/your-repository.git</code>
+clone 的時候要把 github.com 改成你剛剛設定的別名</p><pre tabindex=0><code>git clone git@github-company:your-company/your-repository.git
+</code></pre><ol start=4><li>最後可以測試一下是不是可以正常連線</li></ol><pre tabindex=0><code>ssh -T git@github.com
+ssh -T git@github-company
+</code></pre><p>如果每次都需要改變連線網址會相當麻煩，可以再做以下設定來解決。</p><ol start=5><li>開啟並編輯 <code>~/.gitconfig</code> ，並且新增以下設定。這樣就不用修改 git clone 的網址。</li></ol><pre tabindex=0><code>[url &#34;git@github-company:your-company/&#34;]
+    insteadOf = git@github.com:your-company/
+</code></pre><h1 id=reference>Reference</h1><ul><li><a href=https://gist.github.com/oanhnn/80a89405ab9023894df7>https://gist.github.com/oanhnn/80a89405ab9023894df7</a></li></ul></div><div class=post-footer><div id=disqus_thread></div><script type=application/javascript>window.disqus_config=function(){},function(){if(["localhost","127.0.0.1"].indexOf(window.location.hostname)!=-1){document.getElementById("disqus_thread").innerHTML="Disqus comments not available by default when the website is previewed locally.";return}var t=document,e=t.createElement("script");e.async=!0,e.src="//tsungyi-li.disqus.com/embed.js",e.setAttribute("data-timestamp",+new Date),(t.head||t.body).appendChild(e)}()</script><noscript>Please enable JavaScript to view the <a href=https://disqus.com/?ref_noscript>comments powered by Disqus.</a></noscript><a href=https://disqus.com class=dsq-brlink>comments powered by <span class=logo-disqus>Disqus</span></a></div></article></main></body></html>
