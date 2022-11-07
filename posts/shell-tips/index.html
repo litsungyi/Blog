@@ -1,0 +1,59 @@
+<!doctype html><html lang=en-us><head><title>Shell Tips // Null Refference</title><link rel="shortcut icon" href=/favicon.ico><link href=https://tsungyi.li/Blog/fontawesome-free-5.15.4-web/css/all.css rel=stylesheet><meta charset=utf-8><meta name=generator content="Hugo 0.105.0"><meta name=viewport content="width=device-width,initial-scale=1"><meta name=author content="Li TsungYi"><meta name=description content><link rel=stylesheet href=https://tsungyi.li/Blog/css/main.min.4a7ec8660f9a44b08c4da97c5f2e31b1192df1d4d0322e65c0dbbc6ecb1b863f.css><script type=application/javascript>var doNotTrack=!1;doNotTrack||(function(e,t,n,s,o,i,a){e.GoogleAnalyticsObject=o,e[o]=e[o]||function(){(e[o].q=e[o].q||[]).push(arguments)},e[o].l=1*new Date,i=t.createElement(n),a=t.getElementsByTagName(n)[0],i.async=1,i.src=s,a.parentNode.insertBefore(i,a)}(window,document,"script","https://www.google-analytics.com/analytics.js","ga"),ga("create","UA-1062546-8","auto"),ga("send","pageview"))</script><meta name=twitter:card content="summary"><meta name=twitter:title content="Shell Tips"><meta name=twitter:description content="記錄一些最近寫 Shell 用到的語法
+shebang 相關定義可以參考 維基百科
+shebang 必須寫在 shell 的第一行，用來指示這個腳本使用的直譯器。
+#! /bin/bash echo &#34;SHELL = $SHELL&#34; echo &#34;MY SHELL = $(ps -o comm -p $$ | awk 'NR==2 { print $1}')&#34; 雖然可以用環境變數 SHELL 取得使用的 Shell 不過並不是很正確。所以需要用其他命令取得正確的 Shell。
+在我的電腦上印出的是使用者預設的 shell 而不是 shebang 指定的 shell。使用 ps 才能拿到正確的 shell。
+SHELL = /bin/zsh MY SHELL = /bin/bash 使用者輸入 echo &#34;What's your name?&#34; read varname echo &#34;Hello $varname&#34; 畫面會輸出一個等待輸入的提示，等待使用者輸入。
+What's your name? ☐ 等到輸入字串並按下 Enter 送出之後，變數的值就被設定為使用者所輸入的字串 （不包含 Enter）"><meta property="og:title" content="Shell Tips"><meta property="og:description" content="記錄一些最近寫 Shell 用到的語法
+shebang 相關定義可以參考 維基百科
+shebang 必須寫在 shell 的第一行，用來指示這個腳本使用的直譯器。
+#! /bin/bash echo &#34;SHELL = $SHELL&#34; echo &#34;MY SHELL = $(ps -o comm -p $$ | awk 'NR==2 { print $1}')&#34; 雖然可以用環境變數 SHELL 取得使用的 Shell 不過並不是很正確。所以需要用其他命令取得正確的 Shell。
+在我的電腦上印出的是使用者預設的 shell 而不是 shebang 指定的 shell。使用 ps 才能拿到正確的 shell。
+SHELL = /bin/zsh MY SHELL = /bin/bash 使用者輸入 echo &#34;What's your name?&#34; read varname echo &#34;Hello $varname&#34; 畫面會輸出一個等待輸入的提示，等待使用者輸入。
+What's your name? ☐ 等到輸入字串並按下 Enter 送出之後，變數的值就被設定為使用者所輸入的字串 （不包含 Enter）"><meta property="og:type" content="article"><meta property="og:url" content="https://tsungyi.li/Blog/posts/shell-tips/"><meta property="article:section" content="posts"><meta property="article:published_time" content="2022-11-07T10:14:38+08:00"><meta property="article:modified_time" content="2022-11-07T10:14:38+08:00"></head><body><header class=app-header><a href=https://tsungyi.li/Blog><img class=app-header-avatar src=/images/Profile.jpg alt="Li TsungYi"></a><h1>Null Refference</h1><nav class=app-header-menu><a class=app-header-menu-item href=/Blog/about.html>About</a>
+|
+<a class=app-header-menu-item href=/Blog/>Home</a>
+|
+<a class=app-header-menu-item href=/Blog/tags/>Tags</a></nav><p>Hi, I am Li Tsung-Yi (李宗沂). I am a game developer from 🇹🇼 Taiwan.</p></header><main class=app-container><article class=post><header class=post-header><h1 class=post-title>Shell Tips</h1><div class=post-meta><div><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentcolor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon icon-calendar"><title>calendar</title><rect x="3" y="4" width="18" height="18" rx="2" ry="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>Nov 7, 2022</div><div><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentcolor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon icon-clock"><title>clock</title><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>2 min read</div></div></header><div class=post-content><p>記錄一些最近寫 Shell 用到的語法</p><h1 id=shebang><code>shebang</code></h1><p>相關定義可以參考 <a href=https://zh.wikipedia.org/zh-tw/Shebang>維基百科</a></p><p>shebang 必須寫在 shell 的第一行，用來指示這個腳本使用的直譯器。</p><pre tabindex=0><code class="language-shell=" data-lang="shell=">#! /bin/bash
+
+echo &#34;SHELL = $SHELL&#34;
+echo &#34;MY SHELL = $(ps -o comm -p $$ | awk &#39;NR==2 { print $1}&#39;)&#34;
+</code></pre><p>雖然可以用環境變數 <code>SHELL</code> 取得使用的 Shell 不過並不是很正確。所以需要用其他命令取得正確的 Shell。</p><p>在我的電腦上印出的是使用者預設的 shell 而不是 shebang 指定的 shell。使用 ps 才能拿到正確的 shell。</p><pre tabindex=0><code>SHELL = /bin/zsh
+MY SHELL = /bin/bash
+</code></pre><h1 id=使用者輸入>使用者輸入</h1><pre tabindex=0><code class="language-shell=" data-lang="shell=">echo &#34;What&#39;s your name?&#34;
+read varname
+echo &#34;Hello $varname&#34;
+</code></pre><p>畫面會輸出一個等待輸入的提示，等待使用者輸入。</p><pre tabindex=0><code>What&#39;s your name?
+☐
+</code></pre><p>等到輸入字串並按下 Enter 送出之後，變數的值就被設定為使用者所輸入的字串 （不包含 Enter）</p><pre tabindex=0><code>What&#39;s your name?
+Caesar
+Hello Caesar
+</code></pre><h2 id=有用的參數>有用的參數</h2><p>我們可以在 <code>read</code> 加上 <code>-p</code> 表示 <code>read</code> 要顯示的提示字串，就不需要用 <code>echo</code>。
+也可以加上 <code>r</code> 指定不將反斜線視為跳脫字元。</p><pre tabindex=0><code class="language-shell=" data-lang="shell=">read -rp &#34;What&#39;s your name? &#34; varname
+echo &#34;Hello $varname&#34;
+</code></pre><p>需要注意的是，使用 <code>-p</code> 時的提示字串跟輸入游標沒有換行，需要自行加上空格排版，</p><pre tabindex=0><code>What&#39;s your name? ☐
+</code></pre><p>如果要用密碼輸入的話可以用 <code>-s</code> 來隱藏輸入。
+因為 <code>-s</code> 會將送出的 Enter 也隱藏，所以顯示時可以加上一個空行來排版。</p><pre tabindex=0><code class="language-shell=" data-lang="shell=">read -rp &#34;username? &#34; username
+read -srp &#34;password? &#34; password
+echo &#34;&#34;
+echo &#34;Hello $username&#34;
+</code></pre><p>如果要實作 &ldquo;press any key to continue&rdquo; 可以用以下的語法。
+使用 <code>-n 1</code> 來指定只要讀取 1 個字元。</p><pre tabindex=0><code class="language-shell=" data-lang="shell=">read -rp &#34;username? &#34; username
+read -n 1 -srp &#34;press any key to continue&#34; key
+echo &#34;&#34;
+echo &#34;Hello $username&#34;
+</code></pre><p>同樣的我們也可以用這個方法來實作選項。</p><pre tabindex=0><code class="language-shell=" data-lang="shell=">read -rp &#34;username? &#34; username
+read -n 1 -rp &#34;Are you $username (y/n)? &#34; key
+echo &#34;&#34;
+if [ &#34;$key&#34; = &#34;y&#34; ]
+then
+    echo &#34;Hello $username&#34;
+fi
+</code></pre><h1 id=color>Color</h1><p>Shell 輸出的時候可以加上控制碼改變文字或是背景的顏色，
+我們在寫一些較長的腳本會希望輸出的地方能有色彩變化，
+這樣在閱讀的時候比較容易找到重要的地方。</p><p>色碼的顏色文字跟背景的顏色可以分別設定。</p><h2 id=控制碼>控制碼</h2><p>控制碼的格式為 <code>\033[xxm</code> 其中的 xx 就是顏色代碼。
+使用的時候可以用 <code>echo -e</code> 指定後面的文字帶有控制碼。
+另外，要注意的是結束的時候需要用 <code>\033[0m</code> 這個特殊的控制碼 (RESET) 將所有格式清空。
+否則格式會影響到後面的輸出。</p><pre tabindex=0><code class="language-shell=" data-lang="shell=">echo -e &#34;\033[31mhello\033[0m world&#34;
+</code></pre><p>以上代碼就會顯示出紅色的 hello 而 world 則是顯示預設的文字顏色。</p><h2 id=前景-foreground>前景 foreground</h2><p>前景色一共有 16 色</p><ul><li><code>\033[30m</code>: 黑色 (Black)</li><li><code>\033[31m</code>: 紅色 (Red)</li><li><code>\033[32m</code>: 綠色 (Green)</li><li><code>\033[33m</code>: 黃色 (Yellow)</li><li><code>\033[34m</code>: 藍色 (Blue)</li><li><code>\033[35m</code>: 洋紅色 (Magenta)</li><li><code>\033[36m</code>: 青色 (Cyan)</li><li><code>\033[37m</code>: 白色 (White)</li><li><code>\033[1;30m</code> (or <code>\033[90m</code>): 亮黑色 (Bright Black / Gray)</li><li><code>\033[1;31m</code> (or <code>\033[91m</code>): 亮紅色 (Bright Red)</li><li><code>\033[1;32m</code> (or <code>\033[92m</code>): 亮綠色 (Bright Green)</li><li><code>\033[1;33m</code> (or <code>\033[93m</code>): 亮黃色 (Bright Yellow)</li><li><code>\033[1;34m</code> (or <code>\033[94m</code>): 亮藍色 (Bright Blue)</li><li><code>\033[1;35m</code> (or <code>\033[95m</code>): 亮洋紅色 (Bright Magenta)</li><li><code>\033[1;36m</code> (or <code>\033[96m</code>): 亮青色 (Bright Cyan)</li><li><code>\033[1;37m</code> (or <code>\033[97m</code>): 亮白色 (Bright White)</li></ul><h2 id=背景-background>背景 background</h2><p>背景色一共有 16 色，可以用分號分隔就跟前景色一起使用。</p><ul><li><code>\033[40m</code>: 黑色 (Black)</li><li><code>\033[41m</code>: 紅色 (Red)</li><li><code>\033[42m</code>: 綠色 (Green)</li><li><code>\033[43m</code>: 黃色 (Yellow)</li><li><code>\033[44m</code>: 藍色 (Blue)</li><li><code>\033[45m</code>: 洋紅色 (Magenta)</li><li><code>\033[46m</code>: 青色 (Cyan)</li><li><code>\033[47m</code>: 白色 (White)</li><li><code>\033[1;40m</code> (or <code>\033[100m</code>): 亮黑色 (Bright Black / Gray)</li><li><code>\033[1;41m</code> (or <code>\033[101m</code>): 亮紅色 (Bright Red)</li><li><code>\033[1;42m</code> (or <code>\033[102m</code>): 亮綠色 (Bright Green)</li><li><code>\033[1;43m</code> (or <code>\033[103m</code>): 亮黃色 (Bright Yellow)</li><li><code>\033[1;44m</code> (or <code>\033[104m</code>): 亮藍色 (Bright Blue)</li><li><code>\033[1;45m</code> (or <code>\033[105m</code>): 亮洋紅色 (Bright Magenta)</li><li><code>\033[1;46m</code> (or <code>\033[106m</code>): 亮青色 (Bright Cyan)</li><li><code>\033[1;47m</code> (or <code>\033[107m</code>): 亮白色 (Bright White)</li></ul><h2 id=其他控制符號>其他控制符號</h2><ul><li><code>\033[0m</code>: 重置 (Reset)</li><li><code>\033[1m</code>: 粗體 (Bold)</li><li><code>\033[4m</code>: 底線 (Underline)</li><li><code>\033[7m</code>: 反轉前景、背景色 (Reverse)</li></ul><p>另外也可以用來控制游標位置，做到類似進度條的顯示。
+細節請參考<a href=https://www.lihaoyi.com/post/BuildyourownCommandLinewithANSIescapecodes.html>參考資料</a>。</p></div><div class=post-footer><div id=disqus_thread></div><script type=application/javascript>window.disqus_config=function(){},function(){if(["localhost","127.0.0.1"].indexOf(window.location.hostname)!=-1){document.getElementById("disqus_thread").innerHTML="Disqus comments not available by default when the website is previewed locally.";return}var t=document,e=t.createElement("script");e.async=!0,e.src="//tsungyi-li.disqus.com/embed.js",e.setAttribute("data-timestamp",+new Date),(t.head||t.body).appendChild(e)}()</script><noscript>Please enable JavaScript to view the <a href=https://disqus.com/?ref_noscript>comments powered by Disqus.</a></noscript><a href=https://disqus.com class=dsq-brlink>comments powered by <span class=logo-disqus>Disqus</span></a></div></article></main></body></html>
