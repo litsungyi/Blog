@@ -1,10 +1,16 @@
 ---
 title: "Shell Tips"
 date: 2022-11-07T10:14:38+08:00
+tags: ["Shell"]
 draft: false
 ---
 
 記錄一些最近寫 Shell 用到的語法
+
+# ShellCheck
+
+如果你是使用 Visual Studio Code 強烈建議可以安裝這個套件 [ShellCheck](https://marketplace.visualstudio.com/items?itemName=timonwong.shellcheck)。
+可以幫你檢查 Shell 的錯誤跟提供建議的寫法。
 
 # `shebang`
 
@@ -27,6 +33,111 @@ echo "MY SHELL = $(ps -o comm -p $$ | awk 'NR==2 { print $1}')"
 SHELL = /bin/zsh
 MY SHELL = /bin/bash
 ```
+
+# 常用的內建變數
+
+- `$?`: 上一個指令或程式執行的回傳值，通常 0 代表執行成功，0 以外的數字表示失敗
+- `$n`: n 是數字，表示第幾個參數
+- `$#`: 參數數量
+- `$$`: shell 執行的 PID
+- 如果要取得 pipeline 的其中一個階段的結果可以用 `${PIPESTATUS[n]}` 其中的 n 是數字
+
+## redirect
+
+通常會用 `> info.log` 來把輸出寫到檔案，我們也可以用來將輸出寫到不同的目標 `2> error.log | tee output.log`。
+
+- `2` 是 stderr
+- `tee` 用來把輸出同時寫到畫面跟檔案
+
+如果要隱藏輸出可以使用 `> /dev/null`
+
+
+# 執行外部命令
+
+在 shell 中可以透過直接執行程式來設定變數
+
+```shell=
+RBENV_VERSION=`rbenv version | tr '{print $1}'`
+echo "$RBENV_VERSION"
+```
+
+不過 ShellCheck 會建議不要使用 '`' 的方式，可以改用以下寫法：
+
+```shell=
+RBENV_VERSION=$(rbenv version)
+echo "$RBENV_VERSION"
+```
+
+
+# 判斷式
+
+基本的 if 語法是這樣
+
+```shell=
+if [ 條件 ]
+then
+    # do something
+elif [ 條件 ]
+then
+    # do something
+else
+    # do something
+fi
+```
+
+- **NOTE** `[` or `]` 跟條件需要有空格分開
+
+常用的條件有：
+
+## 字串比對
+- `"字串1" = "字串2"`: 比對兩個字串是否相同
+    - Shellcheck 會建議即使是變數也要加上 `"` 因為變數的值可能有空格或特殊符號，有可能在特定輸入會出問題
+      - ❌ `if [ KEY = "name" ]`
+      - ⭕ `if [ "$KEY" = "name" ]`
+- `"字串1" != "字串2"`: 比對兩個字串是否不ㄍㄜ同
+
+## 數值比對
+- `變數1 -eq 變數2`: 比對兩個數字是否相同
+- `變數1 -ne 變數2`: 比對兩個數字是否相同
+- `變數1 -lt 變數2`: 變數1 < 變數2
+- `變數1 -gt 變數2`: 變數1 > 變數2
+- `變數1 -le 變數2`: 變數1 <= 變數2
+- `變數1 -ge 變數2`: 變數1 >= 變數2
+
+## 檔案檢查
+- `-d 路徑`: 檢查路徑是否為資料夾
+- `-e 路徑`: 檢查路徑的檔案或資料夾是否存在
+
+**NOTE**: NOT 的語法是在條件前面加上 `!`，要檢查檔案不存在就是 `if [ ! -e "test.ini" ]`
+
+## 多條件比對
+
+多個條件可以用 `||` 或是 `&&` 分隔多個條件
+Ex. `if [ $? -eq 0 ] && [ -e "test.ini" ]`
+
+## 判斷其他命令的執行結果
+
+#### 方法一
+
+```shell=
+rbenv version
+if [ $? -eq 0 ]
+then
+  # Do something
+fi
+```
+
+#### 方法二
+
+```shell=
+if rbenv version
+then
+  # Do something
+fi
+```
+
+可以直接在 if 的條件式中執行命令。這樣比較簡潔， ShellCheck 建議使用這種格式。
+
 
 # 使用者輸入
 
@@ -98,6 +209,7 @@ then
     echo "Hello $username"
 fi
 ```
+
 
 # Color
 
