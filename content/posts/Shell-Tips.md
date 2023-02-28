@@ -5,6 +5,7 @@ tags: ["Shell"]
 draft: false
 ---
 
+
 記錄一些最近寫 Shell 用到的語法
 
 # ShellCheck
@@ -283,3 +284,5 @@ echo -e "\033[31mhello\033[0m world"
 
 另外也可以用來控制游標位置，做到類似進度條的顯示。
 細節請參考[參考資料](https://www.lihaoyi.com/post/BuildyourownCommandLinewithANSIescapecodes.html)。
+
+Ref. [Shell Script Best Practices](https://sharats.me/posts/shell-script-best-practices/)
