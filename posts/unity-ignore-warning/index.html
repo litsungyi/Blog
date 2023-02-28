@@ -1,4 +1,32 @@
-<!doctype html><html lang=en-us><head><title>Unity - 忽略警告訊息 // Null Refference</title><link rel="shortcut icon" href=/favicon.ico><link href=https://tsungyi.li/Blog/fontawesome-free-5.15.4-web/css/all.css rel=stylesheet><meta charset=utf-8><meta name=generator content="Hugo 0.105.0"><meta name=viewport content="width=device-width,initial-scale=1"><meta name=author content="Li TsungYi"><meta name=description content><link rel=stylesheet href=https://tsungyi.li/Blog/css/main.min.4a7ec8660f9a44b08c4da97c5f2e31b1192df1d4d0322e65c0dbbc6ecb1b863f.css><script type=application/javascript>var doNotTrack=!1;doNotTrack||(function(e,t,n,s,o,i,a){e.GoogleAnalyticsObject=o,e[o]=e[o]||function(){(e[o].q=e[o].q||[]).push(arguments)},e[o].l=1*new Date,i=t.createElement(n),a=t.getElementsByTagName(n)[0],i.async=1,i.src=s,a.parentNode.insertBefore(i,a)}(window,document,"script","https://www.google-analytics.com/analytics.js","ga"),ga("create","UA-1062546-8","auto"),ga("send","pageview"))</script><meta name=twitter:card content="summary"><meta name=twitter:title content="Unity - 忽略警告訊息"><meta name=twitter:description content="在 Unity 中如果有用到其他 Plugins 經常會發現許多來自這些 Plugins 的 Warning。如果不處理的話，這些訊息可能會淹沒了專案中真正需要注意的警告訊息。
+<!doctype html>
+<html lang="en-us">
+  <head>
+    <title>Unity - 忽略警告訊息 // Null Refference</title>
+    <link rel="shortcut icon" href="/favicon.ico" />
+    <link href="https://tsungyi.li/Blog/fontawesome-free-5.15.4-web/css/all.css" rel="stylesheet"> 
+    <meta charset="utf-8" />
+    <meta name="generator" content="Hugo 0.101.0" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="author" content="Li TsungYi" />
+    <meta name="description" content="" />
+    <link rel="stylesheet" href="https://tsungyi.li/Blog/css/main.min.4a7ec8660f9a44b08c4da97c5f2e31b1192df1d4d0322e65c0dbbc6ecb1b863f.css" />
+
+    
+<script type="application/javascript">
+var doNotTrack = false;
+if (!doNotTrack) {
+	(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+	(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+	m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+	})(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+	ga('create', 'UA-1062546-8', 'auto');
+	
+	ga('send', 'pageview');
+}
+</script>
+    <meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="Unity - 忽略警告訊息"/>
+<meta name="twitter:description" content="在 Unity 中如果有用到其他 Plugins 經常會發現許多來自這些 Plugins 的 Warning。如果不處理的話，這些訊息可能會淹沒了專案中真正需要注意的警告訊息。
 底下是來自我們目前專案的警告訊息：
 Unity 看到的警告訊息大約 300個 從 Visual Studio for Mac 看到的警告訊息超過 2000個 NOTE: Unity 跟 Visual Studio for Mac 的警告訊息數量不同，最好兩個都檢查
 雖然理論上警告訊息都必須要修正，但是專案進行中總是有很多無法掌握的情形， 以下介紹我在目前處理的專案中，遇到難以修改的警告訊息的解決方式：
@@ -9,7 +37,10 @@ Plugins&rsquo; warning 對於第三方的 Plugins 我們可以先用 #pragma war
 如果檔案裡的警告太多，也可以在檔案開頭與結尾分別加上關閉與還原檔案內所有警告訊息。
 NOTE: 這樣的關閉方式，一但更新 Plugins 的時候可能要重新處理一次。
 底下的例子來自 MSDN
-// CS0649.cs // compile with: /W:4 using System."><meta property="og:title" content="Unity - 忽略警告訊息"><meta property="og:description" content="在 Unity 中如果有用到其他 Plugins 經常會發現許多來自這些 Plugins 的 Warning。如果不處理的話，這些訊息可能會淹沒了專案中真正需要注意的警告訊息。
+// CS0649.cs // compile with: /W:4 using System."/>
+
+    <meta property="og:title" content="Unity - 忽略警告訊息" />
+<meta property="og:description" content="在 Unity 中如果有用到其他 Plugins 經常會發現許多來自這些 Plugins 的 Warning。如果不處理的話，這些訊息可能會淹沒了專案中真正需要注意的警告訊息。
 底下是來自我們目前專案的警告訊息：
 Unity 看到的警告訊息大約 300個 從 Visual Studio for Mac 看到的警告訊息超過 2000個 NOTE: Unity 跟 Visual Studio for Mac 的警告訊息數量不同，最好兩個都檢查
 雖然理論上警告訊息都必須要修正，但是專案進行中總是有很多無法掌握的情形， 以下介紹我在目前處理的專案中，遇到難以修改的警告訊息的解決方式：
@@ -20,61 +51,182 @@ Plugins&rsquo; warning 對於第三方的 Plugins 我們可以先用 #pragma war
 如果檔案裡的警告太多，也可以在檔案開頭與結尾分別加上關閉與還原檔案內所有警告訊息。
 NOTE: 這樣的關閉方式，一但更新 Plugins 的時候可能要重新處理一次。
 底下的例子來自 MSDN
-// CS0649.cs // compile with: /W:4 using System."><meta property="og:type" content="article"><meta property="og:url" content="https://tsungyi.li/Blog/posts/unity-ignore-warning/"><meta property="article:section" content="posts"><meta property="article:published_time" content="2018-11-07T15:49:00+08:00"><meta property="article:modified_time" content="2018-11-07T15:49:00+08:00"></head><body><header class=app-header><a href=https://tsungyi.li/Blog><img class=app-header-avatar src=/images/Profile.jpg alt="Li TsungYi"></a><h1>Null Refference</h1><nav class=app-header-menu><a class=app-header-menu-item href=/Blog/about.html>About</a>
-|
-<a class=app-header-menu-item href=/Blog/>Home</a>
-|
-<a class=app-header-menu-item href=/Blog/tags/>Tags</a></nav><p>Hi, I am Li Tsung-Yi (李宗沂). I am a game developer from 🇹🇼 Taiwan.</p></header><main class=app-container><article class=post><header class=post-header><h1 class=post-title>Unity - 忽略警告訊息</h1><div class=post-meta><div><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentcolor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon icon-calendar"><title>calendar</title><rect x="3" y="4" width="18" height="18" rx="2" ry="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>Nov 7, 2018</div><div><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentcolor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon icon-clock"><title>clock</title><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>2 min read</div><div><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentcolor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon icon-tag"><title>tag</title><path d="M20.59 13.41l-7.17 7.17a2 2 0 01-2.83.0L2 12V2h10l8.59 8.59a2 2 0 010 2.82z"/><line x1="7" y1="7" x2="7.01" y2="7"/></svg><a class=tag href=https://tsungyi.li/Blog/tags/unity/>Unity</a>
-<a class=tag href=https://tsungyi.li/Blog/tags/c#/>C#</a></div></div></header><div class=post-content><p>在 Unity 中如果有用到其他 Plugins 經常會發現許多來自這些 Plugins 的 Warning。如果不處理的話，這些訊息可能會淹沒了專案中真正需要注意的警告訊息。</p><p>底下是來自我們目前專案的警告訊息：</p><p>Unity 看到的警告訊息大約 300個
-<img src=/Blog/images/Unity-Ignore-Warning/Warning-1.png alt="Unity 看到的警告訊息大約 300個"></p><p>從 Visual Studio for Mac 看到的警告訊息超過 2000個
-<img src=/Blog/images/Unity-Ignore-Warning/Warning-2.png alt="從 Visual Studio for Mac 看到的警告訊息超過 2000個"></p><p><strong>NOTE</strong>: Unity 跟 Visual Studio for Mac 的警告訊息數量不同，最好兩個都檢查</p><p>雖然理論上警告訊息都必須要修正，但是專案進行中總是有很多無法掌握的情形，
-以下介紹我在目前處理的專案中，遇到難以修改的警告訊息的解決方式：</p><h2 id=plugins-warning>Plugins&rsquo; warning</h2><p>對於第三方的 Plugins 我們可以先用 <code>#pragma warning</code> 命令來暫時關閉警告訊息。</p><p>關閉的方式使用 <code>#pragma warning disable</code> 暫時關閉，並在使用後用 <code>#pragma warning restore</code> 開啟警告。</p><p>通常會在發生警告前一行加上 <code>#pragma warning disable *warning-list*</code>，並且在發生警告後一行加上 <code>#pragma warning restore *warning-list*</code> 重新開啟警告。</p><p>一般來說，建議將關閉警告與開啟警告的範圍越小越好，避免意外隱藏其他有意義的警告訊息。</p><p>如果檔案裡的警告太多，也可以在檔案開頭與結尾分別加上關閉與還原檔案內所有警告訊息。</p><p><strong>NOTE</strong>: 這樣的關閉方式，一但更新 Plugins 的時候可能要重新處理一次。</p><p>底下的例子來自 MSDN</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-csharp data-lang=csharp><span style=display:flex><span><span style=color:#75715e>// CS0649.cs</span>
-</span></span><span style=display:flex><span><span style=color:#75715e>// compile with: /W:4</span>
-</span></span><span style=display:flex><span><span style=color:#66d9ef>using</span> System.Collections;
-</span></span><span style=display:flex><span>
-</span></span><span style=display:flex><span><span style=color:#66d9ef>class</span> <span style=color:#a6e22e>MyClass</span>
-</span></span><span style=display:flex><span>{
-</span></span><span style=display:flex><span><span style=color:#75715e>#pragma warning disable 0649</span>
-</span></span><span style=display:flex><span>   Hashtable table;  <span style=color:#75715e>// CS0649</span>
-</span></span><span style=display:flex><span><span style=color:#75715e>#pragma warning restore 0649</span>
-</span></span><span style=display:flex><span>   <span style=color:#75715e>// You may have intended to initialize the variable to null</span>
-</span></span><span style=display:flex><span>   <span style=color:#75715e>// Hashtable table = null;</span>
-</span></span><span style=display:flex><span>
-</span></span><span style=display:flex><span>   <span style=color:#75715e>// Or you may have meant to create an object here</span>
-</span></span><span style=display:flex><span>   <span style=color:#75715e>// Hashtable table = new Hashtable();</span>
-</span></span><span style=display:flex><span>
-</span></span><span style=display:flex><span>   <span style=color:#66d9ef>public</span> <span style=color:#66d9ef>void</span> Func(<span style=color:#66d9ef>object</span> o, <span style=color:#66d9ef>string</span> p)
-</span></span><span style=display:flex><span>   {
-</span></span><span style=display:flex><span>      <span style=color:#75715e>// Or here</span>
-</span></span><span style=display:flex><span>      <span style=color:#75715e>// table = new Hashtable();</span>
-</span></span><span style=display:flex><span>      table[p] = o;
-</span></span><span style=display:flex><span>   }
-</span></span><span style=display:flex><span>
-</span></span><span style=display:flex><span>   <span style=color:#66d9ef>public</span> <span style=color:#66d9ef>static</span> <span style=color:#66d9ef>void</span> Main()
-</span></span><span style=display:flex><span>   {
-</span></span><span style=display:flex><span>   }
-</span></span><span style=display:flex><span>}
-</span></span></code></pre></div><ul><li><p>Ref. <a href=https://docs.microsoft.com/en-us/dotnet/csharp/language-reference/preprocessor-directives/preprocessor-pragma-warning>MSDN: #pragma warning (C# Reference)</a></p></li><li><p>Ref. <a href=https://docs.microsoft.com/en-us/dotnet/csharp/misc/cs0649>MSDN: Compiler Warning (level 4) CS0649</a></p></li></ul><h2 id=projects-warning>Project&rsquo;s warning</h2><p>相較於 Plugins 的警告訊息，自己專案的警告訊息是比較需要處理的。</p><p>不過 Unity 本身的機制會造成許多警告訊息不斷出現，會影響到重要的警告被淹沒在大量警告訊息中</p><p>底下的範例示範在 Unity 中引發最常見的警告 CS0649 的方式：</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-csharp data-lang=csharp><span style=display:flex><span><span style=color:#66d9ef>using</span> UnityEngine
-</span></span><span style=display:flex><span>
-</span></span><span style=display:flex><span><span style=color:#66d9ef>public</span> <span style=color:#66d9ef>class</span> <span style=color:#a6e22e>ExampleScript</span> : MonoBehaviour
-</span></span><span style=display:flex><span>{
-</span></span><span style=display:flex><span>    <span style=color:#66d9ef>private</span> <span style=color:#66d9ef>int</span> noWarning;
-</span></span><span style=display:flex><span>
-</span></span><span style=display:flex><span>    <span style=color:#75715e>// Warning CS0649: Field is never assigned to, and will always have its default value null</span>
-</span></span><span style=display:flex><span><span style=color:#a6e22e>    [SerializeField]</span> <span style=color:#66d9ef>private</span> <span style=color:#66d9ef>int</span> warning0649;
-</span></span><span style=display:flex><span>
-</span></span><span style=display:flex><span>    <span style=color:#66d9ef>private</span> <span style=color:#66d9ef>void</span> Awake()
-</span></span><span style=display:flex><span>    {
-</span></span><span style=display:flex><span>        noWarning = warning0649;
-</span></span><span style=display:flex><span>    }
-</span></span><span style=display:flex><span>}
-</span></span></code></pre></div><p>以上的情況很常發生，通常發生在我們要在 inspector 上設定值或是參考到場景上的 GameObject 的變數上且沒有給初始值的情況。</p><p>簡單的解決方法可以在宣告的時候加上初始值，雖然大部分情況這個初始值不會發生作用。</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-csharp data-lang=csharp><span style=display:flex><span><span style=color:#a6e22e>[SerializeField]</span> <span style=color:#66d9ef>private</span> <span style=color:#66d9ef>int</span> warning0649 = <span style=color:#ae81ff>0</span>;
-</span></span></code></pre></div><p>對於開發中的專案，要修復所有警告可能需要花上很多時間，我們可以採用另一種比較暴力的處理方式。</p><p>使用 <code>mcs.rsp</code> 檔案來設定專案中要忽略的警告。
-詳細的使用方式可以用 <code>mcs -help</code> 指令查詢。</p><ul><li>Ref. <a href=https://docs.microsoft.com/en-us/dotnet/csharp/misc/cs0649>Unity Documentation: Global custom #defines</a></li></ul><p>我們會用到其中的 <code>nowarn</code> 參數來將特定的警告關閉。
-因為 <code>mcs.rsp</code> 是全專案的隱藏，可能會誤關到真正會發生問題的警告，所以使用上必須小心選擇要關閉的警告。</p><p>我們的 <code>mcs.rsp</code> 的內容只有簡單地忽略幾個 Unity 常見的警告訊息，檔案需要放在 <code>Assets/mcs.rsp</code> 路徑下。</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-text data-lang=text><span style=display:flex><span>-nowarn:0649
-</span></span><span style=display:flex><span>-nowarn:1635
+// CS0649.cs // compile with: /W:4 using System." />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://tsungyi.li/Blog/posts/unity-ignore-warning/" /><meta property="article:section" content="posts" />
+<meta property="article:published_time" content="2018-11-07T15:49:00+08:00" />
+<meta property="article:modified_time" content="2018-11-07T15:49:00+08:00" />
+
+
+
+  </head>
+  <body>
+    <header class="app-header">
+      <a href="https://tsungyi.li/Blog"><img class="app-header-avatar" src="/images/Profile.jpg" alt="Li TsungYi" /></a>
+      <h1>Null Refference</h1>
+      <nav class="app-header-menu">
+          <a class="app-header-menu-item" href="/Blog/about.html">About</a>
+             | 
+          
+          <a class="app-header-menu-item" href="/Blog/">Home</a>
+             | 
+          
+          <a class="app-header-menu-item" href="/Blog/tags/">Tags</a>
+      </nav>
+      <p>Hi, I am Li Tsung-Yi (李宗沂). I am a game developer from 🇹🇼 Taiwan.</p>
+    </header>
+    <main class="app-container">
+      
+  <article class="post">
+    <header class="post-header">
+      <h1 class ="post-title">Unity - 忽略警告訊息</h1>
+      <div class="post-meta">
+        <div>
+          <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon icon-calendar">
+  <title>calendar</title>
+  <rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect><line x1="16" y1="2" x2="16" y2="6"></line><line x1="8" y1="2" x2="8" y2="6"></line><line x1="3" y1="10" x2="21" y2="10"></line>
+</svg>
+          Nov 7, 2018
+        </div>
+        <div>
+          <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon icon-clock">
+  <title>clock</title>
+  <circle cx="12" cy="12" r="10"></circle><polyline points="12 6 12 12 16 14"></polyline>
+</svg>
+          2 min read
+        </div>
+        <div>
+          <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon icon-tag">
+  <title>tag</title>
+  <path d="M20.59 13.41l-7.17 7.17a2 2 0 0 1-2.83 0L2 12V2h10l8.59 8.59a2 2 0 0 1 0 2.82z"></path><line x1="7" y1="7" x2="7.01" y2="7"></line>
+</svg>
+              <a class="tag" href="https://tsungyi.li/Blog/tags/unity/">Unity</a>
+              <a class="tag" href="https://tsungyi.li/Blog/tags/c#/">C#</a>
+        </div>
+      </div>
+    </header>
+    <div class="post-content">
+      <p>在 Unity 中如果有用到其他 Plugins 經常會發現許多來自這些 Plugins 的 Warning。如果不處理的話，這些訊息可能會淹沒了專案中真正需要注意的警告訊息。</p>
+<p>底下是來自我們目前專案的警告訊息：</p>
+<p>Unity 看到的警告訊息大約 300個
+<img src="/Blog/images/Unity-Ignore-Warning/Warning-1.png" alt="Unity 看到的警告訊息大約 300個"></p>
+<p>從 Visual Studio for Mac 看到的警告訊息超過 2000個
+<img src="/Blog/images/Unity-Ignore-Warning/Warning-2.png" alt="從 Visual Studio for Mac 看到的警告訊息超過 2000個"></p>
+<p><strong>NOTE</strong>: Unity 跟 Visual Studio for Mac 的警告訊息數量不同，最好兩個都檢查</p>
+<p>雖然理論上警告訊息都必須要修正，但是專案進行中總是有很多無法掌握的情形，
+以下介紹我在目前處理的專案中，遇到難以修改的警告訊息的解決方式：</p>
+<h2 id="plugins-warning">Plugins&rsquo; warning</h2>
+<p>對於第三方的 Plugins 我們可以先用 <code>#pragma warning</code> 命令來暫時關閉警告訊息。</p>
+<p>關閉的方式使用 <code>#pragma warning disable</code> 暫時關閉，並在使用後用 <code>#pragma warning restore</code> 開啟警告。</p>
+<p>通常會在發生警告前一行加上 <code>#pragma warning disable *warning-list*</code>，並且在發生警告後一行加上 <code>#pragma warning restore *warning-list*</code> 重新開啟警告。</p>
+<p>一般來說，建議將關閉警告與開啟警告的範圍越小越好，避免意外隱藏其他有意義的警告訊息。</p>
+<p>如果檔案裡的警告太多，也可以在檔案開頭與結尾分別加上關閉與還原檔案內所有警告訊息。</p>
+<p><strong>NOTE</strong>: 這樣的關閉方式，一但更新 Plugins 的時候可能要重新處理一次。</p>
+<p>底下的例子來自 MSDN</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-csharp" data-lang="csharp"><span style="display:flex;"><span><span style="color:#75715e">// CS0649.cs</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">// compile with: /W:4</span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">using</span> System.Collections;
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">class</span> <span style="color:#a6e22e">MyClass</span>
+</span></span><span style="display:flex;"><span>{
+</span></span><span style="display:flex;"><span><span style="color:#75715e">#pragma warning disable 0649</span>
+</span></span><span style="display:flex;"><span>   Hashtable table;  <span style="color:#75715e">// CS0649</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">#pragma warning restore 0649</span>
+</span></span><span style="display:flex;"><span>   <span style="color:#75715e">// You may have intended to initialize the variable to null</span>
+</span></span><span style="display:flex;"><span>   <span style="color:#75715e">// Hashtable table = null;</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>   <span style="color:#75715e">// Or you may have meant to create an object here</span>
+</span></span><span style="display:flex;"><span>   <span style="color:#75715e">// Hashtable table = new Hashtable();</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>   <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">void</span> Func(<span style="color:#66d9ef">object</span> o, <span style="color:#66d9ef">string</span> p)
+</span></span><span style="display:flex;"><span>   {
+</span></span><span style="display:flex;"><span>      <span style="color:#75715e">// Or here</span>
+</span></span><span style="display:flex;"><span>      <span style="color:#75715e">// table = new Hashtable();</span>
+</span></span><span style="display:flex;"><span>      table[p] = o;
+</span></span><span style="display:flex;"><span>   }
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>   <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">static</span> <span style="color:#66d9ef">void</span> Main()
+</span></span><span style="display:flex;"><span>   {
+</span></span><span style="display:flex;"><span>   }
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><ul>
+<li>
+<p>Ref. <a href="https://docs.microsoft.com/en-us/dotnet/csharp/language-reference/preprocessor-directives/preprocessor-pragma-warning">MSDN: #pragma warning (C# Reference)</a></p>
+</li>
+<li>
+<p>Ref. <a href="https://docs.microsoft.com/en-us/dotnet/csharp/misc/cs0649">MSDN: Compiler Warning (level 4) CS0649</a></p>
+</li>
+</ul>
+<h2 id="projects-warning">Project&rsquo;s warning</h2>
+<p>相較於 Plugins 的警告訊息，自己專案的警告訊息是比較需要處理的。</p>
+<p>不過 Unity 本身的機制會造成許多警告訊息不斷出現，會影響到重要的警告被淹沒在大量警告訊息中</p>
+<p>底下的範例示範在 Unity 中引發最常見的警告 CS0649 的方式：</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-csharp" data-lang="csharp"><span style="display:flex;"><span><span style="color:#66d9ef">using</span> UnityEngine
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">public</span> <span style="color:#66d9ef">class</span> <span style="color:#a6e22e">ExampleScript</span> : MonoBehaviour
+</span></span><span style="display:flex;"><span>{
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">private</span> <span style="color:#66d9ef">int</span> noWarning;
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e">// Warning CS0649: Field is never assigned to, and will always have its default value null</span>
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">    [SerializeField]</span> <span style="color:#66d9ef">private</span> <span style="color:#66d9ef">int</span> warning0649;
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">private</span> <span style="color:#66d9ef">void</span> Awake()
+</span></span><span style="display:flex;"><span>    {
+</span></span><span style="display:flex;"><span>        noWarning = warning0649;
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><p>以上的情況很常發生，通常發生在我們要在 inspector 上設定值或是參考到場景上的 GameObject 的變數上且沒有給初始值的情況。</p>
+<p>簡單的解決方法可以在宣告的時候加上初始值，雖然大部分情況這個初始值不會發生作用。</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-csharp" data-lang="csharp"><span style="display:flex;"><span><span style="color:#a6e22e">[SerializeField]</span> <span style="color:#66d9ef">private</span> <span style="color:#66d9ef">int</span> warning0649 = <span style="color:#ae81ff">0</span>;
+</span></span></code></pre></div><p>對於開發中的專案，要修復所有警告可能需要花上很多時間，我們可以採用另一種比較暴力的處理方式。</p>
+<p>使用 <code>mcs.rsp</code> 檔案來設定專案中要忽略的警告。
+詳細的使用方式可以用 <code>mcs -help</code> 指令查詢。</p>
+<ul>
+<li>Ref. <a href="https://docs.microsoft.com/en-us/dotnet/csharp/misc/cs0649">Unity Documentation: Global custom #defines</a></li>
+</ul>
+<p>我們會用到其中的 <code>nowarn</code> 參數來將特定的警告關閉。
+因為 <code>mcs.rsp</code> 是全專案的隱藏，可能會誤關到真正會發生問題的警告，所以使用上必須小心選擇要關閉的警告。</p>
+<p>我們的 <code>mcs.rsp</code> 的內容只有簡單地忽略幾個 Unity 常見的警告訊息，檔案需要放在 <code>Assets/mcs.rsp</code> 路徑下。</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-text" data-lang="text"><span style="display:flex;"><span>-nowarn:0649
+</span></span><span style="display:flex;"><span>-nowarn:1635
 </span></span></code></pre></div><p>在這裡我們關閉了 CS0649 這個常見的警告訊息，另外也關閉了 CS1635 這個警告訊息。
-CS1635 是當我們在全域關閉了某個警告訊息，如果有人用 <code>#pragma warning restore</code> 重新開啟這個警告的時後就會有這個警告。因此我們也需要忽略這個警告。</p><ul><li>Ref. <a href=https://docs.microsoft.com/en-us/dotnet/csharp/misc/cs0649>MSDN: Compiler Warning (level 1) CS1635</a></li></ul><h2 id=conclusion>Conclusion</h2><p>不論是用 <code>#pragma warning</code> 或是 <code>mcs.rsp</code> 來忽略警告訊息都不是很推薦的作法。</p><p>最好還是可以將所有警告都處理掉，
+CS1635 是當我們在全域關閉了某個警告訊息，如果有人用 <code>#pragma warning restore</code> 重新開啟這個警告的時後就會有這個警告。因此我們也需要忽略這個警告。</p>
+<ul>
+<li>Ref. <a href="https://docs.microsoft.com/en-us/dotnet/csharp/misc/cs0649">MSDN: Compiler Warning (level 1) CS1635</a></li>
+</ul>
+<h2 id="conclusion">Conclusion</h2>
+<p>不論是用 <code>#pragma warning</code> 或是 <code>mcs.rsp</code> 來忽略警告訊息都不是很推薦的作法。</p>
+<p>最好還是可以將所有警告都處理掉，
 不過對於外部的 Plugins 可以稍微放寬一點，容忍警告的發生，但是要注意避免警告訊息影響到專案本身。
-可以將 Plugins 的警告都隱藏起來，只要關注在專案本身的警告訊息即可。</p><p>對於現有專案，考量到修改的成本，使用全域的 <code>mcs.rsp</code> 是折衷的手段，
-最終還是需要花費時間回頭處理累積的技術債。</p></div><div class=post-footer><div id=disqus_thread></div><script type=application/javascript>window.disqus_config=function(){},function(){if(["localhost","127.0.0.1"].indexOf(window.location.hostname)!=-1){document.getElementById("disqus_thread").innerHTML="Disqus comments not available by default when the website is previewed locally.";return}var t=document,e=t.createElement("script");e.async=!0,e.src="//tsungyi-li.disqus.com/embed.js",e.setAttribute("data-timestamp",+new Date),(t.head||t.body).appendChild(e)}()</script><noscript>Please enable JavaScript to view the <a href=https://disqus.com/?ref_noscript>comments powered by Disqus.</a></noscript><a href=https://disqus.com class=dsq-brlink>comments powered by <span class=logo-disqus>Disqus</span></a></div></article></main></body></html>
+可以將 Plugins 的警告都隱藏起來，只要關注在專案本身的警告訊息即可。</p>
+<p>對於現有專案，考量到修改的成本，使用全域的 <code>mcs.rsp</code> 是折衷的手段，
+最終還是需要花費時間回頭處理累積的技術債。</p>
+
+    </div>
+    <div class="post-footer">
+      <div id="disqus_thread"></div>
+<script type="application/javascript">
+    window.disqus_config = function () {
+    
+    
+    
+    };
+    (function() {
+        if (["localhost", "127.0.0.1"].indexOf(window.location.hostname) != -1) {
+            document.getElementById('disqus_thread').innerHTML = 'Disqus comments not available by default when the website is previewed locally.';
+            return;
+        }
+        var d = document, s = d.createElement('script'); s.async = true;
+        s.src = '//' + "tsungyi-li" + '.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', +new Date());
+        (d.head || d.body).appendChild(s);
+    })();
+</script>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+<a href="https://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
+    </div>
+  </article>
+
+    </main>
+  </body>
+</html>
