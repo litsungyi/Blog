@@ -1,6 +1,6 @@
 baseURL = "https://tsungyi.li/Blog"
 languageCode = "en-us"
-title = "Null Refference"
+title = "終於明白 | tsungyi knows."
 theme = "m10c"
 googleAnalytics = 'UA-1062546-8'
 disqusShortname = 'tsungyi-li'

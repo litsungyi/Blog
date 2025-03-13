@@ -3,6 +3,9 @@
   <head>
     <title>{{ if .IsHome }}{{ .Site.Title }}{{ else }}{{ .Title }} // {{ .Site.Title }}{{ end }}</title>
     <link rel="shortcut icon" href="{{ .Site.Params.favicon | default "/favicon.ico" }}" />
+    <style>
+      @import url('https://fonts.googleapis.com/css2?family=Iansui&display=swap');
+    </style>
     <link href="{{ .Site.BaseURL }}/fontawesome-free-5.15.4-web/css/all.css" rel="stylesheet"> <!--load all styles -->
     <meta charset="utf-8" />
     {{ hugo.Generator }}
@@ -21,6 +24,7 @@
     <header class="app-header">
       <a href="{{ .Site.BaseURL }}"><img class="app-header-avatar" src="{{ .Site.Params.avatar | default "avatar.jpg" | relURL }}" alt="{{ .Site.Params.author | default "John Doe" }}" /></a>
       <h1>{{ .Site.Title }}</h1>
+      <blockquot>&gt; "I know that I know nothing." ~ Socrates.</blockquote>
       {{- with .Site.Menus.main }}
       <nav class="app-header-menu">
         {{- range $key, $item := . }}
