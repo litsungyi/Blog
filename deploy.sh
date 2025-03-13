@@ -1,9 +1,6 @@
 # deploy.sh
 echo -e "\033[0;32mDeploying updates to GitHub...\033[0m"
 
-git subtree pull --prefix=public git@github-litsungyi:litsungyi/Blog gh-pages
-git subtree push --prefix=public git@github-litsungyi:litsungyi/Blog gh-pages
-
 # Build the project.
 hugo
 
@@ -19,4 +16,4 @@ git commit -m "$msg"
 
 # Push source and build repos.
 git push origin master -f
-git subtree push --prefix=public git@github-litsungyi:litsungyi/Blog gh-pages
+git subtree push --prefix=public https://github.com/litsungyi/Blog gh-pages
