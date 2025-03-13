@@ -2,6 +2,7 @@
 echo -e "\033[0;32mDeploying updates to GitHub...\033[0m"
 
 git subtree pull --prefix=public git@github-litsungyi:litsungyi/Blog gh-pages
+git subtree push --prefix=public git@github-litsungyi:litsungyi/Blog gh-pages
 
 # Build the project.
 hugo
