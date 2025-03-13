@@ -1,0 +1,181 @@
+<!doctype html>
+<html lang="en-us">
+  <head>
+    <title>Unity - Null &amp; Missing Reference Validator // 終於明白 | tsungyi knows.</title>
+    <link rel="shortcut icon" href="/favicon.ico" />
+    <style>
+      @import url('https://fonts.googleapis.com/css2?family=Iansui&display=swap');
+    </style>
+    <link href="https://tsungyi.li/Blog//fontawesome-free-5.15.4-web/css/all.css" rel="stylesheet"> 
+    <meta charset="utf-8" />
+    <meta name="generator" content="Hugo 0.126.1">
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="author" content="Li TsungYi" />
+    <meta name="description" content="" />
+    <link rel="stylesheet" href="https://tsungyi.li/Blog/css/main.min.a209c91de2a631d827e212bd915873536c1d95c5a07e87847737b8b1e9f24140.css" />
+
+    
+  
+    
+      
+    
+  
+
+
+    
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="Unity - Null &amp; Missing Reference Validator">
+  <meta name="twitter:description" content="NotNullAttribute 在 Unity 中如果想要在編譯期增加驗證，確保 GameObject 必須要設定好參考，避免沒有設定好參考執行時出錯。我們可以用一個自訂的 Attribute NotNullAttribute 來標注需要檢查的成員。並且增加一個檢查函式來檢查參考是否為空。
+[AttributeUsage(AttributeTargets.Field)] public class NotNullAttribute : Attribute { } 使用的方式只要在 GameObject 的成員加上 [Not Null] 即可 注意！
+這個檢查，目前只適用在 GameObject 及其子類別的成員。至於其他 Reference Type 的成員（也就是 SerializeField 的成員）。因為 Unity 的 Serialization 機制所致， Reference Type 的成員不會是 null。所以 NotNull 的檢查永遠不會生效。
+public class TestMonoBehaviour : MonoBehaviour { [NotNull, SerializeField] private GameObject notNullPrivateItem; [NotNull, SerializeField] private GameObject notNullPrivateItem_Null; [SerializeField] private GameObject privateItem; [SerializeField] private GameObject privateItem_Null; [NotNull] public GameObject notNullPublicItem; [NotNull] public GameObject notNullPublicItem_Null; public GameObject publicItem; public GameObject publicItem_Null; } PostProcessBuild 另外我們需要一個 PostProcessBuild 來進行驗證，其中的 CheckAllEnabledScenes 跟 CheckAllPrefabs 用來從所有的 Scenes 以及 Prefabs 之中檢查所有的 Components。">
+
+    <meta property="og:url" content="https://tsungyi.li/Blog/posts/unity-null-and-missing-reference/">
+  <meta property="og:site_name" content="終於明白 | tsungyi knows.">
+  <meta property="og:title" content="Unity - Null &amp; Missing Reference Validator">
+  <meta property="og:description" content="NotNullAttribute 在 Unity 中如果想要在編譯期增加驗證，確保 GameObject 必須要設定好參考，避免沒有設定好參考執行時出錯。我們可以用一個自訂的 Attribute NotNullAttribute 來標注需要檢查的成員。並且增加一個檢查函式來檢查參考是否為空。
+[AttributeUsage(AttributeTargets.Field)] public class NotNullAttribute : Attribute { } 使用的方式只要在 GameObject 的成員加上 [Not Null] 即可 注意！
+這個檢查，目前只適用在 GameObject 及其子類別的成員。至於其他 Reference Type 的成員（也就是 SerializeField 的成員）。因為 Unity 的 Serialization 機制所致， Reference Type 的成員不會是 null。所以 NotNull 的檢查永遠不會生效。
+public class TestMonoBehaviour : MonoBehaviour { [NotNull, SerializeField] private GameObject notNullPrivateItem; [NotNull, SerializeField] private GameObject notNullPrivateItem_Null; [SerializeField] private GameObject privateItem; [SerializeField] private GameObject privateItem_Null; [NotNull] public GameObject notNullPublicItem; [NotNull] public GameObject notNullPublicItem_Null; public GameObject publicItem; public GameObject publicItem_Null; } PostProcessBuild 另外我們需要一個 PostProcessBuild 來進行驗證，其中的 CheckAllEnabledScenes 跟 CheckAllPrefabs 用來從所有的 Scenes 以及 Prefabs 之中檢查所有的 Components。">
+  <meta property="og:locale" content="en_us">
+  <meta property="og:type" content="article">
+    <meta property="article:section" content="posts">
+    <meta property="article:published_time" content="2019-12-06T03:41:00+08:00">
+    <meta property="article:modified_time" content="2019-12-06T03:41:00+08:00">
+    <meta property="article:tag" content="Unity">
+    <meta property="article:tag" content="C#">
+
+
+  </head>
+  <body>
+    <header class="app-header">
+      <a href="https://tsungyi.li/Blog/"><img class="app-header-avatar" src="/images/Profile.jpg" alt="Li TsungYi" /></a>
+      <h1>終於明白 | tsungyi knows.</h1>
+      <blockquot>&gt; "I know that I know nothing." ~ Socrates.</blockquote>
+      <nav class="app-header-menu">
+          <a class="app-header-menu-item" href="/Blog/about.html">About</a>
+             | 
+          
+          <a class="app-header-menu-item" href="/Blog/">Home</a>
+             | 
+          
+          <a class="app-header-menu-item" href="/Blog/tags/">Tags</a>
+      </nav>
+      <p>Hi, I am Li Tsung-Yi (李宗沂). I am a game developer from 🇹🇼 Taiwan.</p>
+    </header>
+    <main class="app-container">
+      
+  <article class="post">
+    <header class="post-header">
+      <h1 class ="post-title">Unity - Null &amp; Missing Reference Validator</h1>
+      <div class="post-meta">
+        <div>
+          <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon icon-calendar">
+  <title>calendar</title>
+  <rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect><line x1="16" y1="2" x2="16" y2="6"></line><line x1="8" y1="2" x2="8" y2="6"></line><line x1="3" y1="10" x2="21" y2="10"></line>
+</svg>
+          Dec 6, 2019
+        </div>
+        <div>
+          <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon icon-clock">
+  <title>clock</title>
+  <circle cx="12" cy="12" r="10"></circle><polyline points="12 6 12 12 16 14"></polyline>
+</svg>
+          1 min read
+        </div>
+        <div>
+          <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon icon-tag">
+  <title>tag</title>
+  <path d="M20.59 13.41l-7.17 7.17a2 2 0 0 1-2.83 0L2 12V2h10l8.59 8.59a2 2 0 0 1 0 2.82z"></path><line x1="7" y1="7" x2="7.01" y2="7"></line>
+</svg>
+              <a class="tag" href="https://tsungyi.li/Blog/tags/unity/">Unity</a>
+              <a class="tag" href="https://tsungyi.li/Blog/tags/c%23/">C#</a>
+        </div>
+      </div>
+    </header>
+    <div class="post-content">
+      <h2 id="notnullattribute">NotNullAttribute</h2>
+<p>在 Unity 中如果想要在編譯期增加驗證，確保 GameObject 必須要設定好參考，避免沒有設定好參考執行時出錯。我們可以用一個自訂的 <code>Attribute NotNullAttribute</code> 來標注需要檢查的成員。並且增加一個檢查函式來檢查參考是否為空。</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-csharp" data-lang="csharp"><span style="display:flex;"><span><span style="color:#a6e22e">[AttributeUsage(AttributeTargets.Field)]</span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">public</span> <span style="color:#66d9ef">class</span> <span style="color:#a6e22e">NotNullAttribute</span> : Attribute
+</span></span><span style="display:flex;"><span>{
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><ul>
+<li>使用的方式只要在 GameObject 的成員加上 [Not Null] 即可</li>
+</ul>
+<p><strong>注意！</strong></p>
+<p>這個檢查，目前只適用在 GameObject 及其子類別的成員。至於其他 Reference Type 的成員（也就是 SerializeField 的成員）。因為 Unity 的 Serialization 機制所致， Reference Type 的成員不會是 null。所以 NotNull 的檢查永遠不會生效。</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-csharp" data-lang="csharp"><span style="display:flex;"><span><span style="color:#66d9ef">public</span> <span style="color:#66d9ef">class</span> <span style="color:#a6e22e">TestMonoBehaviour</span> : MonoBehaviour
+</span></span><span style="display:flex;"><span>{
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">    [NotNull, SerializeField]</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">private</span> GameObject notNullPrivateItem;
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">    
+</span></span></span><span style="display:flex;"><span><span style="color:#a6e22e">    [NotNull, SerializeField]</span> <span style="color:#66d9ef">private</span> GameObject notNullPrivateItem_Null;
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">    [SerializeField]</span> <span style="color:#66d9ef">private</span> GameObject privateItem;
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">    [SerializeField]</span> <span style="color:#66d9ef">private</span> GameObject privateItem_Null;
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">    [NotNull]</span> <span style="color:#66d9ef">public</span> GameObject notNullPublicItem;
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">    [NotNull]</span> <span style="color:#66d9ef">public</span> GameObject notNullPublicItem_Null;
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">public</span> GameObject publicItem;
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">public</span> GameObject publicItem_Null;
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><h2 id="postprocessbuild">PostProcessBuild</h2>
+<p>另外我們需要一個 PostProcessBuild 來進行驗證，其中的 CheckAllEnabledScenes 跟 CheckAllPrefabs 用來從所有的 Scenes 以及 Prefabs 之中檢查所有的 Components。</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-csharp" data-lang="csharp"><span style="display:flex;"><span><span style="color:#66d9ef">public</span> <span style="color:#66d9ef">static</span> <span style="color:#66d9ef">class</span> <span style="color:#a6e22e">ValidatorProcess</span>
+</span></span><span style="display:flex;"><span>{
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">    [PostProcessBuild]</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">static</span> <span style="color:#66d9ef">void</span> OnPostprocessBuild(BuildTarget target, <span style="color:#66d9ef">string</span> pathToBuiltProject)
+</span></span><span style="display:flex;"><span>    {
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">var</span> checkPassed = CheckAllEnabledScenes() &amp; CheckAllPrefabs();
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">if</span> (!checkPassed)
+</span></span><span style="display:flex;"><span>        {
+</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">throw</span> <span style="color:#66d9ef">new</span> Exception(<span style="color:#e6db74">&#34;[*] Null or Missing Reference check failed!&#34;</span>);
+</span></span><span style="display:flex;"><span>        }
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><p>檢查 GameObject 時需要使用反射取得所有有 NotNullAttribute 的成員並檢查是否為 null</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-csharp" data-lang="csharp"><span style="display:flex;"><span><span style="color:#66d9ef">private</span> <span style="color:#66d9ef">static</span> <span style="color:#66d9ef">bool</span> IsNotNullValidationFailed(FieldInfo fieldInfo, <span style="color:#66d9ef">object</span> fieldValue)
+</span></span><span style="display:flex;"><span>{
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">var</span> attributes = fieldInfo.GetCustomAttributes(<span style="color:#66d9ef">typeof</span>(NotNullAttribute), <span style="color:#66d9ef">false</span>);
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">if</span> (attributes.Any())
+</span></span><span style="display:flex;"><span>    {
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">if</span> (fieldValue == <span style="color:#66d9ef">null</span> || fieldValue.Equals(<span style="color:#66d9ef">null</span>))
+</span></span><span style="display:flex;"><span>        {
+</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">return</span> <span style="color:#66d9ef">true</span>;
+</span></span><span style="display:flex;"><span>        }
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>    
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">return</span> <span style="color:#66d9ef">false</span>;
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><h2 id="source-code">Source Code</h2>
+<ul>
+<li><a href="https://github.com/litsungyiAktsk/MissingReferenceValidator">測試程式碼</a></li>
+</ul>
+
+    </div>
+    <div class="post-footer">
+      <div id="disqus_thread"></div>
+<script>
+    window.disqus_config = function () {
+    
+    
+    
+    };
+    (function() {
+        if (["localhost", "127.0.0.1"].indexOf(window.location.hostname) != -1) {
+            document.getElementById('disqus_thread').innerHTML = 'Disqus comments not available by default when the website is previewed locally.';
+            return;
+        }
+        var d = document, s = d.createElement('script'); s.async = true;
+        s.src = '//' + "tsungyi-li" + '.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', +new Date());
+        (d.head || d.body).appendChild(s);
+    })();
+</script>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+<a href="https://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
+    </div>
+  </article>
+
+    </main>
+  </body>
+</html>

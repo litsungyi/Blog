@@ -1,0 +1,223 @@
+<!doctype html>
+<html lang="en-us">
+  <head>
+    <title>Unity - 使用 Null Condition Operator &amp; Null Coalescing Operator // 終於明白 | tsungyi knows.</title>
+    <link rel="shortcut icon" href="/favicon.ico" />
+    <style>
+      @import url('https://fonts.googleapis.com/css2?family=Iansui&display=swap');
+    </style>
+    <link href="https://tsungyi.li/Blog//fontawesome-free-5.15.4-web/css/all.css" rel="stylesheet"> 
+    <meta charset="utf-8" />
+    <meta name="generator" content="Hugo 0.126.1">
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="author" content="Li TsungYi" />
+    <meta name="description" content="" />
+    <link rel="stylesheet" href="https://tsungyi.li/Blog/css/main.min.a209c91de2a631d827e212bd915873536c1d95c5a07e87847737b8b1e9f24140.css" />
+
+    
+  
+    
+      
+    
+  
+
+
+    
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="Unity - 使用 Null Condition Operator &amp; Null Coalescing Operator">
+  <meta name="twitter:description" content="Null Conditional Operator 跟 Null Coalescing Operator 都是 C# 6.0 的新語法，可以讓你寫出更加精簡而且可讀性佳的語法。但是在 Unity 中使用需要特別注意，在某些情況下，執行結果可能跟你想的不一樣。
+Null Condition Operator (?.) 當 ?. 的左側是 null 就不會執行右側的語法，如此就可以移除掉很多 null 檢查讓我們的程式更加簡潔好讀。
+先看一下不使用 Null Conditional Operator 的情況：
+var text = string.Empty; if (m_controller != null) { if (m_controller.m_display != null) { if (m_controller.m_display.m_text != null) { text = m_controller.m_display.m_text.text; } } } 如果使用 Null Conditional Operator 的話，可以改寫成以下的語法：
+var text = m_controller?.m_display?.m_text?.text; if (text = null) { text = string.">
+
+    <meta property="og:url" content="https://tsungyi.li/Blog/posts/unity-null-condition-operator-and-null-coalescing-operator/">
+  <meta property="og:site_name" content="終於明白 | tsungyi knows.">
+  <meta property="og:title" content="Unity - 使用 Null Condition Operator &amp; Null Coalescing Operator">
+  <meta property="og:description" content="Null Conditional Operator 跟 Null Coalescing Operator 都是 C# 6.0 的新語法，可以讓你寫出更加精簡而且可讀性佳的語法。但是在 Unity 中使用需要特別注意，在某些情況下，執行結果可能跟你想的不一樣。
+Null Condition Operator (?.) 當 ?. 的左側是 null 就不會執行右側的語法，如此就可以移除掉很多 null 檢查讓我們的程式更加簡潔好讀。
+先看一下不使用 Null Conditional Operator 的情況：
+var text = string.Empty; if (m_controller != null) { if (m_controller.m_display != null) { if (m_controller.m_display.m_text != null) { text = m_controller.m_display.m_text.text; } } } 如果使用 Null Conditional Operator 的話，可以改寫成以下的語法：
+var text = m_controller?.m_display?.m_text?.text; if (text = null) { text = string.">
+  <meta property="og:locale" content="en_us">
+  <meta property="og:type" content="article">
+    <meta property="article:section" content="posts">
+    <meta property="article:published_time" content="2019-09-16T20:35:00+08:00">
+    <meta property="article:modified_time" content="2019-09-16T20:35:00+08:00">
+    <meta property="article:tag" content="Unity">
+    <meta property="article:tag" content="C#">
+
+
+  </head>
+  <body>
+    <header class="app-header">
+      <a href="https://tsungyi.li/Blog/"><img class="app-header-avatar" src="/images/Profile.jpg" alt="Li TsungYi" /></a>
+      <h1>終於明白 | tsungyi knows.</h1>
+      <blockquot>&gt; "I know that I know nothing." ~ Socrates.</blockquote>
+      <nav class="app-header-menu">
+          <a class="app-header-menu-item" href="/Blog/about.html">About</a>
+             | 
+          
+          <a class="app-header-menu-item" href="/Blog/">Home</a>
+             | 
+          
+          <a class="app-header-menu-item" href="/Blog/tags/">Tags</a>
+      </nav>
+      <p>Hi, I am Li Tsung-Yi (李宗沂). I am a game developer from 🇹🇼 Taiwan.</p>
+    </header>
+    <main class="app-container">
+      
+  <article class="post">
+    <header class="post-header">
+      <h1 class ="post-title">Unity - 使用 Null Condition Operator &amp; Null Coalescing Operator</h1>
+      <div class="post-meta">
+        <div>
+          <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon icon-calendar">
+  <title>calendar</title>
+  <rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect><line x1="16" y1="2" x2="16" y2="6"></line><line x1="8" y1="2" x2="8" y2="6"></line><line x1="3" y1="10" x2="21" y2="10"></line>
+</svg>
+          Sep 16, 2019
+        </div>
+        <div>
+          <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon icon-clock">
+  <title>clock</title>
+  <circle cx="12" cy="12" r="10"></circle><polyline points="12 6 12 12 16 14"></polyline>
+</svg>
+          2 min read
+        </div>
+        <div>
+          <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon icon-tag">
+  <title>tag</title>
+  <path d="M20.59 13.41l-7.17 7.17a2 2 0 0 1-2.83 0L2 12V2h10l8.59 8.59a2 2 0 0 1 0 2.82z"></path><line x1="7" y1="7" x2="7.01" y2="7"></line>
+</svg>
+              <a class="tag" href="https://tsungyi.li/Blog/tags/unity/">Unity</a>
+              <a class="tag" href="https://tsungyi.li/Blog/tags/c%23/">C#</a>
+        </div>
+      </div>
+    </header>
+    <div class="post-content">
+      <p><strong>Null Conditional Operator</strong> 跟 <strong>Null Coalescing Operator</strong> 都是 C# 6.0 的新語法，可以讓你寫出更加精簡而且可讀性佳的語法。但是在 Unity 中使用需要特別注意，在某些情況下，執行結果可能跟你想的不一樣。</p>
+<h2 id="null-condition-operator">Null Condition Operator (<code>?.</code>)</h2>
+<p>當 <code>?.</code> 的左側是 <code>null</code> 就不會執行右側的語法，如此就可以移除掉很多 <code>null</code> 檢查讓我們的程式更加簡潔好讀。</p>
+<p>先看一下不使用 <strong>Null Conditional Operator</strong> 的情況：</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-csharp" data-lang="csharp"><span style="display:flex;"><span><span style="color:#66d9ef">var</span> text = <span style="color:#66d9ef">string</span>.Empty;
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">if</span> (m_controller != <span style="color:#66d9ef">null</span>)
+</span></span><span style="display:flex;"><span>{
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">if</span> (m_controller.m_display != <span style="color:#66d9ef">null</span>)
+</span></span><span style="display:flex;"><span>    {
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">if</span> (m_controller.m_display.m_text != <span style="color:#66d9ef">null</span>)
+</span></span><span style="display:flex;"><span>        {
+</span></span><span style="display:flex;"><span>            text = m_controller.m_display.m_text.text;
+</span></span><span style="display:flex;"><span>        }
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><p>如果使用 <strong>Null Conditional Operator</strong> 的話，可以改寫成以下的語法：</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-csharp" data-lang="csharp"><span style="display:flex;"><span><span style="color:#66d9ef">var</span> text = m_controller?.m_display?.m_text?.text;
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">if</span> (text = <span style="color:#66d9ef">null</span>)
+</span></span><span style="display:flex;"><span>{
+</span></span><span style="display:flex;"><span>    text = <span style="color:#66d9ef">string</span>.Empty;
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><p>如果其中任何一部份回傳值為 <code>null</code>，text 最後的結果就是最後結果的預設值 (default)。對於參考型別來說就是 <code>null</code> 了，值型別就是 <code>0</code> 或 <code>false</code>。</p>
+<h2 id="null-coalescing-operator">Null Coalescing Operator (<code>??</code>)</h2>
+<p>同時我們也可以搭配 <strong>Null Coalescing Operator</strong> 寫出更精簡的敘述句。當 <code>??</code> 的左側執行的結果不是 <code>null</code> ，就回傳左側的結果，否則回傳右側的值。</p>
+<p>我們可以將前面的句子再改寫成底下的敘述式：</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-csharp" data-lang="csharp"><span style="display:flex;"><span><span style="color:#66d9ef">var</span> text = m_controller?.m_display?.m_text.text ?? <span style="color:#66d9ef">string</span>.Empty;
+</span></span></code></pre></div><h2 id="小結">小結</h2>
+<p>除了可讀性以外，另外一個好處則是 <strong>Null Conditional Operator</strong> 在多執行緒環境下可以安全的使用。</p>
+<p>以第一個例子來說，如果我們在檢查完 m_controller 不是 <code>null</code> 之後，如果馬上被另外一個 thread 設為 <code>null</code>，那麼在接下來的 m_controller.m_display 仍然會拋出 <code>NullReferenceException</code>。<strong>Null Conditional Operator</strong> 則會由 compiler 使用額外的參考來避免例外發生。</p>
+<p>總之，請盡量使用 <strong>Null Conditional Operator</strong> 跟 <strong>Null Coalescing Operator</strong> 取代傳統的巢狀 if 的 <code>null</code> 檢查。</p>
+<ul>
+<li>Ref. <a href="https://docs.microsoft.com/en-us/dotnet/csharp/language-reference/operators/member-access-operators#null-conditional-operators--and-">[MSDN] Null-conditional operators ?. and ?[]</a></li>
+<li>Ref. <a href="https://docs.microsoft.com/en-us/dotnet/csharp/language-reference/operators/null-coalescing-operator">[MSDN] ?? and ??= operators (C# reference)</a></li>
+</ul>
+<h2 id="working-with-unity">Working with Unity</h2>
+<p>雖然 <strong>Null Conditional Operator</strong> 跟 <strong>Null Coalescing Operator</strong> 很好用，但是在 Unity 卻有一個不容易發現的陷阱。雖然影響並沒有很大，但是會產生奇怪的錯誤訊息與行為可能會讓你十分困擾。</p>
+<p>假設有這樣的程式碼，我們有一個 m_controller 繼承自 MonoBehaviour，並且有一個函式 DisableController 用來清除掉這個 m_controller。OnDestroy 則是用來保證 m_controller 能夠正確的被清除掉。</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-csharp" data-lang="csharp"><span style="display:flex;"><span><span style="color:#66d9ef">public</span> <span style="color:#66d9ef">class</span> <span style="color:#a6e22e">TextInstance</span> : MonoBehaviour
+</span></span><span style="display:flex;"><span>{
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">string</span> text = <span style="color:#e6db74">&#34;TEXT&#34;</span>;
+</span></span><span style="display:flex;"><span>}
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">public</span> <span style="color:#66d9ef">class</span> <span style="color:#a6e22e">Test1</span> : MonoBehaviour
+</span></span><span style="display:flex;"><span>{
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">    [SerializeField]</span> <span style="color:#66d9ef">private</span> TextInstance m_instance;
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">private</span> <span style="color:#66d9ef">void</span> UnsafeLogText()
+</span></span><span style="display:flex;"><span>    {
+</span></span><span style="display:flex;"><span>        Debug.Log(m_instance?.text ?? <span style="color:#66d9ef">string</span>.Empty);
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">private</span> <span style="color:#66d9ef">void</span> UnsafeDestroy()
+</span></span><span style="display:flex;"><span>    {
+</span></span><span style="display:flex;"><span>        Destroy(m_instance.gameObject);
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">private</span> <span style="color:#66d9ef">void</span> SafeLogText()
+</span></span><span style="display:flex;"><span>    {
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">if</span> (m_instance != <span style="color:#66d9ef">null</span>)
+</span></span><span style="display:flex;"><span>        {
+</span></span><span style="display:flex;"><span>            Debug.Log(m_instance.text ?? <span style="color:#66d9ef">string</span>.Empty);
+</span></span><span style="display:flex;"><span>        }
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">private</span> <span style="color:#66d9ef">void</span> SafeDestroy()
+</span></span><span style="display:flex;"><span>    {
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">if</span> (m_instance != <span style="color:#66d9ef">null</span>)
+</span></span><span style="display:flex;"><span>        {
+</span></span><span style="display:flex;"><span>            Destroy(m_instance.gameObject);
+</span></span><span style="display:flex;"><span>        }
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><p>但是這一段程式碼如果曾經呼叫過 <code>UnsafeDestroy</code> 或 <code>SafeDestroy</code> 的話，如果再次呼叫 <code>UnsafeLogText</code> 都會印出 TEXT。但是如果呼叫 <code>SafeLogText</code> 則不會印出任何東西。</p>
+<p>如果在此時呼叫 <code>UnsafeDestroy</code>，就會看到輸出視窗印出錯誤訊息：</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-text" data-lang="text"><span style="display:flex;"><span>MissingReferenceException: The object of type &#39;TextInstance&#39; has been destroyed but you are still trying to access it.
+</span></span><span style="display:flex;"><span>Your script should either check if it is null or you should not destroy the object.
+</span></span></code></pre></div><p>這個結果表示 Unity 在 Destroy 物件後的 <code>m_instance != null</code> 跟 <code>m_instance?.</code> 的行為並不一致，並且這個不一致的結果只在 Editor 上發生，實際裝置上並不會發生。</p>
+<p>因此，如果是對於可能在執行期間刪除的 MonoBehaviour 物件，最好總是在 Destroy 之後將變數設為 <code>null</code>。如果外部可以拿到這個 MonoBehaviour 的參考時，你可能無法將所有的參考都設為 <code>null</code>，這時候最好避免用 Null Conditional Operator 做判斷。</p>
+<h3 id="發生原因">發生原因</h3>
+<p>接下來要解釋一下為什麼會發生這個問題</p>
+<p>UnityEditor 在物件消滅時並不會完全從記憶體中清除，因此在你不小心使用到已經消滅的物件時
+UnityEditor 才有辦法提供足夠的資訊讓你除錯。Unity 是透過覆寫 UnityEngine.Object 的 <code>operator==</code> 讓已經消滅的物件跟 <code>null</code> 比較時返回 <code>true</code>。</p>
+<p>不過因為 <strong>Null Conditional Operator</strong> 與 <strong>Null Conditional Operator</strong> 是 C# 語言層的語法，使用的是 <code>ReferenceEquals</code> 而不是 <code>operator==</code>。因此在 UnityEditor 中的判斷會失敗，而 <code>ReferenceEquals</code> 是 System.Object 的 static method 無法覆寫。</p>
+<p>Unity 為了除錯的考量也不打算修改這個歧異的行為，所以在 Unity 使用 <code>?.</code> 或是 <code>??</code> 的時候需要特別注意。</p>
+<h3 id="建議">建議</h3>
+<p>最後，這是建議的用法</p>
+<ul>
+<li>如果不是繼承 UnityEngine.Object 的類別，使用 <code>?.</code> 或是 <code>??</code> 簡化程式碼完全不會有任何副作用，可以放心使用。</li>
+<li>如果是繼承 UnityEngine.Object 的類別需要特別注意。
+<ul>
+<li>如果可以確保呼叫的物件不會中途被 Destroy ，可以使用 <code>?.</code> 或是 <code>??</code> 簡化程式碼。</li>
+<li>如果物件的參考不會被外部取得。只要記得在 Destroy 時將自己設為 <code>null</code>，還是可以使用 <code>?.</code> 或是 <code>??</code> 簡化程式碼。</li>
+<li>否則，盡量使用 <code>if</code> 判定 <code>null</code>，以避免 Editor 與實機的不同。</li>
+</ul>
+</li>
+</ul>
+
+    </div>
+    <div class="post-footer">
+      <div id="disqus_thread"></div>
+<script>
+    window.disqus_config = function () {
+    
+    
+    
+    };
+    (function() {
+        if (["localhost", "127.0.0.1"].indexOf(window.location.hostname) != -1) {
+            document.getElementById('disqus_thread').innerHTML = 'Disqus comments not available by default when the website is previewed locally.';
+            return;
+        }
+        var d = document, s = d.createElement('script'); s.async = true;
+        s.src = '//' + "tsungyi-li" + '.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', +new Date());
+        (d.head || d.body).appendChild(s);
+    })();
+</script>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+<a href="https://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
+    </div>
+  </article>
+
+    </main>
+  </body>
+</html>

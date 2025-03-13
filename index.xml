@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>終於明白 | tsungyi knows.</title>
+    <link>https://tsungyi.li/Blog/</link>
+    <description>Recent content on 終於明白 | tsungyi knows.</description>
+    <generator>Hugo</generator>
+    <language>en-us</language>
+    <lastBuildDate>Wed, 01 Mar 2023 03:10:00 +0800</lastBuildDate>
+    <atom:link href="https://tsungyi.li/Blog/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>C&#43;&#43; - User-defined literals</title>
+      <link>https://tsungyi.li/Blog/posts/cpp-user-defined-literals/</link>
+      <pubDate>Wed, 01 Mar 2023 03:10:00 +0800</pubDate>
+      <guid>https://tsungyi.li/Blog/posts/cpp-user-defined-literals/</guid>
+      <description>C++ 11 新增 User-defined literals 可以經由程式定義的字面常量後綴，讓我們寫出可讀性更加的程式碼。&#xA;簡單的說，我們可以透過有意義的字面常量後綴將常數或是字串轉換自訂的型別來提高可讀性。&#xA;User-defined literals 目前 User-defined literals 支援以下 8 種語法格式：&#xA;decimal-literal ud-suffix octal-literal ud-suffix hex-literal ud-suffix binary-literal ud-suffix fractional-constant exponent-part ﻿(optional) ud-suffix digit-sequence exponent-part ud-suffix character-literal ud-suffix string-literal ud-suffix 1-4 支援不同進位的整數格式 5, 6 支援不同格式的浮點數 7 支援字元格式 8 支援字串格式 使用者定義的 ud-suffix 需要以底線 _ 開頭，標準函式庫中定義的則不會以底線開頭。 編譯器在遇到 User-defined literals 的時候會依據 ud-suffix 前面的文字的型別推導適當的函式進行轉換。&#xA;首先會透過 unqualified name lookup 找到所有名稱符合的函式集合。&#xA;如果是整數格式： 如果符合的函式集合有參數型別為 unsigned long long 時，會選擇此函式並呼叫 operator &amp;quot;&amp;quot;X(nULL)。 否則，如果有參數型別為 raw literal operators (const char*)時，會選擇此函式並呼叫 operator &amp;quot;&amp;quot;X(&amp;quot;n&amp;quot;)。 否則，如果有參數型別為 numeric literal operator template (template&amp;lt;char .</description>
+    </item>
+    <item>
+      <title>Shell Tips</title>
+      <link>https://tsungyi.li/Blog/posts/shell-tips/</link>
+      <pubDate>Mon, 07 Nov 2022 10:14:38 +0800</pubDate>
+      <guid>https://tsungyi.li/Blog/posts/shell-tips/</guid>
+      <description>記錄一些最近寫 Shell 用到的語法&#xA;ShellCheck 如果你是使用 Visual Studio Code 強烈建議可以安裝這個套件 ShellCheck。 可以幫你檢查 Shell 的錯誤跟提供建議的寫法。&#xA;shebang 相關定義可以參考 維基百科&#xA;shebang 必須寫在 shell 的第一行，用來指示這個腳本使用的直譯器。&#xA;#! /bin/bash echo &amp;#34;SHELL = $SHELL&amp;#34; echo &amp;#34;MY SHELL = $(ps -o comm -p $$ | awk &amp;#39;NR==2 { print $1}&amp;#39;)&amp;#34; 雖然可以用環境變數 SHELL 取得使用的 Shell 不過並不是很正確。所以需要用其他命令取得正確的 Shell。&#xA;在我的電腦上印出的是使用者預設的 shell 而不是 shebang 指定的 shell。使用 ps 才能拿到正確的 shell。&#xA;SHELL = /bin/zsh MY SHELL = /bin/bash 常用的內建變數 $?: 上一個指令或程式執行的回傳值，通常 0 代表執行成功，0 以外的數字表示失敗 $n: n 是數字，表示第幾個參數 $#: 參數數量 $$: shell 執行的 PID 如果要取得 pipeline 的其中一個階段的結果可以用 ${PIPESTATUS[n]} 其中的 n 是數字 redirect 通常會用 &amp;gt; info.</description>
+    </item>
+    <item>
+      <title>GitHub Multiple SSH</title>
+      <link>https://tsungyi.li/Blog/posts/github-multiple-ssh/</link>
+      <pubDate>Tue, 19 Jul 2022 15:16:33 +0800</pubDate>
+      <guid>https://tsungyi.li/Blog/posts/github-multiple-ssh/</guid>
+      <description>Introduction 如果有多個 GitHub 帳號 (個人帳號與工作用的帳號) 都要使用 SSH 連線，因為在同一台電腦上無法使用同一個 SSH Key 綁定到不同的帳號，所以會需要做一些設定才可以使用。&#xA;Setting 首先要先幫兩個帳號都產生一組 SSH Key 可以參考 GitHub 的說明 Generating a new SSH key and adding it to the ssh-agent&#xA;ssh-keygen -t ed25519 -C &amp;quot;personal_mail@personal.com&amp;quot; ssh-keygen -t ed25519 -C &amp;quot;work_mail@company.com&amp;quot;&#xA;並且將兩個帳號都分別註冊到 GitHub 設定頁面 Adding a new SSH key to your GitHub account&#xA;記得兩個帳號都要設定，需要分別登入兩個帳號並且將 public key 註冊。&#xA;接下來需要修改你的 ssh 設定檔： 開啟並編輯 ~/.ssh/config 加上以下設定到檔案中，請依照你前面創造的 ssh 來設定你的設定檔。&#xA;# Personal account Host github.com HostName github.com IdentityFile ~/.</description>
+    </item>
+    <item>
+      <title>C&#43;&#43; - 宣告 vs. 定義</title>
+      <link>https://tsungyi.li/Blog/posts/cpp-declare-define/</link>
+      <pubDate>Mon, 29 Jun 2020 17:23:06 +0800</pubDate>
+      <guid>https://tsungyi.li/Blog/posts/cpp-declare-define/</guid>
+      <description>Declare 宣告 宣告是指程式中使用到某個類別或是變數之前，先讓編譯器知道該類別的名稱或是變數的類別與名稱。 必須要在實際使用之前宣告。因此在標頭檔以及原始檔之中需要使用 #include 這個預處理器命令將用到的類別介紹給編譯器。 #include 這個預處理器命令實際上是將引入的檔案內容取代掉 #include 所在的位置，因此大量的 #include 會大幅增加編譯的時間。 如果只用到指標或是參考時，在標頭檔可以使用前置宣告 (Forward Declare) 的技巧來優化。（細節在 前置宣告 小節中說明） 不呼叫該指標的方法或是使用它的成員時，編譯器不需要知道該類別的形狀，只需要當成該類型的指標變數來處理。因為指標的大小是固定的，所以不需要引入該類別也可以通過編譯。 相同的宣告可以在專案中重複出現。 Define 定義 定義是編譯器提供類型實作細節的地方，以及配置變數記憶體的語句。 因為定義變數時需要配置記憶體在 stack 上，因此編譯器在此時必須要知道此類別的記憶體佈局（成員的順序與類型、記憶體對齊方式等&amp;hellip;）。 與宣告不同的是，定義在程式中只能出現一次。重複定義會造成錯誤。 同一個轉換單元（Translation Unit）之中只能定義一次，否則會有編譯錯誤。 同專案中不同轉換單元之中也只能定義一次，否則會有連結錯誤。 所有程式中有用到的實體（變數、函式&amp;hellip;）都必須也只能在其中一個轉換單元中定義，否則會有連結錯誤。 extern 關鍵字 在多個轉換單元之間，如果要使用同一個變數的實例可以將變數宣告為外部引用（extern），讓編譯器在連結期再把實際的變數實例連結到使用的程式碼。 Forward Declare 前置宣告 需要使用前置宣告通常有兩種原因 因為編譯器必須先看到類別、函式的宣告才能在接下來的程式中使用，一但出現互相引用的狀況編譯器就無法處理。例如底下兩個程式碼就無法編譯： void TestFunction() { TestClass test; // error: unknown type name &amp;#39;TestClass&amp;#39; } class TestClass { public: void Test() { TestFunction(); } }; class TestClass { public: void Test() { TestFunction(); // error: use of undeclared identifier &amp;#39;TestFunction&amp;#39; } }; void TestFunction() { TestClass test; } 不論是先定義 TestFunction 還是先定義 TestClass，都會在使用到對方的程式碼的時候發生編譯錯誤。 前置宣告的作法就是把其中一個的定義語法改成宣告語法，先讓編譯器知道名稱、型別資訊來避免編譯錯誤。 void TestFunction(); // NOTE: Forward declare class TestClass { public: void Test() { TestFunction(); } }; void TestFunction() { TestClass test; } 更常見的原因是為了提升編譯速度。當某個類別的方法參數、成員變數需要其他型別時，我們就需要在標頭檔之中引用其他標頭檔。因為 #include 是將引用的檔案展開到 #include 的位置，當引入的數量很多的時候會有大量的 IO 發生。通常標頭檔還會被其他檔案引用，造成倍數的成長。 如果是方法的參數或是成員變數用到指標或是參考時，編譯器要知道保留多少空間來儲存這個參數。幸運的是指標或是參考的大小都是固定的，因此編譯器並不需要知道整個類別的記憶體佈局。所以使用前置宣告可以減少需要引入的標頭檔數量。 減少需要引入的標頭檔數量還可以減少因為修改檔案時需要重新編譯的檔案數量。 前置宣告的缺點 根據 Google C++ Style Guide 並不建議使用前置宣告。 使用前置宣告可能造成對 incomplete type 的操作，這在 C++ 標準是未定義行為(Undefine Behaviour)，因此無法保證程式是否能更正確運行。 在 #include 該型別的定義之前絕對不要對該型別做操作。 大部分的情況部會有問題，而且誤用時也會有編譯錯誤。但是像是 delete 指標、將指標當成參數是可以通過編譯的（會有警告）。 Ref: https://docs.</description>
+    </item>
+    <item>
+      <title>C&#43;&#43; - 命名規則</title>
+      <link>https://tsungyi.li/Blog/posts/cpp-naming/</link>
+      <pubDate>Mon, 29 Jun 2020 14:13:50 +0800</pubDate>
+      <guid>https://tsungyi.li/Blog/posts/cpp-naming/</guid>
+      <description>General Rule 程式中的所有類別、變數、函式&amp;hellip;的命名請務必使用讓人看到名稱就可以了解他的用途。 使用註解來解釋是不得已的作法，請盡量避免。 名稱的長度沒有限制，但是請以人類容易閱讀、記憶的原則命名，過長或過短的名稱都不適當。 避免無法發音的名稱或是外語的羅馬拼音，除非這是所有成員都理解的專有名稱或是 領域用語。 不要使用自創的縮寫。 使用縮寫請確保團隊成員都清楚縮寫的意義。 命名時請考慮使用共同的 領域用語，降低與其他成員溝通的成本。 團隊應該建立自己的 字彙表 提供團隊成員查詢專案使用的 領域用語。 引用防護（include guard）命名 使用 ALL_CAPS （全大寫命名法）命名。命名規則使用檔案完整路徑並且加上 __ 前綴。（Ex. __BATTLE_FLElD_H） 建議改用 #pragma once 取代引用防護，編譯器能對 #pragma once 做較好的最佳化。 全域變數命名 使用 lower camel case （小駝峰式命名法）命名，並且加上 g_ 前綴。（Ex. bool g_battleField） 請避免使用全域變數。 區域變數命名 使用 lower camel case （小駝峰式命名法）命名。（Ex. bool battleField） 常數命名 使用 ALL_CAPS （全大寫命名法）命名。（Ex. const bool BATTLE_FLAG） 命名空間命名 使用 upper camel case （大駝峰式命名法）命名。（Ex. namespace BattleField） 函式命名 函式使用 lower camel case （小駝峰式命名法）命名。（Ex. void battleFunction()） 參數使用 lower camel case （小駝峰式命名法）命名。（Ex.</description>
+    </item>
+    <item>
+      <title>Unity - Null &amp; Missing Reference Validator</title>
+      <link>https://tsungyi.li/Blog/posts/unity-null-and-missing-reference/</link>
+      <pubDate>Fri, 06 Dec 2019 03:41:00 +0800</pubDate>
+      <guid>https://tsungyi.li/Blog/posts/unity-null-and-missing-reference/</guid>
+      <description>NotNullAttribute 在 Unity 中如果想要在編譯期增加驗證，確保 GameObject 必須要設定好參考，避免沒有設定好參考執行時出錯。我們可以用一個自訂的 Attribute NotNullAttribute 來標注需要檢查的成員。並且增加一個檢查函式來檢查參考是否為空。&#xA;[AttributeUsage(AttributeTargets.Field)] public class NotNullAttribute : Attribute { } 使用的方式只要在 GameObject 的成員加上 [Not Null] 即可 注意！&#xA;這個檢查，目前只適用在 GameObject 及其子類別的成員。至於其他 Reference Type 的成員（也就是 SerializeField 的成員）。因為 Unity 的 Serialization 機制所致， Reference Type 的成員不會是 null。所以 NotNull 的檢查永遠不會生效。&#xA;public class TestMonoBehaviour : MonoBehaviour { [NotNull, SerializeField] private GameObject notNullPrivateItem; [NotNull, SerializeField] private GameObject notNullPrivateItem_Null; [SerializeField] private GameObject privateItem; [SerializeField] private GameObject privateItem_Null; [NotNull] public GameObject notNullPublicItem; [NotNull] public GameObject notNullPublicItem_Null; public GameObject publicItem; public GameObject publicItem_Null; } PostProcessBuild 另外我們需要一個 PostProcessBuild 來進行驗證，其中的 CheckAllEnabledScenes 跟 CheckAllPrefabs 用來從所有的 Scenes 以及 Prefabs 之中檢查所有的 Components。</description>
+    </item>
+    <item>
+      <title>Unity - 使用 Null Condition Operator &amp; Null Coalescing Operator</title>
+      <link>https://tsungyi.li/Blog/posts/unity-null-condition-operator-and-null-coalescing-operator/</link>
+      <pubDate>Mon, 16 Sep 2019 20:35:00 +0800</pubDate>
+      <guid>https://tsungyi.li/Blog/posts/unity-null-condition-operator-and-null-coalescing-operator/</guid>
+      <description>Null Conditional Operator 跟 Null Coalescing Operator 都是 C# 6.0 的新語法，可以讓你寫出更加精簡而且可讀性佳的語法。但是在 Unity 中使用需要特別注意，在某些情況下，執行結果可能跟你想的不一樣。&#xA;Null Condition Operator (?.) 當 ?. 的左側是 null 就不會執行右側的語法，如此就可以移除掉很多 null 檢查讓我們的程式更加簡潔好讀。&#xA;先看一下不使用 Null Conditional Operator 的情況：&#xA;var text = string.Empty; if (m_controller != null) { if (m_controller.m_display != null) { if (m_controller.m_display.m_text != null) { text = m_controller.m_display.m_text.text; } } } 如果使用 Null Conditional Operator 的話，可以改寫成以下的語法：&#xA;var text = m_controller?.m_display?.m_text?.text; if (text = null) { text = string.</description>
+    </item>
+    <item>
+      <title>Unity - 存取修飾詞 (Access Modifier) 與 Special folders &amp; Assembly definition files</title>
+      <link>https://tsungyi.li/Blog/posts/unity-access-modifier/</link>
+      <pubDate>Mon, 12 Nov 2018 01:50:00 +0800</pubDate>
+      <guid>https://tsungyi.li/Blog/posts/unity-access-modifier/</guid>
+      <description>存取修飾詞 Access Modifier C# 的存取修飾詞有以下六種&#xA;public 所有人都可以存取 protected 只有所在類別以及他的的衍生類別可以存取 private 只有所在類別可以存取 internal 只有在相同 assembly 的類別可以存取 protected internal 只有在相同 assembly 的類別或是所在類別以及他的的衍生類別可以存取 (也就是 protected OR internal) private protected (C# 7.2 新增) 只有在相同 assembly 的類別以及所在類別以及他的的衍生類別可以存取 (也就是 protected AND internal) 從這張簡圖就很容易了解不同修飾詞的範圍 另外 Type 只能宣告為 public 或 internal，Type Member 可以用所有的存取修飾詞宣告。&#xA;Default Access Modifier 預設值總是可見度最低的存取修飾詞。Type 為 internal，Type Member 為 private。&#xA;預設的存取修飾詞 可用的存取修飾詞 namespace level enum internal public, internal interface internal public, internal class internal public, internal struct internal public, internal delegate internal public, internal type level enum private public, protected, internal, private, protected internal, private protected interface private public, protected, internal, private, protected internal, private protected class private public, protected, internal, private, protected internal, private protected struct private public, protected, internal, private, protected internal, private protected delegate private public, protected, internal, private, protected internal, private protected enum value public public interface member public public class member private public, protected, internal, private, protected internal, private protected struct member private public, internal, private 以軟體設計的原則，應該讓類別、變數的可見性最小化。也就是說不需要公開的類別就不應該設為 public。</description>
+    </item>
+    <item>
+      <title>Unity - 忽略警告訊息</title>
+      <link>https://tsungyi.li/Blog/posts/unity-ignore-warning/</link>
+      <pubDate>Wed, 07 Nov 2018 15:49:00 +0800</pubDate>
+      <guid>https://tsungyi.li/Blog/posts/unity-ignore-warning/</guid>
+      <description>在 Unity 中如果有用到其他 Plugins 經常會發現許多來自這些 Plugins 的 Warning。如果不處理的話，這些訊息可能會淹沒了專案中真正需要注意的警告訊息。&#xA;底下是來自我們目前專案的警告訊息：&#xA;Unity 看到的警告訊息大約 300個 從 Visual Studio for Mac 看到的警告訊息超過 2000個 NOTE: Unity 跟 Visual Studio for Mac 的警告訊息數量不同，最好兩個都檢查&#xA;雖然理論上警告訊息都必須要修正，但是專案進行中總是有很多無法掌握的情形， 以下介紹我在目前處理的專案中，遇到難以修改的警告訊息的解決方式：&#xA;Plugins&amp;rsquo; warning 對於第三方的 Plugins 我們可以先用 #pragma warning 命令來暫時關閉警告訊息。&#xA;關閉的方式使用 #pragma warning disable 暫時關閉，並在使用後用 #pragma warning restore 開啟警告。&#xA;通常會在發生警告前一行加上 #pragma warning disable *warning-list*，並且在發生警告後一行加上 #pragma warning restore *warning-list* 重新開啟警告。&#xA;一般來說，建議將關閉警告與開啟警告的範圍越小越好，避免意外隱藏其他有意義的警告訊息。&#xA;如果檔案裡的警告太多，也可以在檔案開頭與結尾分別加上關閉與還原檔案內所有警告訊息。&#xA;NOTE: 這樣的關閉方式，一但更新 Plugins 的時候可能要重新處理一次。&#xA;底下的例子來自 MSDN&#xA;// CS0649.cs // compile with: /W:4 using System.</description>
+    </item>
+  </channel>
+</rss>

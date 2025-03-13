@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Unity on 終於明白 | tsungyi knows.</title>
+    <link>https://tsungyi.li/Blog/tags/unity/</link>
+    <description>Recent content in Unity on 終於明白 | tsungyi knows.</description>
+    <generator>Hugo</generator>
+    <language>en-us</language>
+    <lastBuildDate>Fri, 06 Dec 2019 03:41:00 +0800</lastBuildDate>
+    <atom:link href="https://tsungyi.li/Blog/tags/unity/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Unity - Null &amp; Missing Reference Validator</title>
+      <link>https://tsungyi.li/Blog/posts/unity-null-and-missing-reference/</link>
+      <pubDate>Fri, 06 Dec 2019 03:41:00 +0800</pubDate>
+      <guid>https://tsungyi.li/Blog/posts/unity-null-and-missing-reference/</guid>
+      <description>NotNullAttribute 在 Unity 中如果想要在編譯期增加驗證，確保 GameObject 必須要設定好參考，避免沒有設定好參考執行時出錯。我們可以用一個自訂的 Attribute NotNullAttribute 來標注需要檢查的成員。並且增加一個檢查函式來檢查參考是否為空。&#xA;[AttributeUsage(AttributeTargets.Field)] public class NotNullAttribute : Attribute { } 使用的方式只要在 GameObject 的成員加上 [Not Null] 即可 注意！&#xA;這個檢查，目前只適用在 GameObject 及其子類別的成員。至於其他 Reference Type 的成員（也就是 SerializeField 的成員）。因為 Unity 的 Serialization 機制所致， Reference Type 的成員不會是 null。所以 NotNull 的檢查永遠不會生效。&#xA;public class TestMonoBehaviour : MonoBehaviour { [NotNull, SerializeField] private GameObject notNullPrivateItem; [NotNull, SerializeField] private GameObject notNullPrivateItem_Null; [SerializeField] private GameObject privateItem; [SerializeField] private GameObject privateItem_Null; [NotNull] public GameObject notNullPublicItem; [NotNull] public GameObject notNullPublicItem_Null; public GameObject publicItem; public GameObject publicItem_Null; } PostProcessBuild 另外我們需要一個 PostProcessBuild 來進行驗證，其中的 CheckAllEnabledScenes 跟 CheckAllPrefabs 用來從所有的 Scenes 以及 Prefabs 之中檢查所有的 Components。</description>
+    </item>
+    <item>
+      <title>Unity - 使用 Null Condition Operator &amp; Null Coalescing Operator</title>
+      <link>https://tsungyi.li/Blog/posts/unity-null-condition-operator-and-null-coalescing-operator/</link>
+      <pubDate>Mon, 16 Sep 2019 20:35:00 +0800</pubDate>
+      <guid>https://tsungyi.li/Blog/posts/unity-null-condition-operator-and-null-coalescing-operator/</guid>
+      <description>Null Conditional Operator 跟 Null Coalescing Operator 都是 C# 6.0 的新語法，可以讓你寫出更加精簡而且可讀性佳的語法。但是在 Unity 中使用需要特別注意，在某些情況下，執行結果可能跟你想的不一樣。&#xA;Null Condition Operator (?.) 當 ?. 的左側是 null 就不會執行右側的語法，如此就可以移除掉很多 null 檢查讓我們的程式更加簡潔好讀。&#xA;先看一下不使用 Null Conditional Operator 的情況：&#xA;var text = string.Empty; if (m_controller != null) { if (m_controller.m_display != null) { if (m_controller.m_display.m_text != null) { text = m_controller.m_display.m_text.text; } } } 如果使用 Null Conditional Operator 的話，可以改寫成以下的語法：&#xA;var text = m_controller?.m_display?.m_text?.text; if (text = null) { text = string.</description>
+    </item>
+    <item>
+      <title>Unity - 存取修飾詞 (Access Modifier) 與 Special folders &amp; Assembly definition files</title>
+      <link>https://tsungyi.li/Blog/posts/unity-access-modifier/</link>
+      <pubDate>Mon, 12 Nov 2018 01:50:00 +0800</pubDate>
+      <guid>https://tsungyi.li/Blog/posts/unity-access-modifier/</guid>
+      <description>存取修飾詞 Access Modifier C# 的存取修飾詞有以下六種&#xA;public 所有人都可以存取 protected 只有所在類別以及他的的衍生類別可以存取 private 只有所在類別可以存取 internal 只有在相同 assembly 的類別可以存取 protected internal 只有在相同 assembly 的類別或是所在類別以及他的的衍生類別可以存取 (也就是 protected OR internal) private protected (C# 7.2 新增) 只有在相同 assembly 的類別以及所在類別以及他的的衍生類別可以存取 (也就是 protected AND internal) 從這張簡圖就很容易了解不同修飾詞的範圍 另外 Type 只能宣告為 public 或 internal，Type Member 可以用所有的存取修飾詞宣告。&#xA;Default Access Modifier 預設值總是可見度最低的存取修飾詞。Type 為 internal，Type Member 為 private。&#xA;預設的存取修飾詞 可用的存取修飾詞 namespace level enum internal public, internal interface internal public, internal class internal public, internal struct internal public, internal delegate internal public, internal type level enum private public, protected, internal, private, protected internal, private protected interface private public, protected, internal, private, protected internal, private protected class private public, protected, internal, private, protected internal, private protected struct private public, protected, internal, private, protected internal, private protected delegate private public, protected, internal, private, protected internal, private protected enum value public public interface member public public class member private public, protected, internal, private, protected internal, private protected struct member private public, internal, private 以軟體設計的原則，應該讓類別、變數的可見性最小化。也就是說不需要公開的類別就不應該設為 public。</description>
+    </item>
+    <item>
+      <title>Unity - 忽略警告訊息</title>
+      <link>https://tsungyi.li/Blog/posts/unity-ignore-warning/</link>
+      <pubDate>Wed, 07 Nov 2018 15:49:00 +0800</pubDate>
+      <guid>https://tsungyi.li/Blog/posts/unity-ignore-warning/</guid>
+      <description>在 Unity 中如果有用到其他 Plugins 經常會發現許多來自這些 Plugins 的 Warning。如果不處理的話，這些訊息可能會淹沒了專案中真正需要注意的警告訊息。&#xA;底下是來自我們目前專案的警告訊息：&#xA;Unity 看到的警告訊息大約 300個 從 Visual Studio for Mac 看到的警告訊息超過 2000個 NOTE: Unity 跟 Visual Studio for Mac 的警告訊息數量不同，最好兩個都檢查&#xA;雖然理論上警告訊息都必須要修正，但是專案進行中總是有很多無法掌握的情形， 以下介紹我在目前處理的專案中，遇到難以修改的警告訊息的解決方式：&#xA;Plugins&amp;rsquo; warning 對於第三方的 Plugins 我們可以先用 #pragma warning 命令來暫時關閉警告訊息。&#xA;關閉的方式使用 #pragma warning disable 暫時關閉，並在使用後用 #pragma warning restore 開啟警告。&#xA;通常會在發生警告前一行加上 #pragma warning disable *warning-list*，並且在發生警告後一行加上 #pragma warning restore *warning-list* 重新開啟警告。&#xA;一般來說，建議將關閉警告與開啟警告的範圍越小越好，避免意外隱藏其他有意義的警告訊息。&#xA;如果檔案裡的警告太多，也可以在檔案開頭與結尾分別加上關閉與還原檔案內所有警告訊息。&#xA;NOTE: 這樣的關閉方式，一但更新 Plugins 的時候可能要重新處理一次。&#xA;底下的例子來自 MSDN&#xA;// CS0649.cs // compile with: /W:4 using System.</description>
+    </item>
+  </channel>
+</rss>

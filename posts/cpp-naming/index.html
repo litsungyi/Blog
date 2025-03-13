@@ -1,0 +1,214 @@
+<!doctype html>
+<html lang="en-us">
+  <head>
+    <title>C&#43;&#43; - 命名規則 // 終於明白 | tsungyi knows.</title>
+    <link rel="shortcut icon" href="/favicon.ico" />
+    <style>
+      @import url('https://fonts.googleapis.com/css2?family=Iansui&display=swap');
+    </style>
+    <link href="https://tsungyi.li/Blog//fontawesome-free-5.15.4-web/css/all.css" rel="stylesheet"> 
+    <meta charset="utf-8" />
+    <meta name="generator" content="Hugo 0.126.1">
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="author" content="Li TsungYi" />
+    <meta name="description" content="" />
+    <link rel="stylesheet" href="https://tsungyi.li/Blog/css/main.min.a209c91de2a631d827e212bd915873536c1d95c5a07e87847737b8b1e9f24140.css" />
+
+    
+  
+    
+      
+    
+  
+
+
+    
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="C&#43;&#43; - 命名規則">
+  <meta name="twitter:description" content="General Rule 程式中的所有類別、變數、函式…的命名請務必使用讓人看到名稱就可以了解他的用途。 使用註解來解釋是不得已的作法，請盡量避免。 名稱的長度沒有限制，但是請以人類容易閱讀、記憶的原則命名，過長或過短的名稱都不適當。 避免無法發音的名稱或是外語的羅馬拼音，除非這是所有成員都理解的專有名稱或是 領域用語。 不要使用自創的縮寫。 使用縮寫請確保團隊成員都清楚縮寫的意義。 命名時請考慮使用共同的 領域用語，降低與其他成員溝通的成本。 團隊應該建立自己的 字彙表 提供團隊成員查詢專案使用的 領域用語。 引用防護（include guard）命名 使用 ALL_CAPS （全大寫命名法）命名。命名規則使用檔案完整路徑並且加上 __ 前綴。（Ex. __BATTLE_FLElD_H） 建議改用 #pragma once 取代引用防護，編譯器能對 #pragma once 做較好的最佳化。 全域變數命名 使用 lower camel case （小駝峰式命名法）命名，並且加上 g_ 前綴。（Ex. bool g_battleField） 請避免使用全域變數。 區域變數命名 使用 lower camel case （小駝峰式命名法）命名。（Ex. bool battleField） 常數命名 使用 ALL_CAPS （全大寫命名法）命名。（Ex. const bool BATTLE_FLAG） 命名空間命名 使用 upper camel case （大駝峰式命名法）命名。（Ex. namespace BattleField） 函式命名 函式使用 lower camel case （小駝峰式命名法）命名。（Ex. void battleFunction()） 參數使用 lower camel case （小駝峰式命名法）命名。（Ex.">
+
+    <meta property="og:url" content="https://tsungyi.li/Blog/posts/cpp-naming/">
+  <meta property="og:site_name" content="終於明白 | tsungyi knows.">
+  <meta property="og:title" content="C&#43;&#43; - 命名規則">
+  <meta property="og:description" content="General Rule 程式中的所有類別、變數、函式…的命名請務必使用讓人看到名稱就可以了解他的用途。 使用註解來解釋是不得已的作法，請盡量避免。 名稱的長度沒有限制，但是請以人類容易閱讀、記憶的原則命名，過長或過短的名稱都不適當。 避免無法發音的名稱或是外語的羅馬拼音，除非這是所有成員都理解的專有名稱或是 領域用語。 不要使用自創的縮寫。 使用縮寫請確保團隊成員都清楚縮寫的意義。 命名時請考慮使用共同的 領域用語，降低與其他成員溝通的成本。 團隊應該建立自己的 字彙表 提供團隊成員查詢專案使用的 領域用語。 引用防護（include guard）命名 使用 ALL_CAPS （全大寫命名法）命名。命名規則使用檔案完整路徑並且加上 __ 前綴。（Ex. __BATTLE_FLElD_H） 建議改用 #pragma once 取代引用防護，編譯器能對 #pragma once 做較好的最佳化。 全域變數命名 使用 lower camel case （小駝峰式命名法）命名，並且加上 g_ 前綴。（Ex. bool g_battleField） 請避免使用全域變數。 區域變數命名 使用 lower camel case （小駝峰式命名法）命名。（Ex. bool battleField） 常數命名 使用 ALL_CAPS （全大寫命名法）命名。（Ex. const bool BATTLE_FLAG） 命名空間命名 使用 upper camel case （大駝峰式命名法）命名。（Ex. namespace BattleField） 函式命名 函式使用 lower camel case （小駝峰式命名法）命名。（Ex. void battleFunction()） 參數使用 lower camel case （小駝峰式命名法）命名。（Ex.">
+  <meta property="og:locale" content="en_us">
+  <meta property="og:type" content="article">
+    <meta property="article:section" content="posts">
+    <meta property="article:published_time" content="2020-06-29T14:13:50+08:00">
+    <meta property="article:modified_time" content="2020-06-29T14:13:50+08:00">
+    <meta property="article:tag" content="C&#43;&#43;">
+
+
+  </head>
+  <body>
+    <header class="app-header">
+      <a href="https://tsungyi.li/Blog/"><img class="app-header-avatar" src="/images/Profile.jpg" alt="Li TsungYi" /></a>
+      <h1>終於明白 | tsungyi knows.</h1>
+      <blockquot>&gt; "I know that I know nothing." ~ Socrates.</blockquote>
+      <nav class="app-header-menu">
+          <a class="app-header-menu-item" href="/Blog/about.html">About</a>
+             | 
+          
+          <a class="app-header-menu-item" href="/Blog/">Home</a>
+             | 
+          
+          <a class="app-header-menu-item" href="/Blog/tags/">Tags</a>
+      </nav>
+      <p>Hi, I am Li Tsung-Yi (李宗沂). I am a game developer from 🇹🇼 Taiwan.</p>
+    </header>
+    <main class="app-container">
+      
+  <article class="post">
+    <header class="post-header">
+      <h1 class ="post-title">C&#43;&#43; - 命名規則</h1>
+      <div class="post-meta">
+        <div>
+          <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon icon-calendar">
+  <title>calendar</title>
+  <rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect><line x1="16" y1="2" x2="16" y2="6"></line><line x1="8" y1="2" x2="8" y2="6"></line><line x1="3" y1="10" x2="21" y2="10"></line>
+</svg>
+          Jun 29, 2020
+        </div>
+        <div>
+          <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon icon-clock">
+  <title>clock</title>
+  <circle cx="12" cy="12" r="10"></circle><polyline points="12 6 12 12 16 14"></polyline>
+</svg>
+          1 min read
+        </div>
+        <div>
+          <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon icon-tag">
+  <title>tag</title>
+  <path d="M20.59 13.41l-7.17 7.17a2 2 0 0 1-2.83 0L2 12V2h10l8.59 8.59a2 2 0 0 1 0 2.82z"></path><line x1="7" y1="7" x2="7.01" y2="7"></line>
+</svg>
+              <a class="tag" href="https://tsungyi.li/Blog/tags/c&#43;&#43;/">C&#43;&#43;</a>
+        </div>
+      </div>
+    </header>
+    <div class="post-content">
+      <h1 id="general-rule">General Rule</h1>
+<ul>
+<li>程式中的所有類別、變數、函式&hellip;的命名請務必使用讓人看到名稱就可以了解他的用途。
+<ul>
+<li>使用註解來解釋是不得已的作法，請盡量避免。</li>
+</ul>
+</li>
+<li>名稱的長度沒有限制，但是請以人類容易閱讀、記憶的原則命名，過長或過短的名稱都不適當。
+<ul>
+<li>避免無法發音的名稱或是外語的羅馬拼音，除非這是所有成員都理解的專有名稱或是 <strong>領域用語</strong>。</li>
+<li>不要使用自創的縮寫。</li>
+<li>使用縮寫請確保團隊成員都清楚縮寫的意義。</li>
+</ul>
+</li>
+<li>命名時請考慮使用共同的 <strong>領域用語</strong>，降低與其他成員溝通的成本。
+<ul>
+<li>團隊應該建立自己的 <strong>字彙表</strong> 提供團隊成員查詢專案使用的 <strong>領域用語</strong>。</li>
+</ul>
+</li>
+</ul>
+<h1 id="引用防護include-guard命名">引用防護（include guard）命名</h1>
+<ul>
+<li>使用 ALL_CAPS （全大寫命名法）命名。命名規則使用檔案完整路徑並且加上 <code>__</code> 前綴。（Ex. <code>__BATTLE_FLElD_H</code>）
+<ul>
+<li>建議改用 <code>#pragma once</code> 取代引用防護，編譯器能對 <code>#pragma once</code> 做較好的最佳化。</li>
+</ul>
+</li>
+</ul>
+<h1 id="全域變數命名">全域變數命名</h1>
+<ul>
+<li>使用 lower camel case （小駝峰式命名法）命名，並且加上 <code>g_</code> 前綴。（Ex. <code>bool g_battleField</code>）
+<ul>
+<li>請避免使用全域變數。</li>
+</ul>
+</li>
+</ul>
+<h1 id="區域變數命名">區域變數命名</h1>
+<ul>
+<li>使用 lower camel case （小駝峰式命名法）命名。（Ex. <code>bool battleField</code>）</li>
+</ul>
+<h1 id="常數命名">常數命名</h1>
+<ul>
+<li>使用 ALL_CAPS （全大寫命名法）命名。（Ex. <code>const bool BATTLE_FLAG</code>）</li>
+</ul>
+<h1 id="命名空間命名">命名空間命名</h1>
+<ul>
+<li>使用 upper camel case （大駝峰式命名法）命名。（Ex. <code>namespace BattleField</code>）</li>
+</ul>
+<h1 id="函式命名">函式命名</h1>
+<ul>
+<li>函式使用 lower camel case （小駝峰式命名法）命名。（Ex. <code>void battleFunction()</code>）</li>
+<li>參數使用 lower camel case （小駝峰式命名法）命名。（Ex. <code>void battleFunction(bool battleFlag)</code>）</li>
+</ul>
+<h1 id="列舉命名">列舉命名</h1>
+<ul>
+<li>使用 upper camel case （大駝峰式命名法）命名。（Ex. <code>enum BattleField</code>）</li>
+</ul>
+<h2 id="列舉值命名">列舉值命名</h2>
+<ul>
+<li>使用 upper camel case （大駝峰式命名法）命名。（Ex. <code>Empty = 0</code>）
+<ul>
+<li>盡量給所有列舉值初始值，避免程式改動後數值錯亂。</li>
+</ul>
+</li>
+<li>命名時請不要重複列舉的名稱。
+<ul>
+<li>GOOD: <code>enum BattleField { Empty = 0, Full = 1, };</code></li>
+<li>BAD: <code>enum BattleField { BattleFieldEmpty, BattleFieldFull, };</code></li>
+</ul>
+</li>
+</ul>
+<h1 id="類別命名">類別命名</h1>
+<ul>
+<li>使用 upper camel case （大駝峰式命名法）命名。（Ex. <code>class BattleField</code>）</li>
+</ul>
+<h2 id="類別成員命名">類別成員命名</h2>
+<ul>
+<li>public 成員使用 lower camel case （小駝峰式命名法）命名 （Ex. <code>bool battleFlag</code>）。
+<ul>
+<li>請只在 struct 中使用 public 成員。</li>
+</ul>
+</li>
+<li>protected 、 private 成員使用 lower camel case （小駝峰式命名法）命名，並且加上 <code>_</code> 前綴。（Ex. <code>bool _battleFlag</code>）。</li>
+</ul>
+<h2 id="類別方法類別靜態方法命名">類別方法/類別靜態方法命名</h2>
+<ul>
+<li>函式使用 lower camel case （小駝峰式命名法）命名 （Ex. <code>void battleFunction()</code>）</li>
+<li>參數使用 lower camel case （小駝峰式命名法）命名 （Ex. <code>void battleFunction(bool battleFlag)</code>）</li>
+</ul>
+<h2 id="類別靜態成員命名">類別靜態成員命名</h2>
+<ul>
+<li>使用 lower camel case （小駝峰式命名法）命名，並且加上 <code>s_</code> 前綴。 （Ex. <code>static bool s_battleFlag</code>）。</li>
+</ul>
+<h2 id="類別成員常數類別靜態成員常數命名">類別成員常數/類別靜態成員常數命名</h2>
+<ul>
+<li>使用 ALL_CAPS （全大寫命名法）命名。 （Ex. <code>static const bool BATTLE_FLAG</code>）。</li>
+</ul>
+
+    </div>
+    <div class="post-footer">
+      <div id="disqus_thread"></div>
+<script>
+    window.disqus_config = function () {
+    
+    
+    
+    };
+    (function() {
+        if (["localhost", "127.0.0.1"].indexOf(window.location.hostname) != -1) {
+            document.getElementById('disqus_thread').innerHTML = 'Disqus comments not available by default when the website is previewed locally.';
+            return;
+        }
+        var d = document, s = d.createElement('script'); s.async = true;
+        s.src = '//' + "tsungyi-li" + '.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', +new Date());
+        (d.head || d.body).appendChild(s);
+    })();
+</script>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+<a href="https://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
+    </div>
+  </article>
+
+    </main>
+  </body>
+</html>

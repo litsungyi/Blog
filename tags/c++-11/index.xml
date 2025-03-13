@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>C&#43;&#43; 11 on 終於明白 | tsungyi knows.</title>
+    <link>https://tsungyi.li/Blog/tags/c&#43;&#43;-11/</link>
+    <description>Recent content in C&#43;&#43; 11 on 終於明白 | tsungyi knows.</description>
+    <generator>Hugo</generator>
+    <language>en-us</language>
+    <lastBuildDate>Wed, 01 Mar 2023 03:10:00 +0800</lastBuildDate>
+    <atom:link href="https://tsungyi.li/Blog/tags/c++-11/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>C&#43;&#43; - User-defined literals</title>
+      <link>https://tsungyi.li/Blog/posts/cpp-user-defined-literals/</link>
+      <pubDate>Wed, 01 Mar 2023 03:10:00 +0800</pubDate>
+      <guid>https://tsungyi.li/Blog/posts/cpp-user-defined-literals/</guid>
+      <description>C++ 11 新增 User-defined literals 可以經由程式定義的字面常量後綴，讓我們寫出可讀性更加的程式碼。&#xA;簡單的說，我們可以透過有意義的字面常量後綴將常數或是字串轉換自訂的型別來提高可讀性。&#xA;User-defined literals 目前 User-defined literals 支援以下 8 種語法格式：&#xA;decimal-literal ud-suffix octal-literal ud-suffix hex-literal ud-suffix binary-literal ud-suffix fractional-constant exponent-part ﻿(optional) ud-suffix digit-sequence exponent-part ud-suffix character-literal ud-suffix string-literal ud-suffix 1-4 支援不同進位的整數格式 5, 6 支援不同格式的浮點數 7 支援字元格式 8 支援字串格式 使用者定義的 ud-suffix 需要以底線 _ 開頭，標準函式庫中定義的則不會以底線開頭。 編譯器在遇到 User-defined literals 的時候會依據 ud-suffix 前面的文字的型別推導適當的函式進行轉換。&#xA;首先會透過 unqualified name lookup 找到所有名稱符合的函式集合。&#xA;如果是整數格式： 如果符合的函式集合有參數型別為 unsigned long long 時，會選擇此函式並呼叫 operator &amp;quot;&amp;quot;X(nULL)。 否則，如果有參數型別為 raw literal operators (const char*)時，會選擇此函式並呼叫 operator &amp;quot;&amp;quot;X(&amp;quot;n&amp;quot;)。 否則，如果有參數型別為 numeric literal operator template (template&amp;lt;char .</description>
+    </item>
+  </channel>
+</rss>

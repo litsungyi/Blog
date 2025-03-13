@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Shell on 終於明白 | tsungyi knows.</title>
+    <link>https://tsungyi.li/Blog/tags/shell/</link>
+    <description>Recent content in Shell on 終於明白 | tsungyi knows.</description>
+    <generator>Hugo</generator>
+    <language>en-us</language>
+    <lastBuildDate>Mon, 07 Nov 2022 10:14:38 +0800</lastBuildDate>
+    <atom:link href="https://tsungyi.li/Blog/tags/shell/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Shell Tips</title>
+      <link>https://tsungyi.li/Blog/posts/shell-tips/</link>
+      <pubDate>Mon, 07 Nov 2022 10:14:38 +0800</pubDate>
+      <guid>https://tsungyi.li/Blog/posts/shell-tips/</guid>
+      <description>記錄一些最近寫 Shell 用到的語法&#xA;ShellCheck 如果你是使用 Visual Studio Code 強烈建議可以安裝這個套件 ShellCheck。 可以幫你檢查 Shell 的錯誤跟提供建議的寫法。&#xA;shebang 相關定義可以參考 維基百科&#xA;shebang 必須寫在 shell 的第一行，用來指示這個腳本使用的直譯器。&#xA;#! /bin/bash echo &amp;#34;SHELL = $SHELL&amp;#34; echo &amp;#34;MY SHELL = $(ps -o comm -p $$ | awk &amp;#39;NR==2 { print $1}&amp;#39;)&amp;#34; 雖然可以用環境變數 SHELL 取得使用的 Shell 不過並不是很正確。所以需要用其他命令取得正確的 Shell。&#xA;在我的電腦上印出的是使用者預設的 shell 而不是 shebang 指定的 shell。使用 ps 才能拿到正確的 shell。&#xA;SHELL = /bin/zsh MY SHELL = /bin/bash 常用的內建變數 $?: 上一個指令或程式執行的回傳值，通常 0 代表執行成功，0 以外的數字表示失敗 $n: n 是數字，表示第幾個參數 $#: 參數數量 $$: shell 執行的 PID 如果要取得 pipeline 的其中一個階段的結果可以用 ${PIPESTATUS[n]} 其中的 n 是數字 redirect 通常會用 &amp;gt; info.</description>
+    </item>
+  </channel>
+</rss>

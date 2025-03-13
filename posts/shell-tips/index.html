@@ -1,0 +1,326 @@
+<!doctype html>
+<html lang="en-us">
+  <head>
+    <title>Shell Tips // 終於明白 | tsungyi knows.</title>
+    <link rel="shortcut icon" href="/favicon.ico" />
+    <style>
+      @import url('https://fonts.googleapis.com/css2?family=Iansui&display=swap');
+    </style>
+    <link href="https://tsungyi.li/Blog//fontawesome-free-5.15.4-web/css/all.css" rel="stylesheet"> 
+    <meta charset="utf-8" />
+    <meta name="generator" content="Hugo 0.126.1">
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="author" content="Li TsungYi" />
+    <meta name="description" content="" />
+    <link rel="stylesheet" href="https://tsungyi.li/Blog/css/main.min.a209c91de2a631d827e212bd915873536c1d95c5a07e87847737b8b1e9f24140.css" />
+
+    
+  
+    
+      
+    
+  
+
+
+    
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="Shell Tips">
+  <meta name="twitter:description" content="記錄一些最近寫 Shell 用到的語法
+ShellCheck 如果你是使用 Visual Studio Code 強烈建議可以安裝這個套件 ShellCheck。 可以幫你檢查 Shell 的錯誤跟提供建議的寫法。
+shebang 相關定義可以參考 維基百科
+shebang 必須寫在 shell 的第一行，用來指示這個腳本使用的直譯器。
+#! /bin/bash echo &#34;SHELL = $SHELL&#34; echo &#34;MY SHELL = $(ps -o comm -p $$ | awk &#39;NR==2 { print $1}&#39;)&#34; 雖然可以用環境變數 SHELL 取得使用的 Shell 不過並不是很正確。所以需要用其他命令取得正確的 Shell。
+在我的電腦上印出的是使用者預設的 shell 而不是 shebang 指定的 shell。使用 ps 才能拿到正確的 shell。
+SHELL = /bin/zsh MY SHELL = /bin/bash 常用的內建變數 $?: 上一個指令或程式執行的回傳值，通常 0 代表執行成功，0 以外的數字表示失敗 $n: n 是數字，表示第幾個參數 $#: 參數數量 $$: shell 執行的 PID 如果要取得 pipeline 的其中一個階段的結果可以用 ${PIPESTATUS[n]} 其中的 n 是數字 redirect 通常會用 &gt; info.">
+
+    <meta property="og:url" content="https://tsungyi.li/Blog/posts/shell-tips/">
+  <meta property="og:site_name" content="終於明白 | tsungyi knows.">
+  <meta property="og:title" content="Shell Tips">
+  <meta property="og:description" content="記錄一些最近寫 Shell 用到的語法
+ShellCheck 如果你是使用 Visual Studio Code 強烈建議可以安裝這個套件 ShellCheck。 可以幫你檢查 Shell 的錯誤跟提供建議的寫法。
+shebang 相關定義可以參考 維基百科
+shebang 必須寫在 shell 的第一行，用來指示這個腳本使用的直譯器。
+#! /bin/bash echo &#34;SHELL = $SHELL&#34; echo &#34;MY SHELL = $(ps -o comm -p $$ | awk &#39;NR==2 { print $1}&#39;)&#34; 雖然可以用環境變數 SHELL 取得使用的 Shell 不過並不是很正確。所以需要用其他命令取得正確的 Shell。
+在我的電腦上印出的是使用者預設的 shell 而不是 shebang 指定的 shell。使用 ps 才能拿到正確的 shell。
+SHELL = /bin/zsh MY SHELL = /bin/bash 常用的內建變數 $?: 上一個指令或程式執行的回傳值，通常 0 代表執行成功，0 以外的數字表示失敗 $n: n 是數字，表示第幾個參數 $#: 參數數量 $$: shell 執行的 PID 如果要取得 pipeline 的其中一個階段的結果可以用 ${PIPESTATUS[n]} 其中的 n 是數字 redirect 通常會用 &gt; info.">
+  <meta property="og:locale" content="en_us">
+  <meta property="og:type" content="article">
+    <meta property="article:section" content="posts">
+    <meta property="article:published_time" content="2022-11-07T10:14:38+08:00">
+    <meta property="article:modified_time" content="2022-11-07T10:14:38+08:00">
+    <meta property="article:tag" content="Shell">
+
+
+  </head>
+  <body>
+    <header class="app-header">
+      <a href="https://tsungyi.li/Blog/"><img class="app-header-avatar" src="/images/Profile.jpg" alt="Li TsungYi" /></a>
+      <h1>終於明白 | tsungyi knows.</h1>
+      <blockquot>&gt; "I know that I know nothing." ~ Socrates.</blockquote>
+      <nav class="app-header-menu">
+          <a class="app-header-menu-item" href="/Blog/about.html">About</a>
+             | 
+          
+          <a class="app-header-menu-item" href="/Blog/">Home</a>
+             | 
+          
+          <a class="app-header-menu-item" href="/Blog/tags/">Tags</a>
+      </nav>
+      <p>Hi, I am Li Tsung-Yi (李宗沂). I am a game developer from 🇹🇼 Taiwan.</p>
+    </header>
+    <main class="app-container">
+      
+  <article class="post">
+    <header class="post-header">
+      <h1 class ="post-title">Shell Tips</h1>
+      <div class="post-meta">
+        <div>
+          <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon icon-calendar">
+  <title>calendar</title>
+  <rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect><line x1="16" y1="2" x2="16" y2="6"></line><line x1="8" y1="2" x2="8" y2="6"></line><line x1="3" y1="10" x2="21" y2="10"></line>
+</svg>
+          Nov 7, 2022
+        </div>
+        <div>
+          <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon icon-clock">
+  <title>clock</title>
+  <circle cx="12" cy="12" r="10"></circle><polyline points="12 6 12 12 16 14"></polyline>
+</svg>
+          3 min read
+        </div>
+        <div>
+          <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon icon-tag">
+  <title>tag</title>
+  <path d="M20.59 13.41l-7.17 7.17a2 2 0 0 1-2.83 0L2 12V2h10l8.59 8.59a2 2 0 0 1 0 2.82z"></path><line x1="7" y1="7" x2="7.01" y2="7"></line>
+</svg>
+              <a class="tag" href="https://tsungyi.li/Blog/tags/shell/">Shell</a>
+        </div>
+      </div>
+    </header>
+    <div class="post-content">
+      <p>記錄一些最近寫 Shell 用到的語法</p>
+<h1 id="shellcheck">ShellCheck</h1>
+<p>如果你是使用 Visual Studio Code 強烈建議可以安裝這個套件 <a href="https://marketplace.visualstudio.com/items?itemName=timonwong.shellcheck">ShellCheck</a>。
+可以幫你檢查 Shell 的錯誤跟提供建議的寫法。</p>
+<h1 id="shebang"><code>shebang</code></h1>
+<p>相關定義可以參考 <a href="https://zh.wikipedia.org/zh-tw/Shebang">維基百科</a></p>
+<p>shebang 必須寫在 shell 的第一行，用來指示這個腳本使用的直譯器。</p>
+<pre tabindex="0"><code class="language-shell=" data-lang="shell=">#! /bin/bash
+
+echo &#34;SHELL = $SHELL&#34;
+echo &#34;MY SHELL = $(ps -o comm -p $$ | awk &#39;NR==2 { print $1}&#39;)&#34;
+</code></pre><p>雖然可以用環境變數 <code>SHELL</code> 取得使用的 Shell 不過並不是很正確。所以需要用其他命令取得正確的 Shell。</p>
+<p>在我的電腦上印出的是使用者預設的 shell 而不是 shebang 指定的 shell。使用 ps 才能拿到正確的 shell。</p>
+<pre tabindex="0"><code>SHELL = /bin/zsh
+MY SHELL = /bin/bash
+</code></pre><h1 id="常用的內建變數">常用的內建變數</h1>
+<ul>
+<li><code>$?</code>: 上一個指令或程式執行的回傳值，通常 0 代表執行成功，0 以外的數字表示失敗</li>
+<li><code>$n</code>: n 是數字，表示第幾個參數</li>
+<li><code>$#</code>: 參數數量</li>
+<li><code>$$</code>: shell 執行的 PID</li>
+<li>如果要取得 pipeline 的其中一個階段的結果可以用 <code>${PIPESTATUS[n]}</code> 其中的 n 是數字</li>
+</ul>
+<h2 id="redirect">redirect</h2>
+<p>通常會用 <code>&gt; info.log</code> 來把輸出寫到檔案，我們也可以用來將輸出寫到不同的目標 <code>2&gt; error.log | tee output.log</code>。</p>
+<ul>
+<li><code>2</code> 是 stderr</li>
+<li><code>tee</code> 用來把輸出同時寫到畫面跟檔案</li>
+</ul>
+<p>如果要隱藏輸出可以使用 <code>&gt; /dev/null</code></p>
+<h1 id="執行外部命令">執行外部命令</h1>
+<p>在 shell 中可以透過直接執行程式來設定變數</p>
+<pre tabindex="0"><code class="language-shell=" data-lang="shell=">RBENV_VERSION=`rbenv version | tr &#39;{print $1}&#39;`
+echo &#34;$RBENV_VERSION&#34;
+</code></pre><p>不過 ShellCheck 會建議不要使用 &lsquo;`&rsquo; 的方式，可以改用以下寫法：</p>
+<pre tabindex="0"><code class="language-shell=" data-lang="shell=">RBENV_VERSION=$(rbenv version)
+echo &#34;$RBENV_VERSION&#34;
+</code></pre><h1 id="判斷式">判斷式</h1>
+<p>基本的 if 語法是這樣</p>
+<pre tabindex="0"><code class="language-shell=" data-lang="shell=">if [ 條件 ]
+then
+    # do something
+elif [ 條件 ]
+then
+    # do something
+else
+    # do something
+fi
+</code></pre><ul>
+<li><strong>NOTE</strong> <code>[</code> or <code>]</code> 跟條件需要有空格分開</li>
+</ul>
+<p>常用的條件有：</p>
+<h2 id="字串比對">字串比對</h2>
+<ul>
+<li><code>&quot;字串1&quot; = &quot;字串2&quot;</code>: 比對兩個字串是否相同
+<ul>
+<li>Shellcheck 會建議即使是變數也要加上 <code>&quot;</code> 因為變數的值可能有空格或特殊符號，有可能在特定輸入會出問題
+<ul>
+<li>❌ <code>if [ KEY = &quot;name&quot; ]</code></li>
+<li>⭕ <code>if [ &quot;$KEY&quot; = &quot;name&quot; ]</code></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><code>&quot;字串1&quot; != &quot;字串2&quot;</code>: 比對兩個字串是否不ㄍㄜ同</li>
+</ul>
+<h2 id="數值比對">數值比對</h2>
+<ul>
+<li><code>變數1 -eq 變數2</code>: 比對兩個數字是否相同</li>
+<li><code>變數1 -ne 變數2</code>: 比對兩個數字是否相同</li>
+<li><code>變數1 -lt 變數2</code>: 變數1 &lt; 變數2</li>
+<li><code>變數1 -gt 變數2</code>: 變數1 &gt; 變數2</li>
+<li><code>變數1 -le 變數2</code>: 變數1 &lt;= 變數2</li>
+<li><code>變數1 -ge 變數2</code>: 變數1 &gt;= 變數2</li>
+</ul>
+<h2 id="檔案檢查">檔案檢查</h2>
+<ul>
+<li><code>-d 路徑</code>: 檢查路徑是否為資料夾</li>
+<li><code>-e 路徑</code>: 檢查路徑的檔案或資料夾是否存在</li>
+</ul>
+<p><strong>NOTE</strong>: NOT 的語法是在條件前面加上 <code>!</code>，要檢查檔案不存在就是 <code>if [ ! -e &quot;test.ini&quot; ]</code></p>
+<h2 id="多條件比對">多條件比對</h2>
+<p>多個條件可以用 <code>||</code> 或是 <code>&amp;&amp;</code> 分隔多個條件
+Ex. <code>if [ $? -eq 0 ] &amp;&amp; [ -e &quot;test.ini&quot; ]</code></p>
+<h2 id="判斷其他命令的執行結果">判斷其他命令的執行結果</h2>
+<h4 id="方法一">方法一</h4>
+<pre tabindex="0"><code class="language-shell=" data-lang="shell=">rbenv version
+if [ $? -eq 0 ]
+then
+  # Do something
+fi
+</code></pre><h4 id="方法二">方法二</h4>
+<pre tabindex="0"><code class="language-shell=" data-lang="shell=">if rbenv version
+then
+  # Do something
+fi
+</code></pre><p>可以直接在 if 的條件式中執行命令。這樣比較簡潔， ShellCheck 建議使用這種格式。</p>
+<h1 id="使用者輸入">使用者輸入</h1>
+<pre tabindex="0"><code class="language-shell=" data-lang="shell=">echo &#34;What&#39;s your name?&#34;
+read varname
+echo &#34;Hello $varname&#34;
+</code></pre><p>畫面會輸出一個等待輸入的提示，等待使用者輸入。</p>
+<pre tabindex="0"><code>What&#39;s your name?
+☐
+</code></pre><p>等到輸入字串並按下 Enter 送出之後，變數的值就被設定為使用者所輸入的字串 （不包含 Enter）</p>
+<pre tabindex="0"><code>What&#39;s your name?
+Caesar
+Hello Caesar
+</code></pre><h2 id="有用的參數">有用的參數</h2>
+<p>我們可以在 <code>read</code> 加上 <code>-p</code> 表示 <code>read</code> 要顯示的提示字串，就不需要用 <code>echo</code>。
+也可以加上 <code>r</code> 指定不將反斜線視為跳脫字元。</p>
+<pre tabindex="0"><code class="language-shell=" data-lang="shell=">read -rp &#34;What&#39;s your name? &#34; varname
+echo &#34;Hello $varname&#34;
+</code></pre><p>需要注意的是，使用 <code>-p</code> 時的提示字串跟輸入游標沒有換行，需要自行加上空格排版，</p>
+<pre tabindex="0"><code>What&#39;s your name? ☐
+</code></pre><p>如果要用密碼輸入的話可以用 <code>-s</code> 來隱藏輸入。
+因為 <code>-s</code> 會將送出的 Enter 也隱藏，所以顯示時可以加上一個空行來排版。</p>
+<pre tabindex="0"><code class="language-shell=" data-lang="shell=">read -rp &#34;username? &#34; username
+read -srp &#34;password? &#34; password
+echo &#34;&#34;
+echo &#34;Hello $username&#34;
+</code></pre><p>如果要實作 &ldquo;press any key to continue&rdquo; 可以用以下的語法。
+使用 <code>-n 1</code> 來指定只要讀取 1 個字元。</p>
+<pre tabindex="0"><code class="language-shell=" data-lang="shell=">read -rp &#34;username? &#34; username
+read -n 1 -srp &#34;press any key to continue&#34; key
+echo &#34;&#34;
+echo &#34;Hello $username&#34;
+</code></pre><p>同樣的我們也可以用這個方法來實作選項。</p>
+<pre tabindex="0"><code class="language-shell=" data-lang="shell=">read -rp &#34;username? &#34; username
+read -n 1 -rp &#34;Are you $username (y/n)? &#34; key
+echo &#34;&#34;
+if [ &#34;$key&#34; = &#34;y&#34; ]
+then
+    echo &#34;Hello $username&#34;
+fi
+</code></pre><h1 id="color">Color</h1>
+<p>Shell 輸出的時候可以加上控制碼改變文字或是背景的顏色，
+我們在寫一些較長的腳本會希望輸出的地方能有色彩變化，
+這樣在閱讀的時候比較容易找到重要的地方。</p>
+<p>色碼的顏色文字跟背景的顏色可以分別設定。</p>
+<h2 id="控制碼">控制碼</h2>
+<p>控制碼的格式為 <code>\033[xxm</code> 其中的 xx 就是顏色代碼。
+使用的時候可以用 <code>echo -e</code> 指定後面的文字帶有控制碼。
+另外，要注意的是結束的時候需要用 <code>\033[0m</code> 這個特殊的控制碼 (RESET) 將所有格式清空。
+否則格式會影響到後面的輸出。</p>
+<pre tabindex="0"><code class="language-shell=" data-lang="shell=">echo -e &#34;\033[31mhello\033[0m world&#34;
+</code></pre><p>以上代碼就會顯示出紅色的 hello 而 world 則是顯示預設的文字顏色。</p>
+<h2 id="前景-foreground">前景 foreground</h2>
+<p>前景色一共有 16 色</p>
+<ul>
+<li><code>\033[30m</code>: 黑色 (Black)</li>
+<li><code>\033[31m</code>: 紅色 (Red)</li>
+<li><code>\033[32m</code>: 綠色 (Green)</li>
+<li><code>\033[33m</code>: 黃色 (Yellow)</li>
+<li><code>\033[34m</code>: 藍色 (Blue)</li>
+<li><code>\033[35m</code>: 洋紅色 (Magenta)</li>
+<li><code>\033[36m</code>: 青色 (Cyan)</li>
+<li><code>\033[37m</code>: 白色 (White)</li>
+<li><code>\033[1;30m</code> (or <code>\033[90m</code>): 亮黑色 (Bright Black / Gray)</li>
+<li><code>\033[1;31m</code> (or <code>\033[91m</code>): 亮紅色 (Bright Red)</li>
+<li><code>\033[1;32m</code> (or <code>\033[92m</code>): 亮綠色 (Bright Green)</li>
+<li><code>\033[1;33m</code> (or <code>\033[93m</code>): 亮黃色 (Bright Yellow)</li>
+<li><code>\033[1;34m</code> (or <code>\033[94m</code>): 亮藍色 (Bright Blue)</li>
+<li><code>\033[1;35m</code> (or <code>\033[95m</code>): 亮洋紅色 (Bright Magenta)</li>
+<li><code>\033[1;36m</code> (or <code>\033[96m</code>): 亮青色 (Bright Cyan)</li>
+<li><code>\033[1;37m</code> (or <code>\033[97m</code>): 亮白色 (Bright White)</li>
+</ul>
+<h2 id="背景-background">背景 background</h2>
+<p>背景色一共有 16 色，可以用分號分隔就跟前景色一起使用。</p>
+<ul>
+<li><code>\033[40m</code>: 黑色 (Black)</li>
+<li><code>\033[41m</code>: 紅色 (Red)</li>
+<li><code>\033[42m</code>: 綠色 (Green)</li>
+<li><code>\033[43m</code>: 黃色 (Yellow)</li>
+<li><code>\033[44m</code>: 藍色 (Blue)</li>
+<li><code>\033[45m</code>: 洋紅色 (Magenta)</li>
+<li><code>\033[46m</code>: 青色 (Cyan)</li>
+<li><code>\033[47m</code>: 白色 (White)</li>
+<li><code>\033[1;40m</code> (or <code>\033[100m</code>): 亮黑色 (Bright Black / Gray)</li>
+<li><code>\033[1;41m</code> (or <code>\033[101m</code>): 亮紅色 (Bright Red)</li>
+<li><code>\033[1;42m</code> (or <code>\033[102m</code>): 亮綠色 (Bright Green)</li>
+<li><code>\033[1;43m</code> (or <code>\033[103m</code>): 亮黃色 (Bright Yellow)</li>
+<li><code>\033[1;44m</code> (or <code>\033[104m</code>): 亮藍色 (Bright Blue)</li>
+<li><code>\033[1;45m</code> (or <code>\033[105m</code>): 亮洋紅色 (Bright Magenta)</li>
+<li><code>\033[1;46m</code> (or <code>\033[106m</code>): 亮青色 (Bright Cyan)</li>
+<li><code>\033[1;47m</code> (or <code>\033[107m</code>): 亮白色 (Bright White)</li>
+</ul>
+<h2 id="其他控制符號">其他控制符號</h2>
+<ul>
+<li><code>\033[0m</code>: 重置 (Reset)</li>
+<li><code>\033[1m</code>: 粗體 (Bold)</li>
+<li><code>\033[4m</code>: 底線 (Underline)</li>
+<li><code>\033[7m</code>: 反轉前景、背景色 (Reverse)</li>
+</ul>
+<p>另外也可以用來控制游標位置，做到類似進度條的顯示。
+細節請參考<a href="https://www.lihaoyi.com/post/BuildyourownCommandLinewithANSIescapecodes.html">參考資料</a>。</p>
+<p>Ref. <a href="https://sharats.me/posts/shell-script-best-practices/">Shell Script Best Practices</a></p>
+
+    </div>
+    <div class="post-footer">
+      <div id="disqus_thread"></div>
+<script>
+    window.disqus_config = function () {
+    
+    
+    
+    };
+    (function() {
+        if (["localhost", "127.0.0.1"].indexOf(window.location.hostname) != -1) {
+            document.getElementById('disqus_thread').innerHTML = 'Disqus comments not available by default when the website is previewed locally.';
+            return;
+        }
+        var d = document, s = d.createElement('script'); s.async = true;
+        s.src = '//' + "tsungyi-li" + '.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', +new Date());
+        (d.head || d.body).appendChild(s);
+    })();
+</script>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+<a href="https://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
+    </div>
+  </article>
+
+    </main>
+  </body>
+</html>
