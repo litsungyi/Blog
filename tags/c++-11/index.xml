@@ -1,6 +1,56 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>C++ 11 on 終於明白 | tsungyi knows.</title><link>https://tsungyi.li/Blog/tags/c++-11/</link><description>Recent content in C++ 11 on 終於明白 | tsungyi knows.</description><generator>Hugo -- gohugo.io</generator><language>en-us</language><lastBuildDate>Wed, 01 Mar 2023 03:10:00 +0800</lastBuildDate><atom:link href="https://tsungyi.li/Blog/tags/c++-11/index.xml" rel="self" type="application/rss+xml"/><item><title>C++ - User-defined literals</title><link>https://tsungyi.li/Blog/posts/cpp-user-defined-literals/</link><pubDate>Wed, 01 Mar 2023 03:10:00 +0800</pubDate><guid>https://tsungyi.li/Blog/posts/cpp-user-defined-literals/</guid><description>C++ 11 新增 User-defined literals 可以經由程式定義的字面常量後綴，讓我們寫出可讀性更加的程式碼。
-簡單的說，我們可以透過有意義的字面常量後綴將常數或是字串轉換自訂的型別來提高可讀性。
-User-defined literals 目前 User-defined literals 支援以下 8 種語法格式：
-decimal-literal ud-suffix octal-literal ud-suffix hex-literal ud-suffix binary-literal ud-suffix fractional-constant exponent-part ﻿(optional) ud-suffix digit-sequence exponent-part ud-suffix character-literal ud-suffix string-literal ud-suffix 1-4 支援不同進位的整數格式 5, 6 支援不同格式的浮點數 7 支援字元格式 8 支援字串格式 使用者定義的 ud-suffix 需要以底線 _ 開頭，標準函式庫中定義的則不會以底線開頭。 編譯器在遇到 User-defined literals 的時候會依據 ud-suffix 前面的文字的型別推導適當的函式進行轉換。
-首先會透過 unqualified name lookup 找到所有名稱符合的函式集合。
-如果是整數格式： 如果符合的函式集合有參數型別為 unsigned long long 時，會選擇此函式並呼叫 operator &amp;quot;&amp;quot;X(nULL)。 否則，如果有參數型別為 raw literal operators (const char*)時，會選擇此函式並呼叫 operator &amp;quot;&amp;quot;X(&amp;quot;n&amp;quot;)。 否則，如果有參數型別為 numeric literal operator template (template&amp;lt;char .</description></item></channel></rss>
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>C++ 11 on 終於明白 | tsungyi knows.</title><link>https://tsungyi.li/Blog/tags/c++-11/</link><description>Recent content in C++ 11 on 終於明白 | tsungyi knows.</description><generator>Hugo</generator><language>en-us</language><lastBuildDate>Wed, 01 Mar 2023 03:10:00 +0800</lastBuildDate><atom:link href="https://tsungyi.li/Blog/tags/c++-11/index.xml" rel="self" type="application/rss+xml"/><item><title>C++ - User-defined literals</title><link>https://tsungyi.li/Blog/posts/cpp-user-defined-literals/</link><pubDate>Wed, 01 Mar 2023 03:10:00 +0800</pubDate><guid>https://tsungyi.li/Blog/posts/cpp-user-defined-literals/</guid><description>&lt;p&gt;C++ 11 新增 User-defined literals 可以經由程式定義的字面常量後綴，讓我們寫出可讀性更加的程式碼。&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;簡單的說，我們可以透過有意義的字面常量後綴將常數或是字串轉換自訂的型別來提高可讀性。&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;h2 id="user-defined-literals"&gt;User-defined literals&lt;/h2&gt;
+&lt;p&gt;目前 User-defined literals 支援以下 8 種語法格式：&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;&lt;code&gt;decimal-literal ud-suffix&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;octal-literal ud-suffix&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;hex-literal ud-suffix&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;binary-literal ud-suffix&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;fractional-constant exponent-part ﻿(optional) ud-suffix&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;digit-sequence exponent-part ud-suffix&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;character-literal ud-suffix&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;string-literal ud-suffix&lt;/code&gt;&lt;/li&gt;
+&lt;/ol&gt;
+&lt;ul&gt;
+&lt;li&gt;1-4 支援不同進位的整數格式&lt;/li&gt;
+&lt;li&gt;5, 6 支援不同格式的浮點數&lt;/li&gt;
+&lt;li&gt;7 支援字元格式&lt;/li&gt;
+&lt;li&gt;8 支援字串格式&lt;/li&gt;
+&lt;li&gt;使用者定義的 &lt;code&gt;ud-suffix&lt;/code&gt; 需要以底線 &lt;code&gt;_&lt;/code&gt; 開頭，標準函式庫中定義的則不會以底線開頭。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;編譯器在遇到 User-defined literals 的時候會依據 &lt;code&gt;ud-suffix&lt;/code&gt; 前面的文字的型別推導適當的函式進行轉換。&lt;/p&gt;
+&lt;p&gt;首先會透過 unqualified name lookup 找到所有名稱符合的函式集合。&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;如果是整數格式：
+&lt;ul&gt;
+&lt;li&gt;如果符合的函式集合有參數型別為 &lt;code&gt;unsigned long long&lt;/code&gt; 時，會選擇此函式並呼叫 &lt;code&gt;operator &amp;quot;&amp;quot;X(nULL)&lt;/code&gt;。&lt;/li&gt;
+&lt;li&gt;否則，如果有參數型別為 &lt;code&gt;raw literal operators&lt;/code&gt; (&lt;code&gt;const char*&lt;/code&gt;)時，會選擇此函式並呼叫 &lt;code&gt;operator &amp;quot;&amp;quot;X(&amp;quot;n&amp;quot;)&lt;/code&gt;。&lt;/li&gt;
+&lt;li&gt;否則，如果有參數型別為 &lt;code&gt;numeric literal operator template&lt;/code&gt; (&lt;code&gt;template&amp;lt;char ...&amp;gt; X operator &amp;quot;&amp;quot;X()&lt;/code&gt;) 時會選擇此函式並呼叫 &lt;code&gt;operator &amp;quot;&amp;quot;X&amp;lt;'C1', 'C2', ..., 'CK'&amp;gt;()&lt;/code&gt;。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;如果是浮點數格式：
+&lt;ul&gt;
+&lt;li&gt;如果符合的函式集合有參數型別為 &lt;code&gt;long double&lt;/code&gt; 時，會選擇此函式並呼叫 &lt;code&gt;operator &amp;quot;&amp;quot;X(fL)&lt;/code&gt;。&lt;/li&gt;
+&lt;li&gt;否則，如果有參數型別為 &lt;code&gt;raw literal operators&lt;/code&gt; (&lt;code&gt;const char*&lt;/code&gt;)時，會選擇此函式並呼叫 &lt;code&gt;operator &amp;quot;&amp;quot;X(&amp;quot;f&amp;quot;)&lt;/code&gt;。&lt;/li&gt;
+&lt;li&gt;否則，如果有參數型別為 &lt;code&gt;numeric literal operator template&lt;/code&gt; (&lt;code&gt;template&amp;lt;char ...&amp;gt; X operator &amp;quot;&amp;quot;X()&lt;/code&gt;) 時會選擇此函式並呼叫 &lt;code&gt;operator &amp;quot;&amp;quot;X&amp;lt;'C1', 'C2', ..., 'CK'&amp;gt;()&lt;/code&gt;。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;如果是字串格式：
+&lt;ul&gt;
+&lt;li&gt;(C++ 20) 如果有符合的 &lt;code&gt;non-type template parameter of class type&lt;/code&gt; (&lt;code&gt;string literal operator template&lt;/code&gt;)時，會選擇此函式並呼叫 &lt;code&gt;operator &amp;quot;&amp;quot;X&amp;lt;str&amp;gt;()&lt;/code&gt;。&lt;/li&gt;
+&lt;li&gt;否則會選擇此函式並呼叫 &lt;code&gt;operator &amp;quot;&amp;quot;X (str, len)&lt;/code&gt;。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;如果是字元格式：
+&lt;ul&gt;
+&lt;li&gt;會選擇此函式並呼叫 &lt;code&gt;operator &amp;quot;&amp;quot;X(ch)&lt;/code&gt;。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id="literal-operators--literal-operators-template"&gt;Literal operators / Literal operators template&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;Literal operators 需要符合以下格式：&lt;/p&gt;</description></item></channel></rss>
