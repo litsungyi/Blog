@@ -1,5 +1,5 @@
 ---
-title: "每天在打、但每次都要想一下的 Git 指令"
+title: "常用的 git 指令"
 date: 2026-08-31T11:42:11+08:00
 draft: false
 tags: [git, fetch, pull, push, reset, rebase, commit]
@@ -35,7 +35,7 @@ git fetch --prune --prune-tags   # 連遠端刪掉的 tag 一起清
 
 ### `git pull --rebase`
 
-`git pull` 的本質是 `git fetch` + `git merge`。當你和遠端各自有新的 commit 時，預設的 merge 會產生一顆 `Merge branch 'main' of ...` 的 merge commit——這種 commit 不記錄任何決策，純粹是同步造成的雜訊。
+`git pull` 的本質是 `git fetch` + `git merge`。當你和遠端各自有新的 commit 時，預設的 merge 會產生一個 `Merge branch 'main' of ...` 的 merge commit——這種 commit 不記錄任何決策，純粹是同步造成的雜訊。
 
 `--rebase` 把第二步換成 `git rebase`：先把你的本地 commit 收起來，快轉到遠端的最新狀態，再把你的 commit 一個一個重播上去。歷史變成一條直線，沒有多餘的 merge commit。
 
@@ -46,9 +46,9 @@ git config --global pull.rebase true   # 設成預設
 
 代價是**你的 commit 會被重寫**（SHA 全變）。所以規則是：只對「還沒推出去的本地 commit」用 rebase。已經 push 出去、別人可能已經接手的 commit，用 rebase 重寫就會製造麻煩。
 
-如果你的分支上有刻意保留的 merge commit（例如把 feature 分支合進來的那顆），用 `--rebase=merges` 才不會被壓平。
+如果你的分支上有刻意保留的 merge commit（例如把 feature 分支合進來的那個），用 `--rebase=merges` 才不會被壓平。
 
-衝突處理方式也不同：merge 是一次解完所有衝突，rebase 是**每一顆 commit 各解一次**。commit 多的時候會解到懷疑人生，這時 `git rebase --abort` 退回去改用 merge 反而快。
+衝突處理方式也不同：merge 是一次解完所有衝突，rebase 是**每一個 commit 各解一次**。commit 多的時候會解到懷疑人生，這時 `git rebase --abort` 退回去改用 merge 反而快。
 
 ### `git push --force`
 
@@ -64,13 +64,13 @@ git push --force-with-lease
 
 它多一道檢查——遠端目前的位置，必須和你本地記錄的 `origin/xxx` 一致才推。也就是「遠端從我上次 fetch 之後沒有變過」才動手，有變就拒絕。
 
-有個容易踩的陷阱：`--force-with-lease` 比對的是本地的 remote-tracking ref，所以任何會更新它的操作——包含你隨手打的一次 `git fetch`、或是背景自動跑 fetch 的 IDE——都會讓這道保險失效。Git 2.30 之後加了 `--force-if-includes` 來補這個洞，它要求「遠端目前那顆 commit 必須已經被我的分支包含進去」：
+有個容易踩的陷阱：`--force-with-lease` 比對的是本地的 remote-tracking ref，所以任何會更新它的操作——包含你隨手打的一次 `git fetch`、或是背景自動跑 fetch 的 IDE——都會讓這道保險失效。Git 2.30 之後加了 `--force-if-includes` 來補這個洞，它要求「遠端目前那個 commit 必須已經被我的分支包含進去」：
 
 ```bash
 git push --force-with-lease --force-if-includes
 ```
 
-再怎麼樣，別對 `main` 這種共用分支強推。分支保護規則設一下比較實在。
+特別注意：**不要對其他人會共用的 branch（`main`、`dev` 等）force push**。只對自己的 feature branch 用，共用分支另外設分支保護規則比較實在。
 
 ## 整理歷史：reset / commit --fixup / rebase --autosquash
 
@@ -89,13 +89,13 @@ git push --force-with-lease --force-if-includes
 最常見的用途是 commit message 打錯：
 
 ```bash
-git reset --soft HEAD^   # 回到上一顆之前，改動全部留在索引裡
+git reset --soft HEAD^   # 回到上一個之前，改動全部留在索引裡
 git commit               # 重新寫一次 message
 ```
 
-`HEAD^` 是「HEAD 的第一個 parent」，也就是上一顆 commit。這裡一定要用 `--soft`，用預設的 `--mixed` 會連 staged 狀態一起丟掉，還得重 `git add` 一次。
+`HEAD^` 是「HEAD 的第一個 parent」，也就是上一個 commit。這裡一定要用 `--soft`，用預設的 `--mixed` 會連 staged 狀態一起丟掉，還得重 `git add` 一次。
 
-不過如果只是要改**最新那顆**的 message，`--amend` 更直接：
+不過如果只是要改**最新那個**的 message，`--amend` 更直接：
 
 ```bash
 git commit --amend                 # 開編輯器改 message
@@ -103,22 +103,22 @@ git commit --amend -m "new msg"    # 直接給新的 message
 git commit --amend --no-edit       # message 不動，只把新 staged 的東西併進去
 ```
 
-兩者的分界很清楚：改一顆用 `--amend`，要把最近三顆併成一顆才輪到 `git reset --soft HEAD~3` 然後重 commit。
+兩者的分界很清楚：改一個用 `--amend`，要把最近三個併成一個才輪到 `git reset --soft HEAD~3` 然後重 commit。
 
 共同點是**兩者都會產生新的 SHA**。已經推出去的話，就會需要上面那條 `--force-with-lease`。
 
 ### `git commit --fixup`
 
-上面的招數都只能處理「最新」的 commit。但實務上更常遇到的是：review 時發現三顆 commit 前的某個檔案漏改了一行。
+上面的招數都只能處理「最新」的 commit。但實務上更常遇到的是：review 時發現三個 commit 前的某個檔案漏改了一行。
 
-這時候不要另外開一顆 `fix typo` 的 commit 丟在最後面——那顆 commit 對讀歷史的人沒有任何意義。用 `--fixup` 標記它屬於哪一顆：
+這時候不要另外開一個 `fix typo` 的 commit 丟在最後面——那個 commit 對讀歷史的人沒有任何意義。用 `--fixup` 標記它屬於哪一個：
 
 ```bash
 git add path/to/file
 git commit --fixup <target-sha>
 ```
 
-它會產生一顆 message 是 `fixup! <目標 commit 的標題>` 的 commit。內容照樣是你這次的改動，但標題裡帶著「我要被併回那顆」的資訊。
+它會產生一個 message 是 `fixup! <目標 commit 的標題>` 的 commit。內容照樣是你這次的改動，但標題裡帶著「我要被併回那個」的資訊。
 
 幾個變體：
 
@@ -136,7 +136,7 @@ git rebase --autosquash <base>
 
 它會掃過待 rebase 的 commit，凡是 message 以 `fixup!` / `squash!` / `amend!` 開頭的，就自動排到對應的目標 commit 後面，並把動作標成 `fixup` 或 `squash`。原本要手動剪貼 rebase todo 的步驟整個省掉。
 
-`--autosquash` 底層走的是 interactive 的機制，但不需要顯式加 `-i`——不加就是直接執行、不開編輯器讓你確認。想先看一眼排出來的 todo 再決定，就加 `-i`。
+`--autosquash` 底層走的是 interactive 的機制，但不需要顯式加 `-i`——不加就是直接執行、不開編輯器讓你確認。想先看一眼排出來的 todo 再決定，就加 `-i`。我通常會用 `-i` 模式，順便調整要 commit 的順序跟方式（`pick`、`reword`、`squash`、`drop` 等）。
 
 同樣可以設成預設（只對 interactive 模式生效）：
 
@@ -147,13 +147,15 @@ git config --global rebase.autoSquash true
 搭起來的完整流程是這樣：
 
 ```bash
-git commit --fixup <sha>          # 補一顆，標好目標
-git commit --fixup <another-sha>  # 可以補很多顆
-git rebase --autosquash <sha>^    # 一次全部歸位
+git commit --fixup <sha>          # 補一個，標好目標
+git commit --fixup <another-sha>  # 可以補很多個
+git rebase --autosquash -i <base> # 確認這次 merge 的內容
 git push --force-with-lease       # 推上去
 ```
 
 平常開發時想到什麼補什麼，送 PR 前再一次整乾淨。歷史保持可讀，過程中又不用一直中斷手上的事去做 rebase。
+
+我在發 PR 請其他人 review 之前，都會用這個方式整理 commit，讓 commit 歷史更好讀。
 
 ## 參考資料
 
