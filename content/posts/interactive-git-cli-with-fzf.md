@@ -1,6 +1,6 @@
 ---
 title: "把 Git 包成互動式 CLI：11 支 fzf 腳本的設計筆記"
-date: 2026-08-31T11:42:11+08:00
+date: 2026-09-15T11:42:11+08:00
 draft: false
 tags: [git, fzf, bash, cli, developer-tools, worktree, rebase]
 categories: [工程筆記]
