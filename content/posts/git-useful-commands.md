@@ -5,7 +5,10 @@ draft: false
 tags: [git, fetch, pull, push, reset, rebase, commit]
 categories: [工程筆記]
 description: "整理 fetch/pull/push 與 reset/commit/rebase 這六條天天在用的指令，重點放在 --prune、--rebase、--force-with-lease、--fixup、--autosquash 這幾個會改變行為的參數。"
+images: ["images/Header/git-useful-commands.jpg"]
 ---
+
+![常用的 git 指令](/Blog/images/Header/git-useful-commands.jpg)
 
 ## 起因
 

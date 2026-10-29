@@ -5,7 +5,10 @@ draft: false
 tags: [git, fzf, bash, cli, developer-tools, worktree, rebase]
 categories: [工程筆記]
 description: "用 fzf 把 git 每天會打、但每次都要想一下的那幾條指令包成互動式腳本，逐支說明各自解決什麼問題。"
+images: ["images/Header/interactive-git-cli-with-fzf.jpg"]
 ---
+
+![把 Git 包成互動式 CLI：11 支 fzf 腳本的設計筆記](/Blog/images/Header/interactive-git-cli-with-fzf.jpg)
 
 ## 起因
 
