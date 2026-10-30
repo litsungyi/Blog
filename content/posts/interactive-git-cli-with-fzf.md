@@ -36,6 +36,7 @@ AI commit message 的部分要注意：
 ```bash
 function hl()   { printf '\033[1;33m%s\033[0m' "$1"; }
 function info() { printf '[\033[1;36mINFO\033[0m] %s\n' "$1"; }
+# err、warn 等同類函式寫法相同，略
 function check_git() {
   git rev-parse --is-inside-work-tree > /dev/null 2>&1 || { err "Not a git repository."; exit 1; }
 }
@@ -130,6 +131,8 @@ git rebase --onto "$ONTO_BRANCH" "$(git merge-base "$FROM_BRANCH" "$TO_BRANCH")"
 
 `rebase --onto` 的第二個參數是「舊的 base」，但人腦知道的其實是「這兩條從哪分家」。把 merge-base 這步自動化之後，這指令就從要想三十秒變成選三次。
 
+要注意 merge-base 算的是兩條分支「最近的共同祖先」。如果 FROM 和 TO 之間有過合併，算出來的點可能比你心中的分家點更晚或更早，重播的 commit 就會跟預期不同。執行前可以先用 `gitl1 -b` 看一下範圍。
+
 三個參數都可以先帶進去當 fzf 的初始 query，TO 沒給的話預設是目前分支。FROM 和 TO 選到同一條會直接擋下來。
 
 ### `gitst` — STatus
@@ -139,8 +142,15 @@ git rebase --onto "$ONTO_BRANCH" "$(git merge-base "$FROM_BRANCH" "$TO_BRANCH")"
 第一階段是檔案清單。stage / unstage 用 `execute-silent` 加 `reload` **就地更新清單**，不用離開 fzf：
 
 ```bash
---bind="ctrl-a:execute-silent(git add -- {2})+reload(git status -u -s -z --no-renames | awk ...)"
+list_cmd="git status -u -s -z --no-renames"
+$list_cmd | fzf --read0 --delimiter='^.. ' \
+  --bind="ctrl-a:execute-silent(git add -- {2})+reload($list_cmd)"
 ```
+
+這裡有兩個細節是為了**檔名含空白**：
+
+- `git status --short` 遇到有空白的路徑會加上引號（`"a b.txt"`），直接拿去 `git add` 會找不到檔案。改用 `-z` 輸出原始路徑、以 NUL 分隔，fzf 再用 `--read0` 讀。
+- fzf 預設用空白切欄位，`{2}` 只會拿到檔名的第一段。`--delimiter='^.. '` 改成只在開頭兩碼狀態加一個空白的位置切一刀，`{2}` 就是完整路徑；fzf 帶入 `{2}` 時會自動加引號，不用自己處理。
 
 `Ctrl-A` stage、`Ctrl-R` unstage，選好之後按 Enter 進第二階段：列出最近 100 個 commit，這裡的按鍵決定怎麼 commit：
 
@@ -153,7 +163,7 @@ git rebase --onto "$ONTO_BRANCH" "$(git merge-base "$FROM_BRANCH" "$TO_BRANCH")"
 
 腳本帶 `-s` 的話，fixup 完接著 `git rebase -i --autosquash "$commit~1"` 一次歸位（`--fixup` 和 `--autosquash` 的細節在[上一篇](../git-useful-commands/)）。base 要用目標的 parent，不然目標 commit 不會出現在 todo 清單裡。
 
-按 Enter 的話，就把 `git diff --cached` 丟給 AI（用環境變數 `GITST_COMMIT_MSG` 選產生器：`ollama` 是預設，`claude` 走本機 CLI，`jev` 只做安全檢查、不產 message）產 5 組 commit message，再用 `--expect` 分流：
+上表的 `Ctrl-E` 是在 commit 清單這一層直接自己寫。按 Enter 的話，就把 `git diff --cached` 丟給 AI（用環境變數 `GITST_COMMIT_MSG` 選產生器：`ollama` 是預設，`claude` 走本機 CLI，`jev` 只做安全檢查、不產 message）產 5 組 commit message，進入第三階段的候選清單，再用 `--expect` 分流。注意這一層的按鍵意義不同，`ctrl-c` 被拿來當「不用 AI、自己寫」，而不是 fzf 預設的中止：
 
 ```bash
 --expect=ctrl-e,ctrl-c
@@ -194,7 +204,7 @@ preview 用了 `diff_or_stash`：先掃過所有 stash，如果這個檔案被�
 
 C-c、C-d、C-r 做完都會回到清單，失敗的原因會顯示在下一輪清單的 header。
 
-**worktree 路徑。** 預設放 `<root>/.worktree/{branch}`。要改的話用 `C-r` 輸入新路徑（絕對或相對皆可），會依 repo 寫進 `~/.local/share/scripts.json`：
+**worktree 路徑。** 預設放 `<root>/.worktree/{branch}`。分支名含 `/` 的話（例如 `feat/x`），路徑會變成多層目錄 `.worktree/feat/x`。要改的話用 `C-r` 輸入新路徑（絕對或相對皆可），會依 repo 寫進 `~/.local/share/scripts.json`：
 
 ```json
 {
@@ -218,7 +228,7 @@ C-c、C-d、C-r 做完都會回到清單，失敗的原因會顯示在下一輪�
 gitwt() { local d; d="$(command gitwt "$@" 3>&1 1>&2)"; [ -n "$d" ] && cd "$d"; }
 ```
 
-fzf 的 UI 走 stderr，所以 `1>&2` 把 stdout 轉去 stderr 保持畫面正常，`3>&1` 則把 fd 3 的內容接回來存進 `d`。這樣「進入」就是在**目前這個 shell** 裡 `cd`，不會多開一層，也不用 `exit` 離開。沒載入這個 function 時，腳本只會印出 `cd <path>` 的提示。
+`$(...)` 只會接 stdout，所以先用 `3>&1` 把 fd 3 接到 stdout 存進 `d`，再用 `1>&2` 把腳本原本的 stdout 輸出（提示訊息等）改送到 stderr，讓它照常顯示在終端機、不會混進路徑裡。fzf 的畫面本來就不走 stdout，不受影響。這樣「進入」就是在**目前這個 shell** 裡 `cd`，不會多開一層，也不用 `exit` 離開。沒載入這個 function 時，腳本只會印出 `cd <path>` 的提示。
 
 ### `gitsm` — SubModule
 

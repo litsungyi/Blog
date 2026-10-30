@@ -137,9 +137,9 @@ git commit --fixup <target-sha>
 git rebase --autosquash <base>
 ```
 
-它會掃過待 rebase 的 commit，凡是 message 以 `fixup!` / `squash!` / `amend!` 開頭的，就自動排到對應的目標 commit 後面，並把動作標成 `fixup` 或 `squash`。原本要手動剪貼 rebase todo 的步驟整個省掉。
+它會掃過待 rebase 的 commit，凡是 message 以 `fixup!` / `squash!` / `amend!` 開頭的，就自動排到對應的目標 commit 後面，並把動作標成 `fixup`、`squash` 或 `fixup -C`（`amend!`）。原本要手動剪貼 rebase todo 的步驟整個省掉。
 
-`--autosquash` 底層走的是 interactive 的機制，但不需要顯式加 `-i`——不加就是直接執行、不開編輯器讓你確認。想先看一眼排出來的 todo 再決定，就加 `-i`。我通常會用 `-i` 模式，順便調整要 commit 的順序跟方式（`pick`、`reword`、`squash`、`drop` 等）。
+`--autosquash` 底層走的是 interactive 的機制，但從 Git 2.44 起不需要顯式加 `-i`——不加就是直接執行、不開編輯器讓你確認（更舊的版本 `--autosquash` 只能搭配 `-i` 使用）。想先看一眼排出來的 todo 再決定，就加 `-i`。我通常會用 `-i` 模式，順便調整要 commit 的順序跟方式（`pick`、`reword`、`squash`、`drop` 等）。
 
 同樣可以設成預設（只對 interactive 模式生效）：
 
@@ -152,7 +152,7 @@ git config --global rebase.autoSquash true
 ```bash
 git commit --fixup <sha>          # 補一個，標好目標
 git commit --fixup <another-sha>  # 可以補很多個
-git rebase --autosquash -i <base> # 確認這次 merge 的內容
+git rebase --autosquash -i <base> # 確認 todo 的排序與動作
 git push --force-with-lease       # 推上去
 ```
 
