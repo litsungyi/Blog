@@ -2,8 +2,10 @@ baseURL = "https://tsungyi.li/Blog"
 languageCode = "en-us"
 title = "終於明白 | tsungyi knows."
 theme = "hugo-theme-m10c"
-googleAnalytics = 'UA-1062546-8'
 disqusShortname = 'tsungyi-li'
+
+[services.googleAnalytics]
+  id = 'G-3ZWTRVN435'
 
 [menu]
   [[menu.main]]
